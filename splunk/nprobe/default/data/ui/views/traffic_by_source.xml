@@ -1,0 +1,278 @@
+<form>
+  <label>Traffic by Source</label>
+  <description/>
+  <!-- Do not need a Search Button. Inputs search when changed -->
+  <fieldset autoRun="true" submitButton="false">
+    <!-- Create a text box; token is "series"                         -->
+    <!-- label: Label for the text box                                -->
+    <!-- default: Default value for the form                          -->
+    <!-- suffix: All tokens are followed by a *                       -->
+    <!--         If user does not specify text, then search uses '*'  -->
+    <input type="text" token="SRC_IP" searchWhenChanged="true">
+      <label>Source IP</label>
+      <default>*</default>
+      <suffix>*</suffix>
+    </input>
+    <input type="text" token="SRC_PORT" searchWhenChanged="true">
+      <label>Source Port</label>
+      <default>*</default>
+    </input>
+    <input type="text" token="DST_IP" searchWhenChanged="true">
+      <label>Destination IP</label>
+      <default>*</default>
+      <suffix>*</suffix>
+      <!-- <prefix>*</prefix>-->
+    </input>
+    <input type="text" token="DST_PORT" searchWhenChanged="true">
+      <label>Destination Port</label>
+      <default>*</default>
+    </input>
+    <input type="text" token="PROTO_NAME" searchWhenChanged="true">
+      <label>Protocol Name</label>
+      <default>*</default>
+    </input>
+    <!-- Add time range picker -->
+    <input type="time" searchWhenChanged="true">
+      <default>
+        <earliestTime>@d</earliestTime>
+        <latestTime>now</latestTime>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <chart>
+      <title>Destination Hosts per time</title>
+      <searchString>`base_dest_src($PROTO_NAME$,"$SRC_IP$",$SRC_PORT$,"$DST_IP$",$DST_PORT$)`| timechart count as counter by "Source IP" limit=10 | sort -counter</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">log</option>
+      <option name="charting.chart">column</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+      <option name="charting.axisTitleX.text">Time</option>
+      <option name="charting.axisTitleY.text">N. Flows</option>
+    </chart>
+    <chart>
+      <title>Top 10 Destination Hosts</title>
+      <searchString>`base_dest_src($PROTO_NAME$,"$SRC_IP$",$SRC_PORT$,"$DST_IP$",$DST_PORT$)` | stats sum(Bytes) as Bytes by "Destination IP" | sort -Bytes limit=10</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+      <option name="list.drilldown">full</option>
+      <option name="list.wrap">1</option>
+      <option name="maxLines">5</option>
+      <option name="raw.drilldown">full</option>
+      <option name="rowNumbers">0</option>
+      <option name="table.drilldown">1</option>
+      <option name="table.wrap">1</option>
+      <option name="type">list</option>
+      <fields>["host","source","sourcetype"]</fields>
+    </chart>
+  </row>
+  <row>
+    <table>
+      <title>Top Host</title>
+      <searchString>`base_dest_src($PROTO_NAME$,"$SRC_IP$",$SRC_PORT$,"$DST_IP$",$DST_PORT$)` | rename IN_BYTES as Bytes,SRC_HOST_NAME as "Src Name", DST_HOST_NAME as "Dst Name" |top limit=10 "Source IP","Src Name", "Destination IP" , "Dst Name", Bytes | sort -Bytes,-percent,count</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="drilldown">row</option>
+      <option name="count">10</option>
+    </table>
+  </row>
+  <row>
+    <chart>
+      <title>Top Protocols l4</title>
+      <searchString>`base_dest_src($PROTO_NAME$,"$SRC_IP$",$SRC_PORT$,"$DST_IP$",$DST_PORT$)` |rename PROTOCOL_NAME as "Protocol Name"| stats sum(Bytes) as Bytes by "Protocol Name" | sort -Bytes limit=20</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+    <chart>
+      <title>Top Protocols l7</title>
+      <searchString>`base_dest_src($PROTO_NAME$,"$SRC_IP$",$SRC_PORT$,"$DST_IP$",$DST_PORT$)` |rename L7_PROTO_NAME as "Protocol Name"| stats sum(Bytes) as Bytes by "Protocol Name" | sort -Bytes limit=20</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+  </row>
+  <row>
+    <chart>
+      <title>Bytes distribution per destination</title>
+      <searchString>`base_dest_src($PROTO_NAME$,"$SRC_IP$",$SRC_PORT$,"$DST_IP$",$DST_PORT$)` | stats sum(Bytes) as Bytes by "Destination IP" | sort -Bytes limit=20</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+    <chart>
+      <title>Average bytes per destination</title>
+      <searchString>`base_dest_src($PROTO_NAME$,"$SRC_IP$",$SRC_PORT$,"$DST_IP$",$DST_PORT$)`| stats avg(Bytes) as "Average Bytes" by "Destination IP" | sort -"Average Bytes" limit=10</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">bar</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+      <option name="charting.axisTitleY.text">Avarage</option>
+    </chart>
+  </row>
+  <row>
+    <chart>
+      <title>Packets distribution per destination</title>
+      <searchString>`base_dest_src($PROTO_NAME$,"$SRC_IP$",$SRC_PORT$,"$DST_IP$",$DST_PORT$)` | stats sum(Packets) as Packets by "Destination IP" | sort -Bytes limit=20</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+    <chart>
+      <title>Average packets per destination</title>
+      <searchString>`base_dest_src($PROTO_NAME$,"$SRC_IP$",$SRC_PORT$,"$DST_IP$",$DST_PORT$)`| stats avg(Packets) as "Average Packets" by "Destination IP" | sort -"Average Packets" limit=10</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">log</option>
+      <option name="charting.chart">bar</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+      <option name="charting.axisTitleY.text">Average</option>
+    </chart>
+  </row>
+  <row>
+    <single>
+      <title>Last seen</title>
+      <searchString>`base_dest_src($PROTO_NAME$,"$SRC_IP$",$SRC_PORT$,"$DST_IP$",$DST_PORT$)` | top limit=20 _time</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="drilldown">row</option>
+      <option name="count">10</option>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">column</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+      <option name="linkView">search</option>
+    </single>
+    <table>
+      <title>Top 10 source</title>
+      <searchString>`base_dest_src($PROTO_NAME$,"$SRC_IP$",$SRC_PORT$,"$DST_IP$",$DST_PORT$)`| top limit=20 source</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="drilldown">cell</option>
+    </table>
+  </row>
+</form>

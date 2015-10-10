@@ -1,0 +1,244 @@
+{
+    "objectSummary": {
+        "Interface Implementations": 0, 
+        "Search-Based": 1, 
+        "Transaction-Based": 0, 
+        "Event-Based": 0, 
+        "Interfaces": 0
+    }, 
+    "description": "", 
+    "displayName": "nProbe", 
+    "modelName": "nProbe", 
+    "objects": [
+        {
+            "parentName": "BaseSearch", 
+            "objectName": "All", 
+            "constraints": [], 
+            "comment": "", 
+            "calculations": [], 
+            "displayName": "All", 
+            "fields": [
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "42", 
+                    "fieldName": "42", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "DST_AS", 
+                    "fieldName": "DST_AS", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "FIRST_SWITCHED", 
+                    "fieldName": "FIRST_SWITCHED", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "string", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "host", 
+                    "fieldName": "host", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "IN_BYTES", 
+                    "fieldName": "IN_BYTES", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "IN_PKTS", 
+                    "fieldName": "IN_PKTS", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "string", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "index", 
+                    "fieldName": "index", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "INPUT_SNMP", 
+                    "fieldName": "INPUT_SNMP", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "string", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "IPV4_DST_ADDR", 
+                    "fieldName": "IPV4_DST_ADDR", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "IPV4_DST_MASK", 
+                    "fieldName": "IPV4_DST_MASK", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "string", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "IPV4_NEXT_HOP", 
+                    "fieldName": "IPV4_NEXT_HOP", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "string", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "IPV4_SRC_ADDR", 
+                    "fieldName": "IPV4_SRC_ADDR", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "IPV4_SRC_MASK", 
+                    "fieldName": "IPV4_SRC_MASK", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "L4_DST_PORT", 
+                    "fieldName": "L4_DST_PORT", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "L4_SRC_PORT", 
+                    "fieldName": "L4_SRC_PORT", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "LAST_SWITCHED", 
+                    "fieldName": "LAST_SWITCHED", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "OUTPUT_SNMP", 
+                    "fieldName": "OUTPUT_SNMP", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "PROTOCOL", 
+                    "fieldName": "PROTOCOL", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "string", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "source", 
+                    "fieldName": "source", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "string", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "sourcetype", 
+                    "fieldName": "sourcetype", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "string", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "splunk_server", 
+                    "fieldName": "splunk_server", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "SRC_AS", 
+                    "fieldName": "SRC_AS", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "SRC_TOS", 
+                    "fieldName": "SRC_TOS", 
+                    "comment": ""
+                }, 
+                {
+                    "multivalue": false, 
+                    "type": "number", 
+                    "hidden": false, 
+                    "required": false, 
+                    "displayName": "TCP_FLAGS", 
+                    "fieldName": "TCP_FLAGS", 
+                    "comment": ""
+                }
+            ], 
+            "baseSearch": "index=nprobe"
+        }
+    ], 
+    "objectNameList": [
+        "All"
+    ]
+}

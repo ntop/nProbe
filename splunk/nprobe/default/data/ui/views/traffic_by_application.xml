@@ -1,0 +1,158 @@
+<form>
+  <label>Traffic by Application</label>
+  <description/>
+  <!-- Do not need a Search Button. Inputs search when changed -->
+  <fieldset autoRun="true" submitButton="false">
+    <!-- Create a text box; token is "series"                         -->
+    <!-- label: Label for the text box                                -->
+    <!-- default: Default value for the form                          -->
+    <!-- suffix: All tokens are followed by a *                       -->
+    <!--         If user does not specify text, then search uses '*'  -->
+    <input type="text" token="APP" searchWhenChanged="true">
+      <label>Application</label>
+      <default>*</default>
+      <suffix>*</suffix>
+    </input>
+    <input type="text" token="PROTO_L4" searchWhenChanged="true">
+      <label>Protocol L4</label>
+      <default>*</default>
+      <suffix>*</suffix>
+    </input>
+    <!-- Add time range picker -->
+    <input type="time" searchWhenChanged="true">
+      <default>
+        <earliestTime>@d</earliestTime>
+        <latestTime>now</latestTime>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <chart>
+      <title>Application per time</title>
+      <searchString>`base_traffic_application($PROTO_L4$,$APP$)` | rename L7_PROTO_NAME As "Protocol Name"
+| timechart count as counter by "Protocol Name" | sort -counter</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">column</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+      <option name="charting.axisTitleX.text">Time</option>
+      <option name="charting.axisTitleY.text">N. Flows</option>
+    </chart>
+  </row>
+  <row>
+    <chart>
+      <title>Top Application</title>
+      <searchString>`base_traffic_application($PROTO_L4$,$APP$)` | rename L7_PROTO_NAME As "Protocol Name" | stats sum(Bytes) as "Traffic" by "Protocol Name" | sort -Bytes limit=25</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+  </row>
+  <row>
+    <chart>
+      <title>Traffic by Source</title>
+      <searchString>`base_traffic_application($PROTO_L4$,$APP$)`|timechart sum(Bytes) by "Source IP" limit=10</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">log</option>
+      <option name="charting.chart">line</option>
+      <option name="charting.chart.nullValueMode">connect</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+      <option name="charting.axisTitleX.text">Time</option>
+      <option name="charting.axisTitleY.text">Sum Bytes</option>
+    </chart>
+    <chart>
+      <title>Traffic by Destination</title>
+      <searchString>`base_traffic_application($PROTO_L4$,$APP$)` |timechart sum(Bytes) by "Destination IP" limit=10</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">log</option>
+      <option name="charting.chart">line</option>
+      <option name="charting.chart.nullValueMode">connect</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+      <option name="charting.axisTitleX.text">Time</option>
+      <option name="charting.axisTitleY.text">Sum Bytes</option>
+    </chart>
+  </row>
+  <row>
+    <chart>
+      <title>Top Source</title>
+      <searchString>`base_traffic_application($PROTO_L4$,$APP$)`|chart sum(Bytes) as "Sum of bytes" by "Source IP"  | sort -Bytes limit=15</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+    <chart>
+      <title>Top Source Ports</title>
+      <searchString>`base_traffic_application($PROTO_L4$,$APP$)`| rename L4_SRC_PORT as "Protocol Port" | stats sum(Bytes) as Bytes by "Protocol Port" | sort -Bytes limit=10</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">bar</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+  </row>
+</form>

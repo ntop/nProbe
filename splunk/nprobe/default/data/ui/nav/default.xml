@@ -1,0 +1,39 @@
+<nav color="#FF7600"> 
+
+<collection label="Search">
+    <a href="/app/nprobe/search?q=search%20index%3Dnprobe">Timeline</a>
+  </collection>
+
+<collection label="Dashboards">
+    <view name="overview" default="true"/>
+  </collection>
+    
+  <collection label="Traffic">
+    <view name="traffic_by_application"/>
+    <view name="traffic_by_destination"/>
+    <view name="traffic_by_source"/>
+    <!-- <view name="traffic_by_source"/> -->
+    <!-- <view name="traffic_by_qos"/> -->
+    <!-- <view name="top_host_pairs"/> -->
+    <!-- <view name="traffic_conversations"/> -->
+  </collection>
+
+  <collection label="Plugins">
+    <view name="http"/>
+  </collection>
+
+  <collection label="Settings">
+    <!-- <view name="about"/> -->
+    <collection label="Splunk">
+    <!-- <view name="search" /> -->
+    <view name="data_models" />
+    <view name="reports" />
+    <view name="alerts" />
+    <!-- <view name="dashboards"/> -->
+  </collection>
+  </collection>
+
+  
+
+  
+</nav>

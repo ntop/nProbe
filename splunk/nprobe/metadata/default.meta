@@ -1,0 +1,113 @@
+
+# Application-level permissions
+
+[]
+access = read : [ * ], write : [ admin ]
+export = none
+
+
+
+### EVENT TYPES
+
+[eventtypes]
+export = system
+access = read : [ * ], write : [ power ]
+
+### PROPS
+
+[props]
+export = system
+
+
+### TRANSFORMS
+
+[transforms]
+export = system
+
+[transforms/http_ret_code_lookups]
+export = none
+owner = admin
+
+[transforms/protocol_lookups]
+export = none
+owner = admin
+
+
+[transforms/ip_lookups]
+export = none
+owner = admin
+
+### LOOKUPS
+
+[lookups]
+export = system
+
+[props/json-too_small/LOOKUP-protocols_lookups]
+export = none
+owner = admin
+
+[props/json-too_small/LOOKUP-http_ret_code_lookups]
+export = none
+owner = admin
+
+
+[lookups/protocols.csv]
+access = read : [ * ], write : [ admin, power ]
+export = none
+owner = admin
+
+
+
+### VIEWSTATES: even normal users should be able to create shared viewstates
+
+[viewstates]
+access = read : [ * ], write : [ * ]
+export = system
+
+[views/traffic_by_source]
+owner = admin
+
+
+[views/traffic_by_destination]
+owner = admin
+
+
+[views/traffic_by_application]
+owner = admin
+
+
+[views/http]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+
+
+[views/overview]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+
+
+### MACROS
+
+[macros/source_host_name]
+access = read : [ * ], write : [ admin ]
+export = none
+
+
+[macros/destination_host_name]
+access = read : [ * ], write : [ admin ]
+export = none
+
+
+[macros/bytes]
+access = read : [ * ], write : [ admin ]
+export = none
+
+
+[macros/packets]
+access = read : [ * ], write : [ admin ]
+export = none
+
+
+

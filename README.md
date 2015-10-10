@@ -3,6 +3,6 @@ This repository contains open source components and extensions for nProbe availa
 
 Here you can find:
 * Add-on and extensions
-* Code example of applications that can interact with nProbe
+* Code examples of applications that can interact with nProbe
 
 Enjoy!

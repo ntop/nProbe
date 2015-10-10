@@ -1,0 +1,13 @@
+BGP lister written in perl: your BGP-enabled router connects to it, and it injects in a local
+nProbe instance all the routes (initially all received routes, later all the routing updates)
+so that the probe can compute the AS path and put it into emitted flows.
+
+You can start this script from the nProbe BGP plugin part of nProbe Pro
+
+
+NOTE that you need to configure into the source code your AS info
+
+Download:
+- http://www.ris.ripe.net/source/libbgpdump-1.4.99.11.tar.gz
+- http://data.ris.ripe.net/rrc10/2010.07/
+
