@@ -1,0 +1,47 @@
+[
+  {
+    "_id": "NTOP:-HTTP-Nprobe",
+    "_type": "search",
+    "_source": {
+      "title": "NTOP: HTTP Nprobe",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "_source"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"nprobe-*\",\"query\":{\"query_string\":{\"query\":\"_type:http\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "nprobe-HTTP-Table",
+    "_type": "search",
+    "_source": {
+      "title": "nprobe HTTP Table",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "HTTP_HOST",
+        "HTTP_METHOD",
+        "HTTP_RET_CODE",
+        "HTTP_SITE",
+        "HTTP_URL",
+        "HTTP_UA"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"nprobe-*\",\"query\":{\"query_string\":{\"query\":\"_type:http AND HTTP_HOST:*\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  }
+]
