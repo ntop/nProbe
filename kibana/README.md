@@ -8,6 +8,8 @@ Requirements:
 * Elasticsearch 2.x _(cluster or single server)_
 * Kibana 4.2+ _(cluster or single server)_
 
+<br><br>
+
 ### First Setup
 
 #### Index Template
@@ -29,6 +31,7 @@ The following example generate new flow fields with sum of IN/OUT Bytes and Pack
 ![](https://cloud.githubusercontent.com/assets/1423657/11626821/18a51fb8-9ce6-11e5-986d-5d232486dd96.png)
 
 ----------------------
+<br><br>
 
 #### Automated Import
 A script is provided to automatically load all nProbe demo dashboards and settings:
@@ -36,15 +39,11 @@ A script is provided to automatically load all nProbe demo dashboards and settin
 # ./load.sh -url http://localhost:9200 
 ```
 
-#### Manual Import
-To manually import sample dashboards, visualizers and searches in Kibana use the built-in functionality:
-##### Path: ```Settings > Objects```
-![](https://cloud.githubusercontent.com/assets/1423657/11626808/030aa218-9ce6-11e5-923b-7203d965bfb3.png)
-
-Once imported, Kibana objects should be automatically assigned and become usable:
+Once imported, Kibana objects should become available:
 ![](https://cloud.githubusercontent.com/assets/1423657/11626806/0305688e-9ce6-11e5-8d63-817e511f15be.png)
 
 ----------------------
+<br><br>
 
 ### Dashboard Examples
 The provided Dashboards are a work-in-progress and community contributions are extremely welcome!
