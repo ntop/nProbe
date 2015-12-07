@@ -1,4 +1,4 @@
-# nProbe + Kibana
+# nProbe + Elasticsearch & Kibana
 This document provides useful information and examples for using nProbe metrics with Elasticsearch and Kibana.
 
 Requirements:
