@@ -9,25 +9,60 @@ Requirements:
 * Kibana 4.2+ _(cluster or single server)_
 
 ### First Setup
-Before using nProbe metrics in Kibana you need to load the index template, which lets Elasticsearch know which fields should be analyzed in which way.
-The provided template file can be adjusted and loaded with the following command:
+
+#### Index Template
+Before using nProbe metrics in Kibana, an index template is required to let Elasticsearch know which fields should be analyzed in which way. The provided template file can be adjusted and loaded with the following command:
 ```
 curl -XPUT localhost:9200/_template/nprobe_template --data @template/nprobe-es-template.json
 ```
+#### Index Pattern
+Before using nProbe metrics in Kibana, an index pattern should be created as follows:
+
+###### Path: ```Settings > Indices ```
+![](https://cloud.githubusercontent.com/assets/1423657/11626807/030a0768-9ce6-11e5-8115-5c8f20841186.png)
+
+
+#### Scripted Fields
+Users can optionally generate scripted fields "on-the-fly" in Kibana when needed. 
+The following example generate new flow fields with sum of IN/OUT Bytes and Packets:
+
+![](https://cloud.githubusercontent.com/assets/1423657/11626821/18a51fb8-9ce6-11e5-986d-5d232486dd96.png)
+
+----------------------
+
+#### Automated Import
+A script is provided to automatically load all nProbe demo dashboards and settings:
+```
+# ./load.sh -url http://localhost:9200 
+```
+
+#### Manual Import
+To manually import sample dashboards, visualizers and searches in Kibana use the built-in functionality:
+##### Path: ```Settings > Objects```
+![](https://cloud.githubusercontent.com/assets/1423657/11626808/030aa218-9ce6-11e5-923b-7203d965bfb3.png)
+
+Once imported, Kibana objects should be automatically assigned and become usable:
+![](https://cloud.githubusercontent.com/assets/1423657/11626806/0305688e-9ce6-11e5-8d63-817e511f15be.png)
+
+----------------------
 
 ### Dashboard Examples
-The following example Plugin Dashboards can be imported in Kibana 4 <br>
-The Dashboards are a work-in-progress and community contributions are extremely welcome!
+The provided Dashboards are a work-in-progress and community contributions are extremely welcome!
 
-#### DNS
+----------------------
+
+##### DNS
 Start nProbe exporting ```%DNS_*``` fields:
 ```
 nprobe --elastic "dns;nprobe-%Y.%m.%d;http://localhost:9200/_bulk;" -T "%IPV4_SRC_ADDR %L4_SRC_PORT %IPV4_DST_ADDR %L4_DST_PORT %PROTOCOL %IN_BYTES %OUT_BYTES %FIRST_SWITCHED %LAST_SWITCHED %IN_PKTS %OUT_PKTS %IP_PROTOCOL_VERSION %APPLICATION_ID %L7_PROTO_NAME %ICMP_TYPE %SRC_IP_COUNTRY %DST_IP_COUNTRY %APPL_LATENCY_MS %DNS_QUERY %DNS_QUERY_ID %DNS_QUERY_TYPE %DNS_RET_CODE %DNS_NUM_ANSWERS %DNS_TTL_ANSWER %DNS_RESPONSE" ....
 ```
+----------------------
 
-#### HTTP
+##### HTTP
 Start nProbe exporting ```%HTTP_*``` fields:
 ```
 nprobe --elastic "http;nprobe-%Y.%m.%d;http://localhost:9200/_bulk;" -T "%IPV4_SRC_ADDR %L4_SRC_PORT %IPV4_DST_ADDR %L4_DST_PORT %PROTOCOL %IN_BYTES %OUT_BYTES %FIRST_SWITCHED %LAST_SWITCHED %IN_PKTS %OUT_PKTS %IP_PROTOCOL_VERSION %APPLICATION_ID %L7_PROTO_NAME %ICMP_TYPE %SRC_IP_COUNTRY %DST_IP_COUNTRY %APPL_LATENCY_MS %HTTP_URL %HTTP_METHOD %HTTP_RET_CODE %HTTP_REFERER %HTTP_UA %HTTP_MIME %HTTP_HOST %HTTP_SITE" ....
 ```
+
+----------------------
 
