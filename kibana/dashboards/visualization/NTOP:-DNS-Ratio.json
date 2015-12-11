@@ -1,0 +1,10 @@
+{
+  "visState": "{\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"filters\",\"schema\":\"segment\",\"params\":{\"filters\":[{\"input\":{\"query\":{\"query_string\":{\"query\":\"DNS_QUERY_TYPE:1\",\"analyze_wildcard\":true}}},\"label\":\"A\"},{\"input\":{\"query\":{\"query_string\":{\"query\":\"DNS_QUERY_TYPE:28\",\"analyze_wildcard\":true}}},\"label\":\"AAAA\"},{\"input\":{\"query\":{\"query_string\":{\"query\":\"DNS_QUERY_TYPE:5\",\"analyze_wildcard\":true}}},\"label\":\"CNAME\"},{\"input\":{\"query\":{\"query_string\":{\"query\":\"DNS_QUERY_TYPE:15\",\"analyze_wildcard\":true}}},\"label\":\"MX\"},{\"input\":{\"query\":{\"query_string\":{\"query\":\"DNS_QUERY_TYPE:35\",\"analyze_wildcard\":true}}},\"label\":\"NAPTR\"}]}}],\"listeners\":{}}", 
+  "description": "", 
+  "title": "NTOP: DNS Ratio", 
+  "version": 1, 
+  "savedSearchId": "nprobe-DNS", 
+  "kibanaSavedObjectMeta": {
+    "searchSourceJSON": "{\"filter\":[]}"
+  }
+}

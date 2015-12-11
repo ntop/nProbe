@@ -1,0 +1,10 @@
+{
+  "visState": "{\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"filters\",\"schema\":\"segment\",\"params\":{\"filters\":[{\"input\":{\"query\":{\"query_string\":{\"query\":\"IP_PROTOCOL_VERSION:4\",\"analyze_wildcard\":true}}},\"label\":\"IPv4\"},{\"input\":{\"query\":{\"query_string\":{\"query\":\"IP_PROTOCOL_VERSION:6\",\"analyze_wildcard\":true}}},\"label\":\"IPv6\"}]}}],\"listeners\":{}}", 
+  "description": "", 
+  "title": "NTOP: v4/v6 Ratio", 
+  "version": 1, 
+  "savedSearchId": "nprobe-DNS", 
+  "kibanaSavedObjectMeta": {
+    "searchSourceJSON": "{\"filter\":[]}"
+  }
+}

@@ -3,10 +3,10 @@
   "timeRestore": false, 
   "description": "", 
   "title": "NTOP:DNS", 
-  "panelsJSON": "[{\"col\":7,\"id\":\"NTOP:-DNS-Query-Type\",\"row\":3,\"size_x\":2,\"size_y\":2,\"type\":\"visualization\"},{\"col\":7,\"id\":\"NTOP:-DNS-TTL-Answer\",\"row\":7,\"size_x\":2,\"size_y\":2,\"type\":\"visualization\"},{\"col\":9,\"columns\":[\"DNS_QUERY\",\"DNS_QUERY_ID\",\"DNS_QUERY_TYPE\",\"DNS_RESPONSE\",\"DNS_RET_CODE\",\"DNS_TTL_ANSWER\"],\"id\":\"nprobe-DNS\",\"row\":3,\"size_x\":4,\"size_y\":6,\"sort\":[\"@timestamp\",\"asc\"],\"type\":\"search\"},{\"col\":1,\"id\":\"NTOP:-DNS-Clients\",\"row\":3,\"size_x\":6,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"NTOP:-DNS-Resolvers\",\"row\":5,\"size_x\":6,\"size_y\":2,\"type\":\"visualization\"},{\"col\":7,\"id\":\"NTOP:-DNS-Counter\",\"row\":5,\"size_x\":2,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"NTOP:-DNS-Packet-Size-*(bytes)\",\"row\":7,\"size_x\":6,\"size_y\":2,\"type\":\"visualization\"},{\"id\":\"NTOP:-DNS-Flows\",\"type\":\"visualization\",\"size_x\":12,\"size_y\":2,\"col\":1,\"row\":1}]", 
+  "panelsJSON": "[{\"col\":1,\"id\":\"NTOP:-DNS-Clients\",\"row\":3,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"NTOP:-DNS-Resolvers\",\"row\":5,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"NTOP:-DNS-Packet-Size-*(bytes)\",\"row\":7,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"NTOP:-DNS-Flows\",\"row\":1,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":6,\"id\":\"NTOP:-DNS-Ratio\",\"row\":5,\"size_x\":2,\"size_y\":2,\"type\":\"visualization\"},{\"col\":8,\"id\":\"NTOP:-DNS-Response-Ratio\",\"row\":3,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":8,\"id\":\"NTOP:-DNS-Top-Queries\",\"row\":5,\"size_x\":5,\"size_y\":4,\"type\":\"visualization\"},{\"col\":6,\"id\":\"NTOP:-DNS-Return-Codes\",\"row\":3,\"size_x\":2,\"size_y\":2,\"type\":\"visualization\"},{\"col\":6,\"id\":\"NTOP:-DNS-TTL-Answer\",\"row\":7,\"size_x\":2,\"size_y\":2,\"type\":\"visualization\"}]", 
   "optionsJSON": "{\"darkTheme\":false}", 
   "version": 1, 
   "kibanaSavedObjectMeta": {
-    "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"query\":\"DNS_QUERY:*\",\"analyze_wildcard\":true}}}]}"
+    "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"DNS_QUERY:*\"}}}]}"
   }
 }
