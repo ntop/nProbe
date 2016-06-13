@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS= -g -I/usr/local/include
-LIBS=-L/usr/local/lib -lzmq
+LIBS=-L/usr/local/lib -lzmq -lz
 OS := $(shell uname -s)
 
 ifeq ($(OS),Darwin)

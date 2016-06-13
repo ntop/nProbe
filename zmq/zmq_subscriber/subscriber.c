@@ -10,6 +10,7 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <zmq.h>
+#include <zlib.h>
 
 #define TOPIC "flow"
 
@@ -151,13 +152,31 @@ int main (int argc, char *argv []) {
       printf("%s", payload);
     } 
 
-    if(verbose) {
+    if(verbose && (h.size > 0)) {
       time_t theTime = time(NULL);
 
       payload[h.size] = '\0';
       
       strftime(theDate, 32, "%d/%b/%Y %H:%M:%S", localtime(&theTime));
-      printf("[%s] %s\n", theDate, payload);
+
+      if(payload[0] != '\0')
+	printf("[%s] %s\n", theDate, payload);
+      else {
+	int err, uncompressed_len;
+	uLongf uLen;
+	char *uncompressed;
+
+	uLen = uncompressed_len = 3*h.size;
+	uncompressed = (char*)malloc(uncompressed_len+1);
+	if((err = uncompress((Bytef*)uncompressed, &uLen, (Bytef*)&payload[1], size-1)) != Z_OK) {
+	  printf("[%s] Uncompress error [%d]", theDate, err);
+	} else {	  
+	  uncompressed_len = uLen, uncompressed[uLen] = '\0';
+	  printf("[%s] %s\n", theDate, uncompressed);
+	}
+
+	free(uncompressed);
+      }
     }
 
     free(payload);
