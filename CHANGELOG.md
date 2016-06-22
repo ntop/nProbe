@@ -1,6 +1,6 @@
 #Changelog
 
-#### nprobe 7.3
+#### nprobe 7.4 (June 22nd, 2016)
 
 ## Main New Features
 
@@ -36,6 +36,7 @@
 * `--http-content-dump-response` to dump both HTTP requests and responses content with `--http-content-dump-dir`
 * `--http-content-dump-dir-layout` to specify layout to be used with `--http-content-dump-dir`
 * `--http-exec-cmd` to execute a command whenever an HTTP dump directory has been written
+* `--minute-expire` to force active flows to expire when a minute is past
 
 ## Plugin Extensions
 * Extended the export template with %BITTORENT_HASH, %PACKET_HASH, %SSL_SERVER_NAM, %UPSTREAM_SESSION_ID, %DOWNSTREAM_SESSION_ID, %SRC_AS_MAP and %DST_AS_MAP
@@ -48,7 +49,6 @@
 * Implemented Diameter support of fields DIAMETER_CLR_CANCEL_TYPE and DIAMETER_CLR_FLAGS and 3GPP type messages (317, 319, 320, 321, 322 and 323)
 * Extended the Diameter plugin in order to export ""Diameter Hop-by-Hop Identifier" information
 * Added DOT1Q_SRC_VLAN/DOT1Q_DST_VLAN for supporting Q-in-Q VLANs
-
 * HTTP plugin export of HTTP_X_FORWARDED_FOR and HTTP_VIA fields
 * Extended DNS plugin with multicast DNS
 
