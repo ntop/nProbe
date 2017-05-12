@@ -1,6 +1,42 @@
-#Changelog
+# Changelog
 
-#### nprobe 7.4 (June 22nd, 2016)
+#### nProbe 8 (May 2017)
+
+## Main New Features
+
+* Implemented BPF filtering with PF_PACKET directional sockets
+* Added VXLAN support
+* Created multiple kafka publishers to enhance performance
+* Implemented options template export via Kafka
+* Added support for collection of IXIA URI and Host
+* Added @SIP@ and @RTP@ plugin shortcuts for VoIP analysis
+* Improved SSL dissection
+* Added support for GTPv2 PCO
+* Added support for IPFIX flowEndMilliSeconds when observationTimeMilliSeconds (often in Cisco ASA)
+* Added ability to export sFlow interface counters via ZMQ
+* Added drops (export/elk/too many flows) drops
+
+## New Options
+
+* `--upscale-traffic` to scale sampled sFlow traffic
+* `--kafka-enable-batch` and `--kafka-batch-len` to batch flow export to kafka
+* `--load-custom-fields` to support custom fields shipped with NetFlow (see http://www.ntop.org/nprobe/collecting-proprietary-flows-with-nprobe/)
+* `--max-num-untunnels` to decapsulate up to 16 tunnelling levels.
+* `--vlanid-as-iface-idx` to use the VLAN tag as the interface index
+* `--zmq-disable-compression` to disable ZMQ data compression
+
+## Extensions
+
+* Implemented min/avg/max throughput with %SRC_TO_DST_MIN_THROUGHPUT %SRC_TO_DST_AVG_THROUGHPUT %SRC_TO_DST_MAX_THROUGHPUT %DST_TO_SRC_MIN_THROUGHPUT %DST_TO_SRC_AVG_THROUGHPUT %DST_TO_SRC_MAX_THROUGHPUT
+* Added support in collection of %IN_SRC_MAC %OUT_DST_MAC %FRAGMENTS %CLIENT_NW_LATENCY_MS %SERVER_NW_LATENCY_MS %APPL_LATENCY_MS %RETRANSMITTED_IN_PKTS %RETRANSMITTED_OUT_PKTS %OOORDER_IN_PKTS %OOORDER_OUT_PKTS
+* Split %FRAGMENTS IN %SRC_FRAGMENTS and %DST_FRAGMENTS
+* Added %NPROBE_IPV4_ADDRESS to export the IP address of the nProbe sensor, whereas %EXPORTER_IPV4_ADDRESS contains the IP address of the flow exporter (e.g. the router that generated the exported flow)
+* Implemented %ICMP_IPV4_TYPE, %ICMP_IPV4_CODE, %FLOW_DURATION_MILLISECONDS, %FLOW_DURATION_MICROSECONDS, %FLOW_START_MICROSECONDS, %FLOW_END_MICROSECONDS
+* VXLAN VNI exported in %UPSTREAM_TUNNEL_ID and %DOWNSTREAM_TUNNEL_ID
+
+
+
+#### nProbe 7.4 (June 22nd, 2016)
 
 ## Main New Features
 
@@ -63,4 +99,3 @@
 * Added black list support for netflow data when nprobe is in proxy mode (ipv4 - V5,V9,IPFIX)
 * Twitter heuristics to guess user activities
 * Implemented support for TCP fast retransmissions
-
