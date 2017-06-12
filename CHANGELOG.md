@@ -1,9 +1,11 @@
 # Changelog
 
-#### nProbe 8 (May 2017)
+#### nProbe 8 (June 2017)
 
 ## Main New Features
 
+* Reworked packet fragmentation support that was not properly rebuilding packet fragments
+* Many tiny bugs fixed that increase stability and metrics reliability
 * Implemented BPF filtering with PF_PACKET directional sockets
 * Added VXLAN support
 * Created multiple kafka publishers to enhance performance
@@ -15,6 +17,7 @@
 * Added support for IPFIX flowEndMilliSeconds when observationTimeMilliSeconds (often in Cisco ASA)
 * Added ability to export sFlow interface counters via ZMQ
 * Added drops (export/elk/too many flows) drops
+* Added kflow export (kentik.com)
 
 ## New Options
 
