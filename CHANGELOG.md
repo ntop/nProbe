@@ -1,4 +1,31 @@
-# Changelog
+# CHANGELOG
+
+#### nProbe 8.2 (December 2017)
+
+
+## Main New Features
+
+* Support for multiple `--zmq` endpoints to load-banace exported flows in a round-robin fashion
+* Full support for NetFlow exported by ASA, including firewall events and cumulative counters
+* MySQL database interoperability with ntopng using template `-T "@NTOPNG@"`
+
+
+## New Options
+
+*  Added `--plugin-dir <dir>` for loading plugins from the specified directory
+
+
+## Extensions
+
+* bgpNextHop support
+* sFlow
+  * Improved sFlow upscale algorithm and added heuristic to prevent sFlow exporters bugs
+  * Fixed throughput calculation and upsampling of sFlow traffic
+* Full systemd support for Debian, Ubuntu, Centos, and Raspbian
+* Fixes wrong flow first/last calculations when collecting IPFIX
+* Added support for flowDurationMillis Fixed bug for properly handling flowStart/flowEndMillis
+
+-------------------------------------------------------------------------------
 
 #### nProbe 8 (June 2017)
 
@@ -37,7 +64,7 @@
 * Implemented %ICMP_IPV4_TYPE, %ICMP_IPV4_CODE, %FLOW_DURATION_MILLISECONDS, %FLOW_DURATION_MICROSECONDS, %FLOW_START_MICROSECONDS, %FLOW_END_MICROSECONDS
 * VXLAN VNI exported in %UPSTREAM_TUNNEL_ID and %DOWNSTREAM_TUNNEL_ID
 
-
+-------------------------------------------------------------------------------
 
 #### nProbe 7.4 (June 22nd, 2016)
 
