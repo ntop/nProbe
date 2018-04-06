@@ -1,5 +1,49 @@
 # CHANGELOG
 
+#### nProbe 8.4 (April 2018)
+
+
+## Main New Features
+
+* DPDK support
+* Implements Kafka batching, options parsing, and variable number of producers
+* Adds Kafka messages transmission statistics
+
+
+## New Options
+
+* `--plugin-dir` to load plugins from the specified directory
+* `--adj-from-as-path` to get previous/next adjacent ASNs from BGP AS-path
+* `--disable-sflow-upscale` to disable sFlow upscaling
+* `--terminate-in` for debugging purposes
+
+
+## Extensions
+
+* Implemented ICMP network latency
+* Added ICMP type/code on flow keys to differenciate ICMP flows from the same peers
+* sFlow upscale now takes into account sample drops
+* Improves throughput calculations with NetFlow
+
+
+## Fixes
+
+* Fixed crash with ICMP traffic and not extended template Rework for whatsapp support
+* Fixes framentation issues that could lead to crashes
+* Prevents leaks with multiple BGP updates
+* Fixes a crash when exporting option templates to Kafka
+* Fixes missing fields (e.g, `FIREWALL_EVENT`) in MySQL db columns
+* Preserve endianness of string_dump_as_hex NetFlow custom fields
+* Fixes overwrite of untunnelled addresses for tunnels after the first
+* Updates centos7 mysql dependency to work either with mysql and mariadb
+* Fixed invalid FTP detection
+* Fix for computing `%DIRECTION` even with reduced temolate IEs
+* Fixes wrong sFlow average scale estimation
+* Fix for wrapping ZMQ rates > 4Gbps
+* Fixed loop bug in plugin handling when multiple plugins are enabled
+
+-------------------------------------------------------------------------------
+
 #### nProbe 8.2 (December 2017)
 
 
