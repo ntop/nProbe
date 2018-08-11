@@ -1,0 +1,58 @@
+#
+# Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+#
+# Notes
+# - STANDARD_EQUIVALENT
+#   If this field is equivalenet/alias of a standard field, put its name here
+#   or put NONE if there is no standard equivalent element
+#
+# - Len cannot exceed 8 bytes
+# - Use 0 for no PEN
+#
+#
+# Available formats
+# - dump_as_uint
+# - dump_as_ipv4_address
+# - dump_as_mac_address
+# - dump_as_hex
+# - dump_as_ascii
+#
+
+L7_APP_ID			NONE		3054	110	4	dump_as_uint
+L7_APP_NAME			NONE		3054	111	128	dump_as_ascii
+SRC_IP_COUNTRY_CODE		NONE		3054	120	2	dump_as_ascii
+SRC_IP_COUNTRY_NAME		NONE		3054	121	128	dump_as_ascii
+SRC_IP_REGION_CODE		NONE		3054	122	2	dump_as_ascii
+SRC_IP_REGION_NAME		NONE		3054	123	128	dump_as_ascii
+SRC_IP_CITY_NAME		NONE		3054	125	128	dump_as_ascii
+SRC_IP_LATITUDE			NONE		3054	126	4	dump_as_float
+SRC_IP_LONGITUDE		NONE		3054	127	4	dump_as_float
+DEST_IP_COUNTRY_CODE		NONE		3054	140	4	dump_as_ascii
+DEST_IP_COUNTRY_NAME		NONE		3054	141	128	dump_as_ascii
+DEST_IP_REGION_CODE		NONE		3054	142	4	dump_as_ascii
+DEST_IP_REGION_NAME		NONE		3054	143	128	dump_as_ascii
+DEST_IP_CITY_NAME		NONE		3054	145	128	dump_as_ascii
+DEST_IP_LATITUDE		NONE		3054	146	4	dump_as_float
+DEST_IP_LONGITUDE		NONE		3054	147	4	dump_as_float
+OS_DEVICE_ID			NONE		3054	160	1	dump_as_uint
+OS_DEVICE_NAME			NONE		3054	161	128	dump_as_ascii
+BROWSER_ID			NONE		3054	162	1	dump_as_uint
+BROWSER_NAME			NONE		3054	163	128	dump_as_ascii
+REV_OCTET_DELTA_COUNT		NONE		3054	176	8	dump_as_uint
+REV_PACKET_DELTA_COUNT		NONE		3054	177	8	dump_as_uint
+CONNECTION_ENCRYPTION_TYPE	NONE		3054	178	128	dump_as_ascii
+ENCRYPTION_CIPHER_NAME		NONE		3054	179	128	dump_as_ascii
+ENCRYPTION_KEY_LENGTH		NONE		3054	180	2	dump_as_uint
+HTTP_REQUEST_USER_AGENT		NONE		3054	182	128	dump_as_ascii
+HOST_NAME			NONE		3054	183	128	dump_as_ascii
+HTTP_URI			NONE		3054	184	128	dump_as_ascii
+DNS_RECORD_TXT			NONE		3054	185	128	dump_as_ascii
+SRC_AS_NAME			NONE		3054	186	128	dump_as_ascii
+DEST_AS_NAME			NONE		3054	187	128	dump_as_ascii
+TRANSACTION_LATENCY		NONE		3054	188	4	dump_as_uint
+DNS_QUERY_HOSTNAME		NONE		3054	189	256	dump_as_ascii
+DNS_RESPONSE_HOSTNAME		NONE		3054	190	256	dump_as_ascii
+DNS_CLASSES			NONE		3054	191	16	dump_as_ascii
+THREAT_TYPE			NONE		3054	192	16	dump_as_ascii
+THREAT_IPV4			NONE		3054	193	4	dump_as_ipv4_address
+THREAT_IPV6			NONE		3054	194	16	dump_as_ipv6_address

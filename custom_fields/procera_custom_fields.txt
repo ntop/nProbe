@@ -1,0 +1,26 @@
+#
+# Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+#
+# Notes
+# - STANDARD_EQUIVALENT
+#   If this field is equivalenet/alias of a standard field, put its name here
+#   or put NONE if there is no standard equivalent element
+#
+# Notes
+# - Use 0 for no PEN
+#
+#
+# Available formats
+# - dump_as_uint
+# - dump_as_ipv4_address
+# - dump_as_mac_address
+# - dump_as_hex
+# - dump_as_ascii
+#
+
+HTTP_URL			NONE	15397	22	8	dump_as_ascii
+proceraApn               	NONE	15397   35  	8       dump_as_ascii
+proceraIncomingOctets    	NONE	15397   3   	8       dump_as_uint
+proceraIncomingPackets   	NONE	15397   5   	8       dump_as_uint
+proceraOutgoingOctets    	NONE	15397   4   	8       dump_as_uint
+proceraOutgoingPackets   	NONE	15397   6   	8       dump_as_uint

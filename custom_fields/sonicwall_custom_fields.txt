@@ -1,0 +1,181 @@
+#
+# Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+#
+# Notes
+# - STANDARD_EQUIVALENT
+#   If this field is equivalenet/alias of a standard field, put its name here
+#   or put NONE if there is no standard equivalent element
+#
+# - Len cannot exceed 8 bytes
+# - Use 0 for no PEN
+#
+#
+# Available formats
+# - dump_as_uint
+# - dump_as_ipv4_address
+# - dump_as_mac_address
+# - dump_as_hex
+# - dump_as_ascii
+#
+
+TIME_STAMP			NONE		8741	1	4	dump_as_uint
+FLOW_IDENTIFIER			NONE		8741	2	4	dump_as_uint
+INITIATOR_GW_MAC		IN_SRC_MAC	8741	3	6	dump_as_mac_address
+RESPONDER_GW_MAC		OUT_DST_MAC	8741	4	6	dump_as_mac_address
+INITIATOR_IP_ADDR		IPV4_SRC_ADDR	8741	5	4	dump_as_uint
+RESPONDER_IP_ADDR		IPV4_DST_ADDR	8741	6	4	dump_as_uint
+INITIATOR_GW_IP_ADDR		NONE		8741	7	4	dump_as_uint
+RESPONDER_GW_IP_ADDR		NONE		8741	8	4	dump_as_uint
+INITIATOR_IFACE			INPUT_SNMP	8741	9	4	dump_as_uint
+RESPONDER_IFACE			OUTPUT_SNMP	8741	10	4	dump_as_uint
+INITIATOR_PORT			L4_SRC_PORT	8741	11	2	dump_as_uint
+RESPONDER_PORT			L4_DST_PORT	8741	12	2	dump_as_uint
+INIT_TO_RESP_PKTS		IN_PKTS		8741	13	4	dump_as_uint
+INIT_TO_RESP_OCTETS		IN_BYTES	8741	14	4	dump_as_uint
+RESP_TO_INIT_PKTS		OUT_PKTS	8741	15	4	dump_as_uint
+RESP_TO_INIT_OCTETS		OUT_BYTES	8741	16	4	dump_as_uint
+FLOW_START_TIME			FLOW_START_SEC	8741	17	4	dump_as_uint
+FLOW_END_TIME			FLOW_START_MILLISECONDS	8741	18	4	dump_as_uint
+INTERNAL_FLAGS			NONE		8741	19	2	dump_as_uint
+PROTOCOL_TYPE			PROTOCOL	8741	20	1	dump_as_uint
+FLOW_TO_APPLICATION_ID		NONE		8741	22	4	dump_as_uint
+FLOW_TO_USER_ID			NONE		8741	23	8	dump_as_uint
+FLOW_TO_IPS_ID			NONE		8741	25	4	dump_as_uint
+FLOW_TO_VIRUS_ID		NONE		8741	26	4	dump_as_uint
+FLOW_TO_SPYWARE_ID		NONE		8741	27	4	dump_as_uint
+TEMPLATE_IDENTIFIER		NONE		8741	28	4	dump_as_uint
+TABLE_NAME			NONE		8741	29	32	dump_as_ascii
+COLUMN_IDENTIFIER		NONE		8741	30	4	dump_as_uint
+COLUMN_NAME			NONE		8741	31	32	dump_as_ascii
+COLUMN_TYPE			NONE		8741	32	4	dump_as_uint
+COLUMN_STANDARD_IPFIX_ID	NONE		8741	33	4	dump_as_uint
+# Added SONIC_ prefix to void clashes with default names
+SONIC_USER_INDEX		NONE		8741	34	8	dump_as_uint
+SONIC_USER_NAME			USER_NAME	8741	35	129	dump_as_ascii
+SONIC_USER_ID			NONE		8741	36	8	dump_as_uint
+#USER_DOMAIN_NAME		NONE		8741	37	129	dump_as_ascii
+USER_AUTH_TYPE			NONE		8741	38	4	dump_as_uint
+APP_INDEX			NONE		8741	39	4	dump_as_uint
+APP_ID				NONE		8741	40	4	dump_as_uint
+APP_NAME			NONE		8741	41	96	dump_as_ascii
+APP_CAT_ID			NONE		8741	42	4	dump_as_uint
+APP_CAT_NAME			NONE		8741	43	96	dump_as_ascii
+APP_SIG_ID			NONE		8741	44	4	dump_as_uint
+GAV_INDEX			NONE		8741	45	4	dump_as_uint
+GAV_NAME			NONE		8741	46	96	dump_as_ascii
+GAV_SIG_ID			NONE		8741	47	4	dump_as_uint
+IPS_INDEX			NONE		8741	48	4	dump_as_uint
+IPS_NAME			NONE		8741	49	96	dump_as_ascii
+IPS_CAT_ID			NONE		8741	50	4	dump_as_uint
+IPS_CAT_NAME			NONE		8741	51	96	dump_as_ascii
+IPS_SIG_ID			NONE		8741	52	4	dump_as_uint
+ASPY_INDEX			NONE		8741	53	4	dump_as_uint
+ASPY_NAME			NONE		8741	54	96	dump_as_ascii
+ASPY_PROD_ID			NONE		8741	55	4	dump_as_uint
+ASPY_PROD_NAME			NONE		8741	56	96	dump_as_ascii
+ASPY_SIG_ID			NONE		8741	57	4	dump_as_uint
+URL_NAME			NONE		8741	59	128	dump_as_ascii
+URL_IP				NONE		8741	60	4	dump_as_uint
+RATING_INDEX			NONE		8741	62	4	dump_as_uint
+RATING_NAME			NONE		8741	63	32	dump_as_ascii
+REGION_ID			NONE		8741	64	4	dump_as_uint
+COUNTRY_ID			NONE		8741	65	4	dump_as_uint
+COUNTRY_NAME			NONE		8741	66	32	dump_as_ascii
+REGION_NAME			NONE		8741	67	32	dump_as_ascii
+LOCATION_IP			NONE		8741	68	4	dump_as_uint
+LOCATION_REGION_ID		NONE		8741	69	4	dump_as_uint
+LOCATION_DOMAIN_NAME		NONE		8741	70	64	dump_as_ascii
+IF_STAT_IFACE			NONE		8741	101	4	dump_as_uint
+IF_STAT_IN_PKTS_RATE		NONE		8741	102	4	dump_as_uint
+IF_STAT_OUT_PKTS_RATE		NONE		8741	103	4	dump_as_uint
+IF_STAT_IN_OCTETS_RATE		NONE		8741	104	4	dump_as_uint
+IF_STAT_OUT_OCTETS_RATE		NONE		8741	105	4	dump_as_uint
+IF_STAT_IN_PKT_SIZE		NONE		8741	106	4	dump_as_uint
+IF_STAT_OUT_PKT_SIZE		NONE		8741	107	4	dump_as_uint
+IF_STAT_CONN_RATE		NONE		8741	108	4	dump_as_uint
+FLOW_INIT_OCTETS_RATE		NONE		8741	111	4	dump_as_uint
+FLOW_RESP_OCTETS_RATE		NONE		8741	112	4	dump_as_uint
+FLOW_INIT_PKT_RATE		NONE		8741	113	4	dump_as_uint
+FLOW_RESP_PKT_RATE		NONE		8741	114	4	dump_as_uint
+FLOW_INIT_PKT_SIZE		NONE		8741	115	4	dump_as_uint
+FLOW_RESP_PKT_SIZE		NONE		8741	116	4	dump_as_uint
+IF_STAT_IF_NAME			NONE		8741	117	32	dump_as_ascii
+IF_STAT_IF_TYPE			NONE		8741	118	1	dump_as_uint
+IF_STAT_IF_SPEED		NONE		8741	119	4	dump_as_uint
+IF_STAT_IF_STATE		NONE		8741	120	1	dump_as_uint
+IF_STAT_IF_MTU			NONE		8741	121	2	dump_as_uint
+IF_STAT_IF_MODE			NONE		8741	122	1	dump_as_uint
+URL_FLOW_ID			NONE		8741	123	4	dump_as_uint
+URL_TIME_ID			NONE		8741	124	4	dump_as_uint
+CORE_STAT_CORE_ID		NONE		8741	126	2	dump_as_uint
+CORE_STAT_CORE_UTIL		NONE		8741	127	2	dump_as_uint
+VOIP_FLOW_ID			NONE		8741	128	4	dump_as_uint
+#VOIP_TIME_ID			NONE		8741	129	4	dump_as_uint
+VOIP_INIT_CALL_ID		NONE		8741	130	80	dump_as_ascii
+VOIP_RESP_CALL_ID		NONE		8741	131	80	dump_as_ascii
+MEDIA_TYPE			NONE		8741	132	1	dump_as_uint
+MEDIA_PROTOCOL			NONE		8741	133	1	dump_as_uint
+SERVICE_NAME			NONE		8741	134	80	dump_as_ascii
+SERVICE_IP_TYPE			NONE		8741	135	1	dump_as_uint
+SERVICE_PORT_BEGIN		NONE		8741	136	2	dump_as_uint
+SERVICE_PORT_END		NONE		8741	137	2	dump_as_uint
+SPAM_SESS_ID			NONE		8741	138	8	dump_as_uint
+SPAM_FLOW_ID			NONE		8741	139	4	dump_as_uint
+SPAM_TIME_ID			NONE		8741	140	4	dump_as_uint
+SPAM_SPAMMER			NONE		8741	141	1	dump_as_uint
+SPAM_TYPE			NONE		8741	142	1	dump_as_uint
+SPAM_TO_E_MAIL			NONE		8741	143	80	dump_as_ascii
+SPAM_FROM_E_MAIL		NONE		8741	144	80	dump_as_ascii
+MEM_TOTAL_RAM			NONE		8741	145	4	dump_as_uint
+MEM_AVAIL_RAM			NONE		8741	146	4	dump_as_uint
+MEM_USED_RAM			NONE		8741	147	4	dump_as_uint
+MEM_DB_RAM			NONE		8741	148	4	dump_as_uint
+MEM_FLOW_COUNT			NONE		8741	149	4	dump_as_uint
+MEM_PER_FLOW			NONE		8741	150	4	dump_as_uint
+DEV_IFACE_ID			NONE		8741	151	4	dump_as_uint
+DEV_IP_ADDR			NONE		8741	152	4	dump_as_uint
+DEV_MAC_ADDR			NONE		8741	153	6	dump_as_mac_address
+DEV_NAME			NONE		8741	154	40	dump_as_ascii
+VPN_IN_SPI_ID			NONE		8741	155	8	dump_as_uint
+VPN_OUT_SPI_ID			NONE		8741	156	8	dump_as_uint
+VPN_TUNNEL_NAME			NONE		8741	157	40	dump_as_ascii
+VPN_LOCAL_GW			NONE		8741	158	4	dump_as_uint
+VPN_REMOTE_GW			NONE		8741	159	4	dump_as_uint
+VPN_TUNNEL_IFACE_ID		NONE		8741	160	4	dump_as_uint
+VPN_POLICY_TYPE			NONE		8741	161	1	dump_as_uint
+VPN_PROTOCOL_TYPE		NONE		8741	162	1	dump_as_uint
+VPN_ENCRYPTION_TYPE		NONE		8741	163	1	dump_as_uint
+VPN_AUTHENTICATION_TYPE		NONE		8741	164	1	dump_as_uint
+VPN_START_TIME			NONE		8741	165	4	dump_as_uint
+VPN_END_TIME			NONE		8741	166	4	dump_as_uint
+INIT_VPN_SPI_OUT		NONE		8741	167	8	dump_as_uint
+RESP_VPN_SPI_OUT		NONE		8741	168	8	dump_as_uint
+INIT_TO_RESP_DELTA_PKTS		NONE		8741	169	4	dump_as_uint
+INIT_TO_RESP_DELTA_OCTETS	NONE		8741	170	4	dump_as_uint
+RESP_TO_INIT_DELTA_PKTS		NONE		8741	171	4	dump_as_uint
+RESP_TO_INIT_DELTA_OCTETS	NONE		8741	172	4	dump_as_uint
+FLOW_BLOCK_REASON		NONE		8741	173	1	dump_as_uint
+IF_STAT_MAC_ADDRESS		NONE		8741	174	6	dump_as_mac_address
+IF_STAT_IP_ADDRESS		NONE		8741	175	4	dump_as_uint
+IF_STAT_SECURITY_TYPE		NONE		8741	176	1	dump_as_uint
+IF_STAT_ZONE_NAME		NONE		8741	177	32	dump_as_ascii
+USER_IP_ADDR			NONE		8741	178	4	dump_as_uint
+URL_RATING_VAL1			NONE		8741	179	1	dump_as_uint
+URL_RATING_VAL2			NONE		8741	180	1	dump_as_uint
+URL_RATING_VAL3			NONE		8741	181	1	dump_as_uint
+URL_RATING_VAL4			NONE		8741	182	1	dump_as_uint
+APP_BWM_ATTR			NONE		8741	183	1	dump_as_uint
+VOIP_INIT2RESP_LOST_PKTS	NONE		8741	184	4	dump_as_uint
+VOIP_RESP2INIT_LOST_PKTS	NONE		8741	185	4	dump_as_uint
+VOIP_INIT2RESP_AVG_LATENCY	NONE		8741	186	4	dump_as_uint
+VOIP_INIT2RESP_MAX_LATENCY	NONE		8741	187	4	dump_as_uint
+VOIP_RESP2INIT_AVG_LATENCY	NONE		8741	188	4	dump_as_uint
+VOIP_RESP2INIT_MAX_LATENCY	NONE		8741	189	4	dump_as_uint
+APP_CONTENT_TYPE		NONE		8741	190	1	dump_as_uint
+SNWL_OPTION			NONE		8741	191	4	dump_as_uint
+APP_RISK_ATTR			NONE		8741	192	1	dump_as_uint
+APP_TECH_ATTR			NONE		8741	193	2	dump_as_uint
+APP_ATTR_BIT_MASK		NONE		8741	194	4	dump_as_uint
+TOP_APPS_SIGID			NONE		8741	195	4	dump_as_uint
+TOP_APPS_APPNAME		NONE		8741	196	96	dump_as_ascii
+TOP_APPS_RATE			NONE		8741	197	4	dump_as_uint

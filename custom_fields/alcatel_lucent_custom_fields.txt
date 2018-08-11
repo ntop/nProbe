@@ -1,0 +1,26 @@
+#
+# Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+#
+# Notes
+# - STANDARD_EQUIVALENT
+#   If this field is equivalenet/alias of a standard field, put its name here
+#   or put NONE if there is no standard equivalent element
+#
+# Notes
+# - Use 0 for no PEN
+#
+#
+# Available formats
+# - dump_as_uint
+# - dump_as_ipv4_address
+# - dump_as_mac_address
+# - dump_as_hex
+# - dump_as_ascii
+#
+
+# Alcatel Lucent
+AluInsideServiceID		NONE	637	91	2	dump_as_uint
+AluOutsideServiceID		NONE	637	92	2	dump_as_uint
+Padding				NONE	0	210	1	dump_as_ascii
+FLOW_END_REASON	                NONE	0       136     1	dump_as_hex
+AluNatSubString                 NONE	637	93	8	dump_as_ascii

@@ -1,0 +1,159 @@
+#
+# Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+#
+# Notes
+# - STANDARD_EQUIVALENT
+#   If this field is equivalenet/alias of a standard field, put its name here
+#   or put NONE if there is no standard equivalent element
+#
+# Notes
+# - Len cannot exceed 8 bytes
+# - Use 0 for no PEN
+#
+#
+# Available formats
+# - dump_as_uint
+# - dump_as_ipv4_address
+# - dump_as_mac_address
+# - dump_as_hex
+# - dump_as_ascii
+#
+
+#VENDOR_PROPRIETARY_65	NONE	NONE	0	65		2	dump_as_uint
+#FORWARDING_STATUS	NONE	0	89		1	dump_as_uint
+#CISCO_12241		NONE	9	12241		2	dump_as_uint
+#CISCO_8337		NONE	9	8337		8	dump_as_hex
+
+########################################################################
+# main section
+AVC_CONN_NEW_CONNECTIONS	NONE	0	278	4	dump_as_uint
+AVC_SERVER_COUNTER_BYTES_LONG	NONE	0	232	8	dump_as_uint
+AVC_CLIENT_COUNTER_BYTES_LONG	NONE	0	231	8	dump_as_uint
+AVC_DELAY_NETWORK_TO_SERVER_SUM	NONE	9	9319	4	dump_as_uint
+AVC_DELAY_NETWORK_TO_CLIENT_SUM	NONE	9	9316	4	dump_as_uint
+AVC_CLIENT_COUNTER_PACKETS	NONE	9	9268	4	dump_as_uint
+AVC_DELAY_NETWORK_CLIENT_TO_SRV	NONE	9	9313	4	dump_as_uint
+AVC_DELAY_APPLICATION_SUM	NONE	9	9306	4	dump_as_uint
+AVC_DELAY_RESP_CLIENT_TO_SRV	NONE	9	930	9	4	dump_as_uint
+AVC_DELAY_RESP_TO_SERVER_SUM	NONE	9	9303	4	dump_as_uint
+AVC_DELAY_RESP_TO_SERVER	NONE	9	930	0	4	dump_as_uint
+AVC_TRANSACTION_DURATION_SUM	NONE	9	9273	4	dump_as_uint
+AVC_CONN_CLIENT_IPV4_ADDRESS	NONE	9	12236	4	dump_as_ipv4_address
+AVC_CONN_SERVER_IPV4_ADDRESS	NONE	9	12237	4	dump_as_ipv4_address
+AVC_SERVER_NETWORK_TIME_MAX	NONE	9	932	0	4	dump_as_uint
+AVC_CLIENT_NETWORK_TIME_MAX	NONE	9	9317	4	dump_as_uint
+AVC_TOTAL_RESPONSE_TIME_MAX	NONE	9	931	0	4	dump_as_uint
+#
+OPT_ROUTING_VRT_NAME		NONE	0	236	32	dump_as_ascii
+OPT_FLOW_SAMPLER		NONE	0	48	4	dump_as_ascii
+OPT_FLOW_SAMPLER_NAME		NONE	0	84	4	0	dump_as_ascii
+OPT_FLOW_ALGORITHIM_EXPORT	NONE	0	4	9	1	dump_as_uint
+OPT_FLOW_SAMPLER_INTERVAL	NONE	0	5
+OPT_FLOW_EXPORTER		NONE	0	144	4	dump_as_uint
+#
+MED_TRANSP_PKTS_LOST_COUNTER	NONE	9	4251	4	dump_as_uint
+MED_TRANSP_RTP_JITTER_MEAN	NONE	9	4255	4	dump_as_uint
+MED_TRANSP_RTP_JITTER_MIN	NONE	9	4256	4	dump_as_uint
+MED_TRANSP_RTP_JITTER_MAX	NONE	9	4257	4	dump_as_uint
+MED_APP_MEDIA_BYTES_RATE	NONE	9	4238	4	dump_as_uint
+MED_APP_MEDIA_PKTS_RATE		NONE	9	4241	4	dump_as_uint
+#
+PFR_TIME_ABS_MON_INT		NONE	0	35	9	8	dump_as_uint
+PFR_IPV4_DEST_PREFIX		NONE	0	45	4	dump_as_uint
+PFR_SITE_DEST_ID_IPV4		NONE	0	37	0	4	dump_as_ipv4_address
+PFR_SITE_SRC_ID_IPV4		NONE	0	37	9	4	dump_as_ipv4_address
+PFR_ROUTING_VRF_OUTPUT		NONE	0	235	4	dump_as_uint
+PFR_BR_IPV4			NONE	0	3900	0	4	dump_as_ipv4_address
+PFR_LABEL_IDENTIFIER		NONE	0	37118	4	dump_as_uint
+PFR_INT_NAME_LONG		NONE	0	83	8	dump_as_ascii
+PFR_IPV4_DEST_MASK		NONE	0	13	1	dump_as_uint
+PFR_RTP_JITTER_INT_ARV_MEAN	NONE	0	37098	4	dump_as_uint
+PFR_TRANSPORT_UNREACHABILITY	NONE	0	66	4	dump_as_uint
+PFR_INGRESS_BW_LONG		NONE	0	39017	8	dump_as_uint
+PFR_MAX_INGRESS_BW		NONE	0	39018	8	dump_as_uint
+PFR_EGRESS_BW_LONG		NONE	0	3901	9	8	dump_as_uint
+PFR_MAX_EGRESS_BW		NONE	0	3902	0	8	dump_as_uint
+
+
+# Disabled fields
+#
+# many items are already part of the base templates and will show
+# that fact when starting nprobe, these items have been left below so we know
+
+# these are already defined as 
+# IPV4_SRC_ADDR and IPV4_DST_ADDR
+#AVC_IPV4_SOURCE_ADDRESS		NONE	0	8	4	dump_as_ipv4_address
+#AVC_IPV4_DEST_ADDRESS			NONE	0	12	4	dump_as_ipv4_address
+
+# this is already defined as PROTOCOL
+#AVC_IP_PROTOCOL			NONE	0	4	1	dump_as_uint
+
+# defined as INPUT_SNMP already 
+#AVC_INTERFACE_INPUT_SNMP	NONE	0	1	0	4	dump_as_uint
+
+# defined as OUTPUT_SNMP already 
+#AVC_INTERFACE_OUTPUT_SNMP	NONE	0	1	0	4	dump_as_uint
+
+# field already defined as APPLICATION_ID
+#AVC_APP_ID			NONE	0	95	4	dump_as_ascii
+#PFR_APP_ID			NONE	0	95	4	dump_as_ascii
+
+# defined already as AVC_VRF_INPUT
+#OPT_ROUTING_VRT_INPUT		NONE	0	234	4	dump_as_ascii
+
+# field already defined as TOTAL_BYTES_EXP
+#OPT_COUNTER_BYTES_EXPORTED	NONE	0	4	0	8	dump_as_uint
+
+# field already defined as TOTAL_PKTS_EXP
+#OPT_COUNTER_PACKETS_EXPORTED	NONE	0	41	8	dump_as_uint
+
+# field already defined as TOTAL_FLOWS_EXP
+#OPT_COUNTER_FLOWS_EXPORTED	NONE	0	42	8	dump_as_uint
+
+# this field is the same as AVC_IP_DSCP
+#MED_IP_DSCP			NONE	0	195	1	dump_as_uint
+#PFR_IP_DSCP			NONE	0	195	1	dump_as_uint
+
+# this field is AVC_CONNECTION_INITIATOR
+#PFR_INT_OUTPUT_SNMP		NONE	0	14	4	dump_as_uint
+
+# Misc
+
+# nprobe doesnt yet support variable length fields
+#AVC_APPLICATION_HTTP_HOST	NONE	9	12235	var	dump_as_ascii
+
+# I have two sets of these from routers and neither match? not sure what's up there
+#OPT_C3PL CLASS CCE-ID		NONE	9	8233	4	dump_as_int
+#OPT_C3PL CLASS CCE-ID		NONE	9	8234	512	dump_as_ascii
+#OPT_C3PL CLASS CCE-ID		NONE	9	8235	256	dump_as_ascii
+
+# extra / unused AVC fields
+#AVC_CONNECTION_INITIATOR	NONE	0	14	4	dump_as_uint
+#AVC_IP_TTL			NONE	0	192	1	dump_as_uint
+#AVC_CONN_SUM_DURATION		NONE	0	27	9	8	dump_as_uint
+#AVC_IP_DSCP			NONE	0	195	1	dump_as_uint
+#AVC_CONN_SERVER_TRANSPORT_PORT	NONE	0	12241	2	dump_as_uint
+#AVC_VRF_INPUT			NONE	0	234	4	dump_as_uint
+#AVC_SERVER_COUNTER_PACKETS_LONG	NONE	0	29	9	8	dump_as_uint
+#AVC_CLIENT_COUNTER_PACKETS_LONG	NONE	0	298	8	dump_as_uint
+#AVC_SERVER_COUNTER_BYTES_NET	NONE	9	8337	8	dump_as_uint
+#AVC_CLIENT_COUNTER_BYTES_NET	NONE	9	8338	8	dump_as_uint
+#AVC_SERVER_COUNTER_RESP		NONE	9	9292	4	dump_as_uint
+#AVC_TRANSACTION_DURATION_MIN	NONE	9	9275	4	dump_as_uint
+#AVC_TRANSACTION_DURATION_MAX	NONE	9	9274	4	dump_as_uint
+#AVC_TRANSACTION_DURATION_CT	NONE	9	9272	4	dump_as_uint
+#AVC_APP_NAME			NONE	0	96	24	dump_as_ascii
+#AVC_APP_DESC			NONE	0	94	55	dump_as_ascii
+#AVC_APP_CATEGORY_NAME		NONE	9	12232	32	dump_as_ascii
+#AVC_APP_SUB_CATEGORY_NAME	NONE	9	12233	32	dump_as_ascii
+#AVC_APP_GROUP_NAME		NONE	9	12234	32	dump_as_ascii
+#AVC_APP_TRAFFIC_CLASS		NONE	9	12243	32	dump_as_ascii
+#AVC_APP_BUSINESS_RELEVANCE	NONE	9	12244	32	dump_as_ascii
+#AVC_P2P_TECH			NONE	0	288	1	0	dump_as_ascii
+#AVC_TUNNEL_TECH		NONE	0	28	9	1	0	dump_as_ascii
+#AVC_ENCRYPTED_TECH		NONE	0	29	0	1	0	dump_as_ascii
+#AVC_APP_VERSION_NAME		NONE	0	106	4	0	dump_as_ascii
+#AVC_APP_SUB_APP_TAG		NONE	0	97	4	dump_as_ascii
+#AVC_APP_SUB_APP_NAME		NONE	0	10	9	8	0	dump_as_ascii
+#AVC_APP_SUB_APP_DESC		NONE	0	11	0	8	0	dump_as_ascii
+

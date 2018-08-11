@@ -1,0 +1,24 @@
+#
+# Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+#
+# Notes
+# - STANDARD_EQUIVALENT
+#   If this field is equivalenet/alias of a standard field, put its name here
+#   or put NONE if there is no standard equivalent element
+#
+# Notes
+# - Use 0 for no PEN
+#
+#
+# Available formats
+# - dump_as_uint
+# - dump_as_ipv4_address
+# - dump_as_mac_address
+# - dump_as_hex
+# - dump_as_ascii
+#
+
+# Gigamon
+HttpReqUrl			NONE	26866	1	64	dump_as_ascii
+DnsQueryName			NONE	26866	204	64	dump_as_ascii
+DnsResponseIpv4Address		NONE	26866	207	4	dump_as_ipv4_address
