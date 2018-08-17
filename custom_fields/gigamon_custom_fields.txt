@@ -22,3 +22,4 @@
 HttpReqUrl			NONE	26866	1	64	dump_as_ascii
 DnsQueryName			NONE	26866	204	64	dump_as_ascii
 DnsResponseIpv4Address		NONE	26866	207	4	dump_as_ipv4_address
+DnsResponseIpv4AddrText		NONE	26866	240	16	dump_as_ascii
