@@ -1,5 +1,63 @@
 # CHANGELOG
 
+
+#### nProbe 8.6 (October 2018)
+
+
+## Main New Features
+
+* Added second-by-second client-to-server and server-to-client flow bytes
+  * https://www.ntop.org/nprobe/introducing-per-second-measurements-in-nprobe-flow-exports/
+* Implemented an embedded web server that can be optionally enabled to
+  * Force a flush of all the active flows
+  * Receive a response monitored traffic traffic statistics
+  * Query the nProbe version
+* Seamless support of ElasticSearch 5 and 6 and automatic template push
+  * ElasticSearch version is automatically determined upon nProbe startup
+  * A proper template is pushed to ElasticSearch on the basis of its version
+* Implemented modbus plugin
+
+
+## Extensions
+
+* Added support for the collection of NetFlow/IPFIX vendor-proprietary information elements through simple configuration files
+  * Supported vendors include Sonicwall, Cisco, IXIA, an others
+  * Configuration files published at https://github.com/ntop/nProbe/tree/master/custom_fields
+* The default NetFlow version is now V9
+* Plugins are disabled in collector mode
+* Improved support for Ubuntu18
+* Implements SIP user agents dissections (Client and Server)
+* Implements TCP/UDP/Other min flow size to discard flows below a certain minimum size
+* nProbe runs with user 'nprobe' by default, falling back to nobody if user 'nprobe' does not exist
+* New NetFlow information elements `%NAT_ORIGINATING_ADDRESS_REALM` and `%NAT_EVENT`
+* `L7_PROTO` exports now the protocol in format `<master>.<application>` protocol
+* Added fields `%SRC_TO_DST_SECOND_BYTES` and `%DST_TO_SRC_SECOND_BYTES` to export second-by-second flow bytes
+* Migrates geolocation support to GeoLite2 and libmaxminddb
+* Migration of nProbe manual to HTML
+  * Manual available at https://www.ntop.org/guides/nProbe/  
+
+## New Options
+
+* `--http-server` to enable the embedded web server
+* `--help-neflow` to dump a long help including plugin and template information
+
+
+## Fixes
+
+* Checks for hardening comparisons with partial strings
+* Further Checks to avoid crossing certain memory bundaries
+* Checks to avoid loops with malformed sctp packets
+* Fixes for flow start/end times and timestamp calculation in proxy mode
+* Fixes issues with SIP call id in RTP flows
+* Fixes length calculation in IPFIX variable-length fields
+* Fixed ZMQ buffer termination when flushing ZMQ buffers
+* Fixed wrong `%EXPORTER_IPV4_ADDRESS` exported over ZMQ export in case on Netflow != v5
+* Fixed a race condition that was preventing all flows to be dumped on file
+* Fix to avoid dumped files to be owerwritten when `-P` is used with `-F < 60`
+* Adds missing librdkafka support on Centos7
+
+-------------------------------------------------------------------------------
+
 #### nProbe 8.4 (April 2018)
 
 
