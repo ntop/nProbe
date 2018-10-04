@@ -2,8 +2,7 @@ nProbe can collect proprietary flow fields as explained in https://www.ntop.org/
 
 This directory contains configuration files for various vendors, so you can use them out of the box with nProbe
 
-Custom Field Value Mappings in ntopng
-#####################################
+# Custom Field Value Mappings in ntopng
 
 Custom field values can be mapped to other values. This is the case,
 for example, of application ids. Typically, application ids are sent
