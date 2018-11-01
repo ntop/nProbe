@@ -16,6 +16,9 @@
 # - dump_as_mac_address
 # - dump_as_hex
 # - dump_as_ascii
+# - dump_as_float
+#
+# https://github.com/logstash-plugins/logstash-codec-netflow/pull/131/files
 #
 
 HTTP_URL			NONE	15397	22	8	dump_as_ascii
@@ -24,3 +27,7 @@ proceraIncomingOctets    	NONE	15397   3   	8       dump_as_uint
 proceraIncomingPackets   	NONE	15397   5   	8       dump_as_uint
 proceraOutgoingOctets    	NONE	15397   4   	8       dump_as_uint
 proceraOutgoingPackets   	NONE	15397   6   	8       dump_as_uint
+proceraQoeIncomingInternal	NONE	15397   38   	4       dump_as_float
+proceraQoeIncomingExternal	NONE	15397   39   	4       dump_as_float
+proceraQoeOutgoingInternal	NONE	15397   40   	4       dump_as_float
+proceraQoeOutgoingExternal	NONE	15397   41   	4       dump_as_float
