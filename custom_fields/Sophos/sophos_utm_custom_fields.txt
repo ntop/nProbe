@@ -1,0 +1,33 @@
+#
+# Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+#
+# Notes
+# - STANDARD_EQUIVALENT
+#   If this field is equivalenet/alias of a standard field, put its name here
+#   or put NONE if there is no standard equivalent element
+#
+# Notes
+# - Use 0 for no PEN
+#
+# Available formats
+# - dump_as_uint
+# - dump_as_ipv4_address
+# - dump_as_mac_address
+# - dump_as_hex
+# - dump_as_ascii
+# - dump_as_float
+#
+
+#
+# iptables/netfilter project
+#
+# https://utm-shop.de/information/anleitungen/utm-online-hilfe-9.400/protokolle-berichte/berichteinstellungen/einstellungen
+#
+NF_MARK			NONE	21373	4	4	dump_as_uint
+NF_CONNTRACK_ID		NONE	21373	6	4	dump_as_uint
+#
+# Astaro AG
+#
+NF_AFC_PROTOCOL		NONE	9789	1	2	dump_as_uint
+NF_AFC_PROTOCOL_NAME	NONE	9789	2	32	dump_as_ascii
+
