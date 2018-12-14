@@ -1,0 +1,33 @@
+#
+# Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+#
+# Notes
+# - STANDARD_EQUIVALENT
+#   If this field is equivalenet/alias of a standard field, put its name here
+#   or put NONE if there is no standard equivalent element
+#
+# Notes
+# - Use 0 for no PEN
+#
+#
+# Available formats
+# - dump_as_uint
+# - dump_as_ipv4_address
+# - dump_as_ipv6_address
+# - dump_as_mac_address
+# - dump_as_hex
+# - dump_as_ascii
+#
+
+# VMware
+# https://docs.vmware.com/en/VMware-NSX-Data-Center-for-vSphere/6.3/com.vmware.nsx.admin.doc/GUID-40805D0E-8A97-4011-B85C-CBF37812DBB5.html
+tenantProtocol			NONE	6876	880	1	dump_as_uint
+tenantSourceIPv4		NONE	6876	881	4	dump_as_ipv4_address
+tenantDestIPv4			NONE	6876	882	4	dump_as_ipv4_address
+tenantSourceIPv6		NONE	6876	883	16	dump_as_ipv6_address
+tenantDestIPv6			NONE	6876	884	16	dump_as_ipv6_address
+tenantSourcePort		NONE	6876	886	2	dump_as_uint
+tenantDestPort			NONE	6876	887	2	dump_as_uint
+egressInterfaceAttr		NONE	6876	888	2	dump_as_uint
+vxlanExportRole			NONE	6876	889	1	dump_as_uint
+ingressInterfaceAttr		NONE	6876	890	2	dump_as_uint
