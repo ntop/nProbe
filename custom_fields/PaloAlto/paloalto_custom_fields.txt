@@ -18,6 +18,6 @@
 # - dump_as_ascii
 #
 
-APP_ID			NONE		25461	56701	4	dump_as_uint
+#APP_ID			NONE		25461	56701	4	dump_as_uint
 L7_APP_NAME		NONE		25461	56701	64	dump_as_ascii
 USER_NAME		NONE		25461	56702	64	dump_as_ascii
