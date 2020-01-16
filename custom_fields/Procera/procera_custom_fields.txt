@@ -32,7 +32,7 @@ observationPointId                 NONE  0       138    8       dump_as_uint
 proceraApn                         NONE  15397   35     8       dump_as_ascii
 proceraBaseService                 NONE  15397   2      8       dump_as_ascii
 proceraExternalJitter              NONE  15397   68     4       dump_as_uint
-prcoeraExternalRtt                 NONE  15397   12     4       dump_as_uint
+proceraExternalRtt                 NONE  15397   12     4       dump_as_uint
 proceraGgsn                        NONE  15397   37     8       dump_as_ascii
 proceraHttpUserAgent               NONE  15397   20     8       dump_as_ascii
 proceraIncomingDot1qPriorityLevel1 NONE  15397   59     1       dump_as_uint
