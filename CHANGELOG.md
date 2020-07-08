@@ -1,5 +1,45 @@
 # CHANGELOG
 
+#### nProbe 9.0 (March 2020)
+
+## New Features
+
+*  Added flowRelay tool to collect flows through a firewall.
+*  Data serialisation based on nDPI: data can now be serialised in either JSON or binary format.
+*  Implemented %SEQ_PLEN, %SEQ_TDIFF, %ENTROPY_CLIENT_BYTES and %ENTROPY_SERVER_BYTES.
+*  Implemented --dump-bad-packets in collector mode for dumping invalid collected packets
+*  Improved GTPv2 plugin with dissection of many new fields.
+*  Implemented GTP v1/v2 per IMSI and APN aggregation via --imsi-apn-aggregation.
+*  Added HPERM and TZSP encapsulation support.
+*  Added %SSL_CIPHER %SSL_UNSAFE_CIPHER %SSL_VERSION.
+*  Implemented JA3 support via %JA3C_HASH and %JA3S_HASH.
+*  Implemented %SRC_HOST_NAME and %DST_HOST_NAME for host symbolic name export (if known).
+*  Implemented IP-in-IP support.
+*  Various Diameter plugin improvements.
+*  Implemented --collector-passthrough.
+*  Added support for IXIA packet trailer.
+*  Extended statistics reported via ZMQ so ntopng can better monitor the nProbe status.
+*  Implemented ZMQ encryption.
+*  Various Kafka export improvements (export plugin).
+*  Added support for the latest ElasticSearch format (export plugin).
+*  Implemented flow collection drop counters on UDP socket (Linux only).
+
+
+## Fixes
+
+*  Fixed NetFlow Lite processing.
+*  Implemented various checks for discarding corrupted packets that caused nProbe to crash.
+*  Fixed flow upscale calculation (e.g. with sFlow traffic).
+*  Application latency is now computed properly for some specific TCP flows with retransmissions.
+*  Fixed DNS dissection over TCP.
+*  Improvements in Out-of-Order and retransmission accounting.
+*  Fixes for %EXPORTER_IPV4_ADDRESS with sFlow.
+*  Support for the new GeoIP database format.
+*  Extended the @NTOPNG@ template macro with new fields supported by ntopng.
+*  Fixed bug in RTP plugin that was leading in some cases nprobe to crash.
+*  Various minor fixes in the nProbe engine.
+
+-------------------------------------------------------------------------------
 
 #### nProbe 8.6 (October 2018)
 
