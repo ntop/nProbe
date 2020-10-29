@@ -1,5 +1,75 @@
 # CHANGELOG
 
+-------------------------------------------------------------------------------
+
+#### nProbe 9.2 (October 2020)
+
+## Main New Features
+
+* Added Kafka and Syslog export when --collector-passthrough is used
+
+## Extensions
+
+*  Added the ability to sniff from stdin by using -i -
+*  Added %L7_PROTO_RISK %L7_PROTO_RISK_NAME
+*  Added %TCP_WIN_MAX_IN %TCP_WIN_MAX_OUT IEs to @NTOPNG@
+*  Added DNS/HTTP IEs to @NTOPNG@ in probe mode
+*  Added collected flow lifetime export via ZMQ
+*  Added IP-in-IP (IPv4 encapsulated in IPv6) support
+*  Improved DNS plugin with additional records and NAPTR query type
+*  Exporting %SEQ_PLEN as 8 bit element
+*  Added TOS export via ZMQ
+*  GTP traffic analysis improvements
+*  Improved IMSI/APN traffic accounting and aggregation when using --imsi-apn-aggregation
+*  Support for SIP over TCP (VoLTE)
+*  Added IPv6 support in GTPv1
+*  Added IPv4+IPv6 GTP-C v2 dissection
+*  Improvement on GTP-C v1 dissection
+*  Added support for %BGP_PREV_ADJACENT_ASN %BGP_NEXT_ADJACENT_ASN when collecting sFlow and Netflow
+*  Added IPv6 PAA export
+*  Support for overwriting element names with aliases provided by the user (case sensitive)
+
+## New Options
+
+*  Changed -p format to <Outer VLAN Id>.<Inner VLAN Id/<proto>/<IP>/<port>/<TOS>/<SCTP StreamId>/<exporter IP>
+*  Added the abiity to specify a binding IPv4 address in collector mode (e.g. -3 127.0.0.1:1234)
+*  Implemented --collector-nf-reforge for filtering and reforging collected netflow flows
+*  Flow cache is now disabled by default in collection mode: replaced --disable-cache with --enable-collection-cache
+*  Added --gtpv1-track-non-gtp-u-traffic and --gtpv2-track-non-gtp-u-traffic for non GTP-encapsulated user export in IE %FLOW_USER_NAME
+
+## Fixes
+
+*  Fixed detection of multiple connections on the same port (RST) exporting multiple flows
+*  Fixed EXPORTER_IPV6_ADDRESS
+*  Fixed UNTUNNELED_IPV6_SRC_ADDR / UNTUNNELED_IPV6_DST_ADDR
+*  Fixed dump of IPv6 flows to MySQL
+*  Fixed shutdown crashes
+*  Fixed kafka stats number overflow
+*  Fixed multiple --collection-filter options
+*  Fixed accounting of bidirectional flows in stats
+*  Fixed export of empty data
+*  Fixed invalid flow idle computation
+*  Fixed CSV export (always print all columns)
+*  Fixed AS lookup/calculation via MaxMind
+*  Fixed bug that caused FLOW_USER_NAME to be empty
+*  Fixed custom template elements support
+*  Fixed SIP decoding with malformed packets
+*  Fixed IPv6 dissection when encapsulated in GTP
+*  Fixed application protocol detection with GTP
+*  Fixed GTPv1 GTPV1_END_USER_IP field
+*  Fixed drop count
+
+## Miscellaneous
+
+*  Moved all binaries and libraries from /usr/local/ to /usr/
+*  Plugins are now loaded from ./plugins, /usr/lib/nprobe/plugins, /usr/local/lib/nprobe/plugins 
+*  Added Ubuntu 20.04 support
+*  Improved OpenWRT support
+*  Windows fixes
+*  Improved plugins SDK
+
+-------------------------------------------------------------------------------
+
 #### nProbe 9.0 (March 2020)
 
 ## New Features
@@ -43,7 +113,6 @@
 
 #### nProbe 8.6 (October 2018)
 
-
 ## Main New Features
 
 * Added second-by-second client-to-server and server-to-client flow bytes
@@ -56,7 +125,6 @@
   * ElasticSearch version is automatically determined upon nProbe startup
   * A proper template is pushed to ElasticSearch on the basis of its version
 * Implemented modbus plugin
-
 
 ## Extensions
 
@@ -81,7 +149,6 @@
 * `--http-server` to enable the embedded web server
 * `--help-neflow` to dump a long help including plugin and template information
 
-
 ## Fixes
 
 * Checks for hardening comparisons with partial strings
@@ -100,13 +167,11 @@
 
 #### nProbe 8.4 (April 2018)
 
-
 ## Main New Features
 
 * DPDK support
 * Implements Kafka batching, options parsing, and variable number of producers
 * Adds Kafka messages transmission statistics
-
 
 ## New Options
 
@@ -115,14 +180,12 @@
 * `--disable-sflow-upscale` to disable sFlow upscaling
 * `--terminate-in` for debugging purposes
 
-
 ## Extensions
 
 * Implemented ICMP network latency
 * Added ICMP type/code on flow keys to differenciate ICMP flows from the same peers
 * sFlow upscale now takes into account sample drops
 * Improves throughput calculations with NetFlow
-
 
 ## Fixes
 
@@ -144,18 +207,15 @@
 
 #### nProbe 8.2 (December 2017)
 
-
 ## Main New Features
 
 * Support for multiple `--zmq` endpoints to load-banace exported flows in a round-robin fashion
 * Full support for NetFlow exported by ASA, including firewall events and cumulative counters
 * MySQL database interoperability with ntopng using template `-T "@NTOPNG@"`
 
-
 ## New Options
 
 *  Added `--plugin-dir <dir>` for loading plugins from the specified directory
-
 
 ## Extensions
 
@@ -247,6 +307,7 @@
 * `--minute-expire` to force active flows to expire when a minute is past
 
 ## Plugin Extensions
+
 * Extended the export template with %BITTORENT_HASH, %PACKET_HASH, %SSL_SERVER_NAM, %UPSTREAM_SESSION_ID, %DOWNSTREAM_SESSION_ID, %SRC_AS_MAP and %DST_AS_MAP
 * Extended the export template to include longitude and latitude (%SRC_IP_LONG, %SRC_IP_LAT, %DST_IP_LONG and %DST_IP_LAT)
 * Implemented SIP RTP support, handling of early export and support of OPTIONS messages
@@ -260,14 +321,15 @@
 * HTTP plugin export of HTTP_X_FORWARDED_FOR and HTTP_VIA fields
 * Extended DNS plugin with multicast DNS
 
-
 ## ZMQ
+
 * ZMQ event handling to send interface statistics to ntopng
 * ZMQ statistics in flow collector mode
 * Ability to use ZMQ zlib compression
 * Enhanced ZMQ statistics with bps/pps rates
 
 ## Miscellaneous
+
 * Added black list support for netflow data when nprobe is in proxy mode (ipv4 - V5,V9,IPFIX)
 * Twitter heuristics to guess user activities
 * Implemented support for TCP fast retransmissions
