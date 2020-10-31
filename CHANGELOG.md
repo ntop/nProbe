@@ -2,11 +2,16 @@
 
 -------------------------------------------------------------------------------
 
-#### nProbe 9.2 (October 2020)
+#### nProbe 9.2 (November 2020)
 
-## Main New Features
+## New Features and Command Line Options
 
 * Added Kafka and Syslog export when --collector-passthrough is used
+* Changed -p format to <Outer VLAN Id>.<Inner VLAN Id/<proto>/<IP>/<port>/<TOS>/<SCTP StreamId>/<exporter IP>
+* Added the abiity to specify a binding IPv4 address in collector mode (e.g. -3 127.0.0.1:1234)
+* Implemented --collector-nf-reforge for filtering and reforging collected netflow flows
+* Flow cache is now disabled by default in collection mode: replaced --disable-cache with --enable-collection-cache
+* Added --gtpv1-track-non-gtp-u-traffic and --gtpv2-track-non-gtp-u-traffic for non GTP-encapsulated user export in IE %FLOW_USER_NAME
 
 ## Extensions
 
@@ -28,14 +33,6 @@
 *  Added support for %BGP_PREV_ADJACENT_ASN %BGP_NEXT_ADJACENT_ASN when collecting sFlow and Netflow
 *  Added IPv6 PAA export
 *  Support for overwriting element names with aliases provided by the user (case sensitive)
-
-## New Options
-
-*  Changed -p format to <Outer VLAN Id>.<Inner VLAN Id/<proto>/<IP>/<port>/<TOS>/<SCTP StreamId>/<exporter IP>
-*  Added the abiity to specify a binding IPv4 address in collector mode (e.g. -3 127.0.0.1:1234)
-*  Implemented --collector-nf-reforge for filtering and reforging collected netflow flows
-*  Flow cache is now disabled by default in collection mode: replaced --disable-cache with --enable-collection-cache
-*  Added --gtpv1-track-non-gtp-u-traffic and --gtpv2-track-non-gtp-u-traffic for non GTP-encapsulated user export in IE %FLOW_USER_NAME
 
 ## Fixes
 
