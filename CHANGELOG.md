@@ -4,12 +4,17 @@
 
 #### nProbe 9.2 (November 2020)
 
-## New Features and Command Line Options
+## New Features
 
-* Added Kafka and Syslog export when --collector-passthrough is used
+* Added --collector-passthrough for exporting flows to remote collectors without passing through the flow cache and without any flow format change. This will result is a great speed improvements (+ 5x) with respect to going through the flow cache.
+* Added --collector-nf-reforge for filtering and reforging collected netflow flows before exporting to remote collectors
+
+## New Command Line Options
+
+* Added Kafka/ZMQ/Syslog export passthtough support when --collector-passthrough is used
+* Added --collector-nf-reforge for filtering and reforging collected netflow flows before exporting to remote collectors
 * Changed -p format to <Outer VLAN Id>.<Inner VLAN Id/<proto>/<IP>/<port>/<TOS>/<SCTP StreamId>/<exporter IP>
-* Added the abiity to specify a binding IPv4 address in collector mode (e.g. -3 127.0.0.1:1234)
-* Implemented --collector-nf-reforge for filtering and reforging collected netflow flows
+* Added the ability to specify a binding IPv4 address in collector mode (e.g. -3 127.0.0.1:1234)
 * Flow cache is now disabled by default in collection mode: replaced --disable-cache with --enable-collection-cache
 * Added --gtpv1-track-non-gtp-u-traffic and --gtpv2-track-non-gtp-u-traffic for non GTP-encapsulated user export in IE %FLOW_USER_NAME
 
