@@ -1,0 +1,15 @@
+[Unit]
+Description=nProbe BGP plugin
+After=nprobe.service
+StartLimitIntervalSec=0
+PartOf=nprobe.service
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/usr/bin/perl /etc/nprobe/bgp_probe_client.pl
+
+[Install]
+WantedBy=multi-user.target
