@@ -14,6 +14,12 @@ fi
 # ntopnghosts.sh v1.3 - added optional central management of script updates and hostnamesubstitute files
 # ntopnghosts.sh v1.4 - separated constant definitions into /etc/nprobe/ntopnghosts-config.sh
 # ntopnghosts.sh v1.5 - improved error handling
+# ntopnghosts.sh v1.6 - revised code to improve to ntopng team standards:
+# - request ssl upgrades for any curl connection where it is available
+# - use a more reliable way to determine if a file already on the router is the same as another than using filesize
+# - relocated script working files from /tmp/ to /run/ntopnghosts/ so that unprivileged processes that could otherwise write to tmp 
+#   and inject code cannot do it to our files as they are in a more restricted location
+# - corrected error with hard coded ntopngserver name
 #
 # It updates host information in ntopng whenever a new host entry appears in the lease table. This means that whenever there is data 
 # present in ntopng for a host there should also be a valid hostname if it is available in DHCP.  Old hosts will stay listed until 
@@ -58,7 +64,7 @@ fi
 #
 # The first time you run the script with TELEGRAMENABLE=YES you might expect us to process all the computers in the DHCP lease table into the hostnameregister
 # however, to keep running time short we don't.  We will then add devices as they get new DHCP leases following that time.  If you want to force
-# hostnameregister to be populated you should use sudo rm /tmp/ntopng_olddhcp followed by sudo touch /tmp/ntopng_olddhcp and then run the script (manually is
+# hostnameregister to be populated you should use sudo rm /run/ntopnghosts/ntopng_olddhcp followed by sudo touch /run/ntopnghosts/ntopng_olddhcp and then run the script (manually is
 # recommended) then it will fully populate the hostnameregister with all known devices.
 #
 # NOTE: if you change your router from DNSMASQ to normal DHCP or vice-versa and do not reboot afterward, the built in command show dhcp leases will hang if you run
@@ -67,7 +73,7 @@ fi
 #
 # UPDATEURL and NAMESUBSTITUTEURL variables control whether the script and/or the hostnamesubstitute file are centrally managed or not.
 # If either of these are blank then the corresponding file will be local only, but if they are a valid URL then the file will be
-# centrally managed.  
+# centrally managed.  It is recommended that you use an https server (not http) for storing these files on.
 # 
 # On first run the script will create a file /etc/nprobe/ntopnghosts-config.sh which contains the default config.  In subsequent runs that config is included at
 # run time.  You can modify that config file with the appropriate settings for each router and it will be retained between versions of the script - so even if the
@@ -86,6 +92,9 @@ if [[ ! -f "/etc/nprobe/ntopnghosts-config.sh" ]]; then
 	echo "TELEGRAM_CHAT_ID=ENTER_A_VALID_CHAT_ID_HERE" >> /etc/nprobe/ntopnghosts-config.sh
 	echo 'UPDATEURL=' >> /etc/nprobe/ntopnghosts-config.sh
 	echo 'NAMESUBSTITUTEURL=' >> /etc/nprobe/ntopnghosts-config.sh
+	if [[ "`grep NTOPNGSERVER /etc/nprobe/ntopnghosts-config.sh`" == "" ]]; then
+		echo 'NTOPNGSERVER=ENTER_VALID_FQDN_NTOPNG_SERVER_NAME_HERE' >> /etc/nprobe/ntopnghosts-config.sh
+	fi
 fi
 # include constants
 source /etc/nprobe/ntopnghosts-config.sh
@@ -115,7 +124,7 @@ dateDiff (){ # source: https://www.unix.com/tips-and-tutorials/31944-simple-date
 }
 
 sendmessage (){
-	RESULT=`curl -s "https://api.telegram.org/bot$TELEGRAM_API_KEY/sendMessage?chat_id=$TELEGRAM_CHAT_ID&text=$MESSAGE"`
+	RESULT=`curl --ssl -s "https://api.telegram.org/bot$TELEGRAM_API_KEY/sendMessage?chat_id=$TELEGRAM_CHAT_ID&text=$MESSAGE"`
 	#echo "RESULT=$RESULT"
 	OK_STR=`echo $RESULT |jq -r '."ok"'`
 	#echo "OK_STR=$OK_STR"
@@ -123,7 +132,7 @@ sendmessage (){
 		# Failed to update:  We're going to wait 30 seconds and then retry and then we'll give up.  This means that if we fail again that there 
 		# will be no notification about this host
 		sleep 31s
-		RESULT=`curl -s "https://api.telegram.org/bot$TELEGRAM_API_KEY/sendMessage?chat_id=$TELEGRAM_CHAT_ID&text=$MESSAGE"`
+		RESULT=`curl --ssl -s "https://api.telegram.org/bot$TELEGRAM_API_KEY/sendMessage?chat_id=$TELEGRAM_CHAT_ID&text=$MESSAGE"`
 		OK_STR=`echo $RESULT |jq -r '."ok"'`
 	fi
 	if [[ "$OK_STR" == "true" ]]; then
@@ -144,30 +153,34 @@ if [[ "`ps -ef |grep ntopnghosts.sh | wc -l`" -gt "4" ]]; then
     # if our process is present already we don't want to run again so we'll stop (more than 4 processes with our name means we are already running)
 	exit
 fi
-
+# make a working directory in RAM (tmpfs)
+mkdir -p /run/ntopnghosts
 # we need to check if the hostnamesubstitute file needs to be updated
 if [[ "$NAMESUBSTITUTEURL" != "" ]]; then
-	NAMESUBSTITUTESIZE=`curl -sI $NAMESUBSTITUTEURL --location --silent -H 'Accept-Encoding: gzip,deflate' |grep -i content-length |cut -d ' ' -f2`
+	# we get the remote file size (without downloading the file - we rely on the server being able to tell us the size - note some servers might not, so use another server)
+	NAMESUBSTITUTESIZE=`curl --ssl -sI $NAMESUBSTITUTEURL --location --silent -H 'Accept-Encoding: gzip,deflate' |grep -i content-length |cut -d ' ' -f2`
 	NAMESUBSTITUTESIZE=(${NAMESUBSTITUTESIZE:0:-1})
-	#curl -sI $NAMESUBSTITUTEURL --location --silent --write-out 'size_download=%{size_download}\n'
-	if [[ -f "/tmp/hostnamesubstitute" ]]; then
-		FILESIZE=`wc -c /tmp/hostnamesubstitute |cut -d ' ' -f1`
+	#curl --ssl -sI $NAMESUBSTITUTEURL --location --silent --write-out 'size_download=%{size_download}\n'
+	if [[ -f "/run/ntopnghosts/hostnamesubstitute" ]]; then
+		FILESIZE=`wc -c /run/ntopnghosts/hostnamesubstitute |cut -d ' ' -f1`
 	else
 		FILESIZE=0
 		if [[ -f "/etc/nprobe/hostnamesubstitute" ]]; then
-			cp /etc/nprobe/hostnamesubstitute /tmp/hostnamesubstitute
+			cp /etc/nprobe/hostnamesubstitute /run/ntopnghosts/hostnamesubstitute
 		fi
 	fi
 	#echo "Centrally managed Namesubstitute size: $NAMESUBSTITUTESIZE"
 	#echo "Local Namesubstitute size: $FILESIZE"
 	if [[ "$NAMESUBSTITUTESIZE" != "0" ]]; then	
+		# is our local file the same size as the remote one?  Note that we could use filesize or date stamp for this, filesize will be more accurate and not all servers will share the date stamp with us
 		if [[ "$FILESIZE" != "$NAMESUBSTITUTESIZE" ]]; then
 			echo "Downloading updated name substitute file"
-			curl -s $NAMESUBSTITUTEURL -o "/tmp/hostnamesubstitute_new"
-			FILESIZE=`wc -c /tmp/hostnamesubstitute_new|cut -d ' ' -f1`
+			curl --ssl -s $NAMESUBSTITUTEURL -o "/run/ntopnghosts/hostnamesubstitute_new"
+			FILESIZE=`wc -c /run/ntopnghosts/hostnamesubstitute_new|cut -d ' ' -f1`
+			# did we download a file that was the same size as we were expecting?  If not, the download was interrupted
 			if [[ "$FILESIZE" == "$NAMESUBSTITUTESIZE" ]]; then
 				echo 'Hostname substitute list is up-to-date'
-				cp /tmp/hostnamesubstitute_new /tmp/hostnamesubstitute
+				cp /run/ntopnghosts/hostnamesubstitute_new /run/ntopnghosts/hostnamesubstitute
 			else
 				echo "Hostname substitute list download failed - we'll try again next run"
 				#echo "Size doesn't match ($FILESIZE) vs ($NAMESUBSTITUTESIZE)"
@@ -177,13 +190,13 @@ if [[ "$NAMESUBSTITUTEURL" != "" ]]; then
 		fi
 	fi
 else 
-	cp /etc/nprobe/hostnamesubstitute /tmp/hostnamesubstitute
+	cp /etc/nprobe/hostnamesubstitute /run/ntopnghosts/hostnamesubstitute
 fi
 #main script follows
-/opt/vyatta/bin/vyatta-op-cmd-wrapper show dhcp leases | tail -n +3| tr -s " " | sed 's/\^I//' | sort >/tmp/ntopng_newdhcp
-#cp tmp/ntopng_newdhcp /tmp/ntopng_newdhcp # for testing only
-#cp tmp/ntopng_olddhcp /tmp/ntopng_olddhcp # for testing only
-if [[ ! -f "/tmp/ntopng_olddhcp" ]]; then
+/opt/vyatta/bin/vyatta-op-cmd-wrapper show dhcp leases | tail -n +3| tr -s " " | sed 's/\^I//' | sort >/run/ntopnghosts/ntopng_newdhcp
+#cp tmp/ntopng_newdhcp /run/ntopnghosts/ntopng_newdhcp # for testing only
+#cp tmp/ntopng_olddhcp /run/ntopnghosts/ntopng_olddhcp # for testing only
+if [[ ! -f "/run/ntopnghosts/ntopng_olddhcp" ]]; then
 	if [[ "$TELEGRAMENABLE" == "YES" ]]; then
 		MESSAGE="`uname -n` has recently rebooted.  There may be some repeat notifications for devices seen in the last 24 hours"
 		TELEGRAMHOSTNAME="`uname -n`"
@@ -191,18 +204,18 @@ if [[ ! -f "/tmp/ntopng_olddhcp" ]]; then
 	fi
 	# we initialise olddhcp with the contents of newdhcp so that the script doesn't get bogged down with processing every device it can see - that would
 	# take longer than 1 minute and therefore would end up with multiple copies of the script running after a reboot.
-	cp /tmp/ntopng_newdhcp /tmp/ntopng_olddhcp
+	cp /run/ntopnghosts/ntopng_newdhcp /run/ntopnghosts/ntopng_olddhcp
 fi
-comm -3 /tmp/ntopng_olddhcp /tmp/ntopng_newdhcp |grep $SUBNET >/tmp/ntopng_dhcpcomm
+comm -3 /run/ntopnghosts/ntopng_olddhcp /run/ntopnghosts/ntopng_newdhcp |grep $SUBNET >/run/ntopnghosts/ntopng_dhcpcomm
 # we want to show any non-printable characters including ^I (tab)
-cat -vet /tmp/ntopng_dhcpcomm >/tmp/ntopng_dhcpdiff
-rm /tmp/ntopng_dhcpcomm
+cat -vet /run/ntopnghosts/ntopng_dhcpcomm >/run/ntopnghosts/ntopng_dhcpdiff
+rm /run/ntopnghosts/ntopng_dhcpcomm
 # next we need to remove ^I (tab) characters if they are present
-sed -i 's/\^I//' /tmp/ntopng_dhcpdiff
+sed -i 's/\^I//' /run/ntopnghosts/ntopng_dhcpdiff
 # because we are using cat -vet to remove non-printable characters including ^I (tab) we get $ on the end of lines, so we remove that on the next line
 # so that they don't end up in the hostnames
-sed -i 's/\$$//' /tmp/ntopng_dhcpdiff
-#cat /tmp/ntopng_dhcpdiff
+sed -i 's/\$$//' /run/ntopnghosts/ntopng_dhcpdiff
+#cat /run/ntopnghosts/ntopng_dhcpdiff
 if [[ "$DEBUG" != "" ]]; then 
 	trap - DEBUG
 	trap
@@ -227,31 +240,31 @@ while IFS= read -r line; do
 	if [[ "$HOSTNAME $MAC" != "$LASTHOSTNAME $LASTMAC" ]]; then
     	NTOPNGHOSTNAME="$HOSTNAME($MAC)"
         # check if we need to replace the hostname with something more meaningful that we have on file
-		if [[ -f "/tmp/hostnamesubstitute" ]]; then
-            SUB=`grep -i "^$HOSTNAME $MAC" /tmp/hostnamesubstitute | cut -d ' ' -f 3-100`
+		if [[ -f "/run/ntopnghosts/hostnamesubstitute" ]]; then
+            SUB=`grep -i "^$HOSTNAME $MAC" /run/ntopnghosts/hostnamesubstitute | cut -d ' ' -f 3-100`
             if [[ "$SUB" != "" ]]; then
                 echo "Replacing $HOSTNAME with $SUB"
                 NTOPNGHOSTNAME="$SUB"
             fi
         fi
         # submit the host to NTOPNG
-        RESULT=`curl -s -u $NTOPNGUSER:$NTOPNGPASS -H "Content-Type: application/json" -d '{"host": "'$IP'", "custom_name": "'$NTOPNGHOSTNAME'"}' "https://ntopng.iam-afghanistan.org/lua/rest/v1/set/host/alias.lua"`
+        RESULT=`curl --ssl -s -u $NTOPNGUSER:$NTOPNGPASS -H "Content-Type: application/json" -d '{"host": "'$IP'", "custom_name": "'$NTOPNGHOSTNAME'"}' "https://$NTOPNGSERVER/lua/rest/v1/set/host/alias.lua"`
         #echo "RESULT=$RESULT"
         # eg. {"rc_str_hr":"Success","rc_str":"OK","rsp":[],"rc":0}
         # check the response for the submission
         RC_STR=`echo $RESULT |jq -r '."rc_str"'`
         #echo "RC_STR=$RC_STR"
-		echo "$HOSTNAME has a new IP address.  Result of uploading to NTOPNG result=$RC_STR"
+		echo "$HOSTNAME has a new DHCP lease.  Result of uploading to NTOPNG result=$RC_STR"
         if [[ "$RC_STR" != "OK" ]]; then
             # Failed to update:  We're going to retry again now and then we'll give up.  This means that if we fail again that host will not update unless it 
 			# changes IP address as we'll never retry again.  The only thing that could cause a failure is if we have no internet connection when we run this 
 			# or if the ntopng server is down.  Note that following a reboot of the router we WILL try again to register all known hosts from the hosts file 
 			# to the ntopng server
-            RESULT=`curl -s -u $NTOPNGUSER:$NTOPNGPASS -H "Content-Type: application/json" -d '{"host": "'$IP'", "custom_name": "'$NTOPNGHOSTNAME'"}' "https://ntopng.iam-afghanistan.org/lua/rest/v1/set/host/alias.lua"`
+            RESULT=`curl --ssl -s -u $NTOPNGUSER:$NTOPNGPASS -H "Content-Type: application/json" -d '{"host": "'$IP'", "custom_name": "'$NTOPNGHOSTNAME'"}' "https://$NTOPNGSERVER/lua/rest/v1/set/host/alias.lua"`
 			#echo "RESULT=$RESULT"
             RC_STR=`echo $RESULT |jq -r '."rc_str"'`
 			#echo "RC_STR=$RC_STR"
-			echo "$HOSTNAME has a new IP address.  Result of uploading to NTOPNG result=$RC_STR"
+			echo "$HOSTNAME has a new DHCP lease.  Result of uploading to NTOPNG result=$RC_STR"
         fi
 		# now check if we need to send a telegram notification about seeing this host
 		# note: the telegram notifications are not related in any way to NTOPNG.  This is an additional function that is useful in some environments when it is
@@ -265,11 +278,11 @@ while IFS= read -r line; do
 		if [[ "$TELEGRAMENABLE" == "YES" ]]; then
 			# if we've recently rebooted we won't have a temporary hostnameregister so we'll copy it from the last saved in /etc/nprobe.  But if there isn't one there
 			# we'll start a new file
-			if [[ ! -f "/tmp/hostnameregister" ]]; then
+			if [[ ! -f "/run/ntopnghosts/hostnameregister" ]]; then
 				if [[ ! -f "/etc/nprobe/hostnameregister" ]]; then
-				    touch /tmp/hostnameregister
+				    touch /run/ntopnghosts/hostnameregister
 				else
-				    cp /etc/nprobe/hostnameregister /tmp/hostnameregister
+				    cp /etc/nprobe/hostnameregister /run/ntopnghosts/hostnameregister
 				fi
 			fi
 			# when did we last see this device?  We'll check the HOSTLOG first because there is a possibility that this device is not uniquely named
@@ -277,7 +290,7 @@ while IFS= read -r line; do
 				# we didn't find a device with this name already so we'll keep processing (some device names are not unique (eg. iPhone or iPad) so we make all device
 				# names unique by matching them with their MAC address)
 				HOSTLOG="$HOSTLOG$CRLF$HOSTNAME $MAC `date -I`"
-				LASTSEEN=`grep -i "^$HOSTNAME $MAC" /tmp/hostnameregister | cut -d ' ' -f 3-100`
+				LASTSEEN=`grep -i "^$HOSTNAME $MAC" /run/ntopnghosts/hostnameregister | cut -d ' ' -f 3-100`
 				if [[ "$LASTSEEN" == "" ]]; then
 					echo "We have never seen this device before"
 					DAYS=9999999
@@ -315,25 +328,25 @@ while IFS= read -r line; do
 		fi
 	fi
     echo ""
-done < /tmp/ntopng_dhcpdiff
+done < /run/ntopnghosts/ntopng_dhcpdiff
 if [[ "$DEBUG" != "" ]]; then 
 	set -x
 	trap 'read -p "run: $BASH_COMMAND"' DEBUG
 fi
 # now we update the ntopng_olddhcp file so that it is ready for next time with what was current this time
-if [[ -f "/tmp/ntopng_olddhcp" ]]; then
-    rm /tmp/ntopng_olddhcp
+if [[ -f "/run/ntopnghosts/ntopng_olddhcp" ]]; then
+    rm /run/ntopnghosts/ntopng_olddhcp
 fi
-cp /tmp/ntopng_newdhcp /tmp/ntopng_olddhcp
+cp /run/ntopnghosts/ntopng_newdhcp /run/ntopnghosts/ntopng_olddhcp
 if [[ "$TELEGRAMENABLE" == "YES" ]]; then
 	# need to look for all devices that are in the current hostname register but not in HOSTLOG and add them to HOSTLOG with their old dates - note this will usually be
 	# almost all the devices because we should only get a few lease updates every few minutes at the most, and therefore every other device will be added from history
 	# note that the next 7 lines of code should be redundant but they are kept here for safety since we don't want to have errors if files don't exist
-	if [[ ! -f "/tmp/hostnameregister" ]]; then
+	if [[ ! -f "/run/ntopnghosts/hostnameregister" ]]; then
 		if [[ ! -f "/etc/nprobe/hostnameregister" ]]; then
-			touch /tmp/hostnameregister
+			touch /run/ntopnghosts/hostnameregister
 		else
-			cp /etc/nprobe/hostnameregister /tmp/hostnameregister
+			cp /etc/nprobe/hostnameregister /run/ntopnghosts/hostnameregister
 		fi
 	fi
 	#echo -e "$HOSTLOG"
@@ -353,17 +366,17 @@ if [[ "$TELEGRAMENABLE" == "YES" ]]; then
 				HOSTLOG="$HOSTLOG$CRLF$line"
 			fi
 		fi
-	done < /tmp/hostnameregister 
+	done < /run/ntopnghosts/hostnameregister 
 	if [[ "$DEBUG" != "" ]]; then 
 		set -x
 		trap 'read -p "run: $BASH_COMMAND"' DEBUG
 	fi
 	#echo -e "$HOSTLOG"
-	echo -e "$HOSTLOG" | sort -f > /tmp/hostnameregister
+	echo -e "$HOSTLOG" | sort -f > /run/ntopnghosts/hostnameregister
 	SAVEPERIOD=1
 	# when did we last update the long term storage with our current last seen hosts list?
-	if [[ -f "/tmp/hostsupdate" ]]; then
-		LASTSAVEDHOSTS=`cat /tmp/hostsupdate`
+	if [[ -f "/run/ntopnghosts/hostsupdate" ]]; then
+		LASTSAVEDHOSTS=`cat /run/ntopnghosts/hostsupdate`
 		SINCESAVED=`dateDiff -d "now" "$LASTSAVEDHOSTS"`
 	else 
 		# this is the first time we've run it
@@ -375,11 +388,10 @@ if [[ "$TELEGRAMENABLE" == "YES" ]]; then
 		if [[ ! -f "/etc/nprobe/hostnameregister" ]]; then
 			touch /etc/nprobe/hostnameregister
 		fi
-		LONGTERMFILESIZE=`wc -c /etc/nprobe/hostnameregister|cut -d ' ' -f1`
-		TEMPORARYFILESIZE=`wc -c /tmp/hostnameregister|cut -d ' ' -f1`
-		if [[ "$LONGTERMFILESIZE" != "$TEMPORARYFILESIZE" ]]; then
-			cp /tmp/hostnameregister /etc/nprobe/hostnameregister
-			echo `date -I` > /tmp/hostsupdate
+		cmp -s /etc/nprobe/hostnameregister /run/ntopnghosts/hostnameregister
+		if [[ "$?" != "0" ]]; then
+			cp /run/ntopnghosts/hostnameregister /etc/nprobe/hostnameregister
+			echo `date -I` > /run/ntopnghosts/hostsupdate
 			echo Updated the hostnameregister in long term storage
 		fi
 		# if we are centrally managing the hostnamesubstitute file then we may need to update it to long term storage too
@@ -387,10 +399,9 @@ if [[ "$TELEGRAMENABLE" == "YES" ]]; then
 			if [[ ! -f "/etc/nprobe/hostnamesubstitute" ]]; then
 				touch /etc/nprobe/hostnamesubstitute
 			fi
-			LONGTERMFILESIZE=`wc -c /etc/nprobe/hostnamesubstitute|cut -d ' ' -f1`
-			TEMPORARYFILESIZE=`wc -c /tmp/hostnamesubstitute|cut -d ' ' -f1`
-			if [[ "$LONGTERMFILESIZE" != "$TEMPORARYFILESIZE" ]]; then
-				cp /tmp/hostnamesubstitute /etc/nprobe/hostnamesubstitute
+			cmp -s /etc/nprobe/hostnamesubstitute /run/ntopnghosts/hostnamesubstitute
+			if [[ "$?" != "0" ]]; then
+				cp /run/ntopnghosts/hostnamesubstitute /etc/nprobe/hostnamesubstitute
 				echo Updated the hostnamesubstitute in long term storage
 			fi
 		fi
@@ -398,9 +409,9 @@ if [[ "$TELEGRAMENABLE" == "YES" ]]; then
 fi
 # we need to check if the script itself needs to be updated
 if [[ "$UPDATEURL" != "" ]]; then
-	UPDATESIZE=`curl -sI $UPDATEURL --location --silent -H 'Accept-Encoding: gzip,deflate' |grep -i content-length |cut -d ' ' -f2`
+	UPDATESIZE=`curl --ssl -sI $UPDATEURL --location --silent -H 'Accept-Encoding: gzip,deflate' |grep -i content-length |cut -d ' ' -f2`
 	UPDATESIZE=(${UPDATESIZE:0:-1})
-	#curl -sI $UPDATEURL --location --silent --write-out 'size_download=%{size_download}\n'
+	#curl --ssl -sI $UPDATEURL --location --silent --write-out 'size_download=%{size_download}\n'
 	if [[ -f "/etc/nprobe/ntopnghosts.sh" ]]; then
 		FILESIZE=`wc -c /etc/nprobe/ntopnghosts.sh|cut -d ' ' -f1`
 	else
@@ -411,11 +422,12 @@ if [[ "$UPDATEURL" != "" ]]; then
 	if [[ "$UPDATESIZE" != "0" ]]; then
 		if [[ "$FILESIZE" != "$UPDATESIZE" ]]; then
 			echo "Downloading updated script"
-			curl -s $UPDATEURL -o "/tmp/ntopnghosts.sh"
-			FILESIZE=`wc -c /tmp/ntopnghosts.sh|cut -d ' ' -f1`
+			curl --ssl -s $UPDATEURL -o "/run/ntopnghosts/ntopnghosts.sh"
+			# verify that we actually downloaded a file of the expected file size
+			FILESIZE=`wc -c /run/ntopnghosts/ntopnghosts.sh|cut -d ' ' -f1`
 			if [[ "$FILESIZE" == "$UPDATESIZE" ]]; then
 				echo 'Script is up-to-date'
-				cp /tmp/ntopnghosts.sh /etc/nprobe/ntopnghosts.sh
+				cp /run/ntopnghosts/ntopnghosts.sh /etc/nprobe/ntopnghosts.sh
 				chmod +x /etc/nprobe/ntopnghosts.sh
 			else
 				echo "Script  download failed - we'll try again next run"

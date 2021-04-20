@@ -1,3 +1,6 @@
+v1.6
+Improves the quality and safety of the code and fixes a bug
+--
 v1.5 
 includes improved error handling
 --
