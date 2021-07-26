@@ -2,6 +2,76 @@
 
 -------------------------------------------------------------------------------
 
+#### nProbe 9.6 (July 2020)
+
+## New Features
+
+ - New support for FreeBSD/OPNsense/pfsense
+ - New UI plugin for configuring nProbe in OPNsense
+ - New IPS mode, supported both on Linux (based on Netfilter) and FreeBSD/OPNsense/pfsense (based on Netmap)
+ - New support for ClickHouse and Maria DB (in addition to MySQL and other export formats)
+ - New AWS VPC Flow Logs collection (via dump files)
+
+## New Command Line Options
+
+ - Extend -E to support 16-bit observationDomainId (IPFIX) 
+ - Add --ips-mode to enable IPS mode
+ - Add --zmq-publish-events to enable collection of events from ntopng, including IPS policies
+ - Add --ignore-obs-domain-id-port to ignore probe port and observation domain id
+ - Add --ja3plus to enable JA3+
+ - Add --version-json for exporting the version and license information in JSON format
+ - Add --host-labels to load host labels from file 
+ - Add -D 'T' dump format (compressed text)
+ - Add --collector-reforge-timestamps for reforging collected timestamps
+
+## Extensions
+
+ - Add %FLOW_VERDICT to report the verdict associated with the flow in IPS mode
+ - Add %SRC_TO_DST_MAX_EST_THROUGHPUT %DST_TO_SRC_MAX_EST_THROUGHPUT to export per direction throughput
+ - Add %SRC_HOST_LABEL %DST_HOST_LABEL to export host labels configured with --host-labels
+ - Add %L7_RISK_SCORE for associating flow risk score with a flow
+ - Add %SIP_REGISTER_MAX_RRD %SIP_REGISTER_NUM_OK %SIP_REGISTER_NUM_OTHER SIP IEs
+ - Add %SRC_TO_DST_IAT_MIN %SRC_TO_DST_IAT_MAX %SRC_TO_DST_IAT_AVG %SRC_TO_DST_IAT_STDDEV %DST_TO_SRC_IAT_MIN %DST_TO_SRC_IAT_MAX %DST_TO_SRC_IAT_AVG %DST_TO_SRC_IAT_STDDEV min/max/avg/stddev packet IAT
+ - Add %OBSERVATION_POINT_TYPE %OBSERVATION_POINT_ID for exporting Observation Point information
+ - Add %L7_INFO with L7 flow information (used by ntopng)
+ - Add collection of %IPV4_NEXT_HOP %IPV4_BGP_NEXT_HOP %FORWARDING_STATUS IEs
+
+## Improvements
+
+ - Add support for decoding fragmented tunnelled packets
+ - Improve Throughput calculation
+ - Extend max template size to 256
+ - Add handlign of ingress VLAN on sFlow extended switch data
+ - Enhance MPLS-tagged packet decoding
+ - Improve dump to Influx DB
+
+## Fixes
+
+ - Fix crash when using --pcap-file-list with --zmq
+ - Fix Win CLI option handling
+ - Fix L2TP dissection of tunnels with optional lenght set
+ - Fix -i DIR option (pcaps are read continuously until shutdown)
+ - Fix handling of %EXPORTER_IPV4_ADDRESS in template when using @NTOPNG@
+ - Fix support of large packets (> MTU) due to GTO/TSO/LRO
+ - Fix RTP invalid memory allocation
+ - Fix @NTOPNG@ template that caused TCP flags to be sent only on one direction, generating invalid security alerts
+ - Fix/rework flow direction and %DIRECTION information element
+ - Fix crash with too many templates defined
+
+## Misc
+
+ - Add configuration Wizard (nprobe-config) for configuring nProbe
+ - Windows now uses a virtual NT SERVICE\nprobe account
+ - Add support for reading the configuration from both the configuration file and CLI parameters (at the same time)
+ - Add scripts for configuring Netfilter with nProbe in IPS mode (installed under /usr/share/nprobe/netfilter/scripts)
+ - Add/improve support for embedded systems, including:
+   - OpenWRT
+   - Ubiquiti (e.g. EdgeRouter X)
+   - Raspberry (Raspbian)
+ - Removed obsolete --ndpi-proto and --ndpi-proto-ports 
+
+-------------------------------------------------------------------------------
+
 #### nProbe 9.2 (November 2020)
 
 ## New Features
