@@ -18,6 +18,11 @@
 # - dump_as_ascii
 #
 
-#APP_ID			NONE		25461	56701	4	dump_as_uint
-L7_APP_NAME		NONE		25461	56701	64	dump_as_ascii
-USER_NAME		NONE		25461	56702	64	dump_as_ascii
+#APP_ID			NONE	25461	56701	4	dump_as_uint
+#L7_APP_NAME		NONE	25461	56701	64	dump_as_ascii
+APPLICATION_NAME	NONE	25461	56701	32	dump_as_ascii
+USER_NAME		NONE	25461	56702	64	dump_as_ascii
+POST_NAT_SRC_IPV6_ADDR	NONE	25461	281	16	dump_as_ipv6_address
+POST_NAT_DST_IPV6_ADDR	NONE	25461	282	16	dump_as_ipv6_address
+ENTREPRISE_NUMBER	NONE	25461	346	4	dump_as_uint
+
