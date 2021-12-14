@@ -1,0 +1,45 @@
+#
+# Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+#
+# Notes
+# - STANDARD_EQUIVALENT
+#   If this field is equivalenet/alias of a standard field, put its name here
+#   or put NONE if there is no standard equivalent element
+#
+# Notes
+# - Len cannot exceed 8 bytes
+# - Use 0 for no PEN
+#
+#
+# Available formats
+# - dump_as_uint
+# - dump_as_ipv4_address
+# - dump_as_mac_address
+# - dump_as_hex
+# - dump_as_ascii
+#
+
+#
+# https://www.calix.com/content/calix/en/site-prod/library-html/systems-products/e-series/sysop/axos/r21x/mmt/index.htm?toc9782344.htm?107275.htm
+#
+
+# Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+OLT-pon-util-aid	NONE	6321	103	64	dump_as_ascii
+rx-pkts			IN_PKTS	6321	205	8	dump_as_uint
+tx-available-bandwidth	NONE	6321	988	8	dump_as_uint
+tx-pkts			OUT_PKTS 6321	201	8	dump_as_uint
+tx-power		NONE	6321	979	4	dump_as_uint
+rx-available-bandwidth	NONE	6321	982	8	dump_as_uint
+hostname		NONE	6321	1	64	dump_as_ascii
+operational-state	NONE	6321	955	64	dump_as_ascii
+rx-unicast-pkts		NONE	6321	620	8	dump_as_uint
+rx-multicast-pkts	NONE	6321	621	8	dump_as_uint
+rx-broadcast-pkts	NONE	6321	622	8	dump_as_uint
+tx-broadcast-pkts	NONE	6321	627	8	dump_as_uint
+tx-unicast-pkts		NONE	6321	625	8	dump_as_uint
+tx-multicast-pkts	NONE	6321	626	8	dump_as_uint
+
+
+
+
+
