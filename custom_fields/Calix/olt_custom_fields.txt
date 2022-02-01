@@ -38,8 +38,25 @@ rx-broadcast-pkts	NONE	6321	622	8	dump_as_uint
 tx-broadcast-pkts	NONE	6321	627	8	dump_as_uint
 tx-unicast-pkts		NONE	6321	625	8	dump_as_uint
 tx-multicast-pkts	NONE	6321	626	8	dump_as_uint
-
-
+mac-address		SRC_MAC	6321	56	17	dump_as_ascii
+ft-port			INTERFACE_ID	6321	4	2	dump_as_uint
+ft-shelf		NONE	6321	2	1	dump_as_uint
+ft-slot			NONE	6321	3	1	dump_as_uint
+ft-svlan		NONE	6321	8	2	dump_as_uint
+ft-sample-time		NONE	6321	10	4	dump_as_uint
+eth-vlan-monitor-aid	NONE	6321	132	64	dump_as_ascii
+rx-unicast-octets	NONE	6321	637	8	dump_as_uint
+rx-multicast-octets	NONE	6321	638	8	dump_as_uint
+rx-broadcast-octets	NONE	6321	639	8	dump_as_uint
+tx-unicast-octets	NONE	6321	640	8	dump_as_uint
+tx-multicast-octets	NONE	6321	641	8	dump_as_uint
+tx-broadcast-octets	NONE	6321	642	8	dump_as_uint
+downstream-bytes	NONE	6321	905	8	dump_as_uint
+downstream-percentage	NONE	6321	907	8	dump_as_uint
+ont-id			NONE	6321	7	64	dump_as_ascii
+pon-ont-util-aid	NONE	6321	903	64	dump_as_ascii
+upstream-bytes 		NONE	6321	904	8	dump_as_uint
+upstream-percentage	NONE	6321	906	8	dump_as_uint
 
 
 
