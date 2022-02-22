@@ -1,0 +1,50 @@
+#
+# Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+#
+# Notes
+# - STANDARD_EQUIVALENT
+#   If this field is equivalenet/alias of a standard field, put its name here
+#   or put NONE if there is no standard equivalent element
+#
+# Notes
+# - Len cannot exceed 8 bytes
+# - Use 0 for no PEN
+#
+#
+# Available formats
+# - dump_as_uint
+# - dump_as_ipv4_address
+# - dump_as_mac_address
+# - dump_as_hex
+# - dump_as_ascii
+#
+
+
+# Name	STANDARD_ALIAS	PEN	FieldId		Len	Format
+
+aaApp			    NONE    637	    1		64	dump_as_ascii
+aaAppGrp		    NONE    637	    2		64	dump_as_ascii
+aaSubType		    NONE    637	    12		1	dump_as_uint
+sessionDirection	    NONE    637	    13		1	dump_as_uint
+natInsideSvcId		    NONE    637	    91		2	dump_as_uint
+natOutsideSvcId		    NONE    637	    92		2	dump_as_uint
+natSubString		    NONE    637	    93		64	dump_as_ascii
+sessionDurationMilliseconds NONE    637     94              4       dump_as_uint
+sessionStartSeconds 	    NONE    637     95              5       dump_as_uint
+hostName		    NONE    637	    96		    64	    dump_as_ascii
+deviceId  	    	    NONE    637     97              2       dump_as_uint
+deviceMfgId   	    	    NONE    637     98              2       dump_as_uint
+deviceOsId    	    	    NONE    637     99              2       dump_as_uint
+deviceOsVer1   	    	    NONE    637     101              1       dump_as_uint
+deviceOsVer2   	    	    NONE    637     102              1       dump_as_uint
+deviceOsVer3   	    	    NONE    637     103              1       dump_as_uint
+apn			    NONE    637     108              33      dump_as_ascii
+mnc    	    	    	    NONE    637     110              2       dump_as_uint
+imsi			    NONE    637	    111		     8	     dump_as_uint
+msisdn			    NONE    637	    112		     8	     dump_as_uint
+pgw-ggsnAddr    	    NONE    637     114              16      dump_as_hex
+ratType 		    NONE    637     116              2       dump_as_uint
+cellId   		    NONE    637     118              4       dump_as_uint
+imei			    NONE    637	    129		     8	     dump_as_uint
+mcc  	    		    NONE    637     131              2       dump_as_uint
+rlq			    NONE    637	    321		     1	     dump_as_uint
