@@ -31,6 +31,7 @@ tx-pkts			OUT_PKTS 6321	201	8	dump_as_uint
 tx-power		NONE	6321	979	4	dump_as_uint
 rx-available-bandwidth	NONE	6321	982	8	dump_as_uint
 hostname		NONE	6321	1	64	dump_as_ascii
+port 			NONE	6321	4	64	dump_as_ascii
 operational-state	NONE	6321	955	64	dump_as_ascii
 rx-unicast-pkts		NONE	6321	620	8	dump_as_uint
 rx-multicast-pkts	NONE	6321	621	8	dump_as_uint
