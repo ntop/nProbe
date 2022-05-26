@@ -76,7 +76,7 @@ parameters are briefly discussed here.
 
 :code:`-D: dump flows format`
 
-	Flows stored on disks can be stored in two formats: text with user-specified format or SQLite format (availability depends on the platform and if nProbe has been compiled with it). Using flow SQLite format (-D d) can significantly reduce the size of stored files, although all the collectors might not support this format. Text flows (-D t) are the safest setting if you want to use a standard collector able to read flows dump on disk. You can also export core flow fields (-D B) in binary format for post-processing by binary applications.  Note that this flag has no effect unless --P is used.
+	Flows stored on disks can be stored in multiple formats: text (default), binary (as they are exported), JSON, or gzip-compressed text flows. Note that this flag has no effect unless -P is used.
 
 :code:`-u: input device index`
 
