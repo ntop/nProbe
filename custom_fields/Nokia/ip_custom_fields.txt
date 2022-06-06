@@ -42,7 +42,8 @@ apn			    NONE    637     108              33      dump_as_ascii
 mnc    	    	    	    NONE    637     110              2       dump_as_uint
 imsi			    NONE    637	    111		     8	     dump_as_uint
 msisdn			    NONE    637	    112		     8	     dump_as_uint
-pgw-ggsnAddr    	    NONE    637     114              16      dump_as_hex
+sgw-sgsnAddr    	    NONE    637     113              16      dump_as_ipv6_address
+pgw-ggsnAddr    	    NONE    637     114              16      dump_as_ipv6_address
 ratType 		    NONE    637     116              2       dump_as_uint
 cellId   		    NONE    637     118              4       dump_as_uint
 imei			    NONE    637	    129		     8	     dump_as_uint
