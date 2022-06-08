@@ -62,9 +62,9 @@ parameters are briefly discussed here.
 
       Useful when starting nprobe as daemon.
 
-:code:`-O: set the number of threads that fetch packets out of the network interface.`
+:code:`--ndpi-protocols|-O: export only flows whose L7 protocol is in the specified list.`
 
-      In general: the more threads are available, the better is the performance. However it is not suggested to have too many threads as in some platforms this can slow down the probe. Start with 1 and increase it if necessary. We suggest to run nprobe as single threaded application and distribute the traffic across multiple probes using PF_RING (e.g. PF_RING cluster or libzero). In fact adding threads you will end up spending a lot of time on synchronization without improving the performance. Please refer to this post http://www.ntop.org/nprobe/10-gbit-line-rate-netflow-traffic-analysis-using-nprobe-and-dna/ for more information. 
+      This option can be used to filter exported flows based on the application protocol. Example: -O "DNS,HTTP,BitTorrent".
 
 :code:`-P: dump flows`
 
@@ -801,10 +801,12 @@ The following options can be used to specify the format:
    [ 80][Len 6] %IN_DST_MAC                 %destinationMacAddress    	Destination MAC Address
    [ 81][Len 6] %OUT_SRC_MAC                %postSourceMacAddress     	Post Source MAC Address
    [ 82][Len 8] %INTERFACE_NAME             %interfaceName            	Interface you are capturing from (-i)
+   [ 85][Len 8] %OCTET_TOTAL                %octetTotalCount          	Total flow bytes [Aliased to %OCTETS_TOTAL]
+   [ 86][Len 8] %PACKET_TOTAL               %packetTotalCount         	Total flow packets [Aliased to %PACKETS_TOTAL]
    [ 89][Len 1] %FORWARDING_STATUS          %forwardingStatus         	Forwarding status of the flow
    [243][Len 2] %DOT1Q_SRC_VLAN             %dot1qVlanId              	Source VLAN (outer VLAN in QinQ)
    [254][Len 2] %DOT1Q_DST_VLAN             %postdot1qVlanId          	Destination VLAN (outer VLAN in QinQ)
-   [ 60][Len 1] %IP_PROTOCOL_VERSION        %ipVersion                   [4=IPv4][6=IPv6]
+   [ 60][Len 1] %IP_PROTOCOL_VERSION        %ipVersion                	[4=IPv4][6=IPv6]
    [ 61][Len 1] %DIRECTION                  %flowDirection            	Flow direction [0=RX, 1=TX]
    [ 62][Len 16] %IPV6_NEXT_HOP              %ipNextHopIPv6Address     	IPv6 next hop address
    [ 70][Len 3] %MPLS_LABEL_1               %mplsTopLabelStackSection 	MPLS label at position 1
@@ -817,8 +819,27 @@ The following options can be used to specify the format:
    [ 77][Len 3] %MPLS_LABEL_8               %mplsLabelStackSection8   	MPLS label at position 8
    [ 78][Len 3] %MPLS_LABEL_9               %mplsLabelStackSection9   	MPLS label at position 9
    [ 79][Len 3] %MPLS_LABEL_10              %mplsLabelStackSection10  	MPLS label at position 10
-   [ 95][Len 4] %APPLICATION_ID             %application_id           	Cisco Application Id
+   [ 95][Len 4] %APPLICATION_ID             %application_id           	Application Id
+   [ 96][Len 16] %APPLICATION_NAME                                     	Layer 7 protocol name
    [136][Len 1] %FLOW_END_REASON            %flowEndReason            	The reason for flow termination.
+   [57640][Len 4] %SRC_PROC_PID                                         	Flow source process PID
+   [57641][Len 16] %SRC_PROC_NAME                                        	Flow source process name
+   [57897][Len 4] %SRC_PROC_UID                                         	Flow source process userId
+   [57844][Len 16] %SRC_PROC_USER_NAME                                   	Flow source process user name
+   [57845][Len 4] %SRC_FATHER_PROC_PID                                  	Flow source father process PID
+   [57846][Len 16] %SRC_FATHER_PROC_NAME                                 	Flow source father process name
+   [58012][Len 16] %SRC_PROC_PACKAGE_NAME                                	Flow source process package name
+   [58028][Len 32] %SRC_PROC_CMDLINE                                     	Flow source process cmdline args
+   [58030][Len 16] %SRC_PROC_CONTAINER_ID                                	Flow source process containerId
+   [57847][Len 4] %DST_PROC_PID                                         	Flow dest process PID
+   [57848][Len 16] %DST_PROC_NAME                                        	Flow dest process name
+   [57898][Len 4] %DST_PROC_UID                                         	Flow dest process userId
+   [57849][Len 16] %DST_PROC_USER_NAME                                   	Flow dest process user name
+   [57850][Len 4] %DST_FATHER_PROC_PID                                  	Flow dest father process PID
+   [57851][Len 16] %DST_FATHER_PROC_NAME                                 	Flow dest father process name
+   [58013][Len 16] %DST_PROC_PACKAGE_NAME                                	Flow dest process package name
+   [58029][Len 32] %DST_PROC_CMDLINE                                     	Flow dest process cmdline args
+   [58031][Len 16] %DST_PROC_CONTAINER_ID                                	Flow dest process containerId
    [102][Len 2] %PACKET_SECTION_OFFSET                                	Packet section offset
    [103][Len 2] %SAMPLED_PACKET_SIZE                                  	Sampled packet size
    [104][Len 2] %SAMPLED_PACKET_ID                                    	Sampled packet id
@@ -839,7 +860,6 @@ The following options can be used to specify the format:
    [229][Len 1] %NAT_ORIGINATING_ADDRESS_REALM %natOriginatingAddressRealm	Nat Originating Address Realm
    [230][Len 1] %NAT_EVENT                  %natEvent                 	Nat Event
    [233][Len 1] %FIREWALL_EVENT             %firewallEvent            	Flow events 0=ignore, 1=created, 2=deleted, 3=denied, 4=alert, 5=update
-   [234][Len 4] %INGRESS_VRFID              %ingressVRFID             	Ingress VRF ID
    [161][Len 4] %FLOW_DURATION_MILLISECONDS %flowDurationMilliseconds 	Flow duration (msec)
    [162][Len 4] %FLOW_DURATION_MICROSECONDS %flowDurationMicroseconds 	Flow duration (usec)
    [176][Len 1] %ICMP_IPV4_TYPE             %icmpTypeIPv4             	ICMP Type
@@ -853,7 +873,11 @@ The following options can be used to specify the format:
    [312][Len 2] %FRAME_LENGTH                                         	Original L2 frame length
    [318][Len 2] %PACKETS_OBSERVED                                     	Tot number of packets seen
    [319][Len 2] %PACKETS_SELECTED                                     	Number of pkts selected for sampling
+   [234][Len 4] %INGRESS_VRFID              %ingressVRFID             	Ingress VRF ID
+   [235][Len 4] %EGRESS_VRFID               %egressVRFID              	Egress VRF ID
    [335][Len 2] %SELECTOR_NAME                                        	Sampler name
+   [361][Len 2] %PORT_RANGE_START           %portRangeStart           	NAT port range start
+   [362][Len 2] %PORT_RANGE_END             %portRangeEnd             	NAT port range end
    [NFv9 57552][IPFIX 35632.80][Len 2] %SRC_FRAGMENTS             	Num fragmented packets src->dst
    [NFv9 57553][IPFIX 35632.81][Len 2] %DST_FRAGMENTS             	Num fragmented packets dst->src
    [NFv9 57595][IPFIX 35632.123][Len 4] %CLIENT_NW_LATENCY_MS      	Network TCP 3WH RTT/2 client <-> nprobe (msec)
@@ -902,7 +926,8 @@ The following options can be used to specify the format:
    [NFv9 57588][IPFIX 35632.116][Len 4] %UNTUNNELED_IPV4_DST_ADDR  	Untunneled IPv4 destination address
    [NFv9 57589][IPFIX 35632.117][Len 2] %UNTUNNELED_L4_DST_PORT    	Untunneled IPv4 destination port
    [NFv9 57590][IPFIX 35632.118][Len 2] %L7_PROTO                  	Layer 7 protocol (numeric)
-   [NFv9 57591][IPFIX 35632.119][Len 16 varlen] %L7_PROTO_NAME             	Layer 7 protocol name
+   [NFv9 58032][IPFIX 35632.560][Len 1] %L7_CONFIDENCE             	nDPI confidence
+   [NFv9 57591][IPFIX 35632.119][Len 16 varlen] %L7_PROTO_NAME             	Layer 7 protocol name [Aliased to %APPLICATION_NAME]
    [NFv9 57973][IPFIX 35632.501][Len 16 varlen] %L7_PROTO_CATEGORY         	Layer 7 protocol category
    [NFv9 58011][IPFIX 35632.539][Len 24 varlen] %L7_INFO                   	Layer 7 flow information
    [NFv9 57592][IPFIX 35632.120][Len 4] %DOWNSTREAM_TUNNEL_ID      	Downstream tunnel identifier (e.g. GTP TEID, VXLAN VNI) or 0 if unknown
@@ -957,7 +982,7 @@ The following options can be used to specify the format:
    [NFv9 57972][IPFIX 35632.500][Len 32 varlen] %HASSH_SERVER              	HASSH server hash
    [NFv9 57975][IPFIX 35632.503][Len 4] %ENTROPY_CLIENT_BYTES      	Byte (src->dst) entropy * 1000
    [NFv9 57976][IPFIX 35632.504][Len 4] %ENTROPY_SERVER_BYTES      	Byte (dst->src) entropy * 1000
-   [NFv9 57981][IPFIX 35632.509][Len 4] %L7_PROTO_RISK             	Layer 7 protocol risk (bitmap)
+   [NFv9 57981][IPFIX 35632.509][Len 8] %L7_PROTO_RISK             	Layer 7 protocol risk (bitmap)
    [NFv9 57982][IPFIX 35632.510][Len 64 varlen] %L7_PROTO_RISK_NAME        	Layer 7 protocol risk (string)
    [NFv9 57999][IPFIX 35632.527][Len 2] %L7_RISK_SCORE             	Layer 7 flow risk score
    [NFv9 57994][IPFIX 35632.522][Len 2] %FLOW_VERDICT              	Flow verdict marker (0 = unknown, 1=pass, 2=drop...)
@@ -971,6 +996,9 @@ The following options can be used to specify the format:
    [NFv9 58008][IPFIX 35632.536][Len 4] %DST_TO_SRC_IAT_MAX        	Max (dst->src) Pkt Inter-Arrival Time (msec)
    [NFv9 58009][IPFIX 35632.537][Len 4] %DST_TO_SRC_IAT_AVG        	Avg (dst->src) Pkt Inter-Arrival Time (msec)
    [NFv9 58010][IPFIX 35632.538][Len 4] %DST_TO_SRC_IAT_STDDEV     	StdDev (dst->src) Pkt Inter-Arrival Time (msec)
+   [NFv9 58025][IPFIX 35632.553][Len 24 varlen] %AAA_NAT_KEY               	AAA/NAT Correlation Key
+   [NFv9 58026][IPFIX 35632.554][Len 4] %L7_ERROR_CODE             	Error code (e.g. SNMP, DNS. HTTP)
+   [NFv9 58027][IPFIX 35632.555][Len 48 varlen] %L7_RISK_INFO              	L7 Risk Information
 
 Plugin HTTP Protocol templates:
 
@@ -1552,6 +1580,38 @@ Major protocol (%L7_PROTO) symbolic mapping:
  261 Likee                  TCP      Fun          SocialNetwork
  262 GitLab                 TCP      Fun          Collaborative
  263 AVAST SecureDNS        UDP      Safe         Network
+ 264 Cassandra              TCP      Acceptable   Database
+ 265 AmazonAWS              TCP      Acceptable   Cloud
+ 266 Salesforce             TCP      Safe         Cloud
+ 267 Vimeo                  TCP      Fun          Streaming
+ 268 FacebookVoip           TCP      Acceptable   VoIP
+ 269 SignalVoip             TCP      Acceptable   VoIP
+ 270 Fuze                   TCP      Acceptable   VoIP
+ 271 GTP_U                  TCP      Acceptable   Network
+ 272 GTP_C                  TCP      Acceptable   Network
+ 273 GTP_PRIME              TCP      Acceptable   Network
+ 274 Alibaba                TCP      Acceptable   Web
+ 275 Crashlytics            TCP      Acceptable   DataTransfer
+ 276 Azure                  TCP      Acceptable   Cloud
+ 277 iCloudPrivateRelay     TCP      Acceptable   VPN
+ 278 EthernetIP             TCP      Acceptable   Network
+ 279 Badoo                  TCP      Fun          SocialNetwork
+ 280 AccuWeather            TCP      Fun          Web
+ 281 GoogleClassroom        TCP      Safe         Collaborative
+ 282 HSRP                   UDP      Acceptable   Network
+ 283 Cybersec               TCP      Safe         Cybersecurity
+ 284 GoogleCloud            TCP      Acceptable   Cloud
+ 285 Tencent                TCP      Acceptable   SocialNetwork
+ 286 RakNet                 UDP      Acceptable   Game
+ 287 Xiaomi                 TCP      Acceptable   Web
+ 288 Edgecast               TCP      Acceptable   Cloud
+ 289 Cachefly               TCP      Acceptable   Cloud
+ 290 Softether              TCP      Acceptable   VPN
+ 291 MpegDash               TCP      Acceptable   Media
+ 292 Dazn                   TCP      Fun          Streaming
+ 293 GoTo                   TCP      Acceptable   VoIP
+ 294 RSH                    TCP      Unsafe       RemoteAccess
+ 295 1kxun                  TCP      Fun          Streaming
 
 Usage examples
 ~~~~~~~~~~~~~~
