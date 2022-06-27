@@ -1,0 +1,9 @@
+#
+# Name		STANDARD_ALIAS
+#
+# This file is an example of how field names are renamed (e.g. for -P)
+
+# Name	STANDARD_ALIAS
+sn-start-time	FIRST_SWITCHED
+sn-charge-volume-ip-bytes-uplink	IN_BYTES
+
