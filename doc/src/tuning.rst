@@ -34,7 +34,7 @@ When nProbe is used to colelct flows from many routers, it is important to label
 
 .. figure:: ./img/ObservationPoints.png
 	    
-It allows you to mark flows according to their source regardless of the IP address of the probe originating them. You can read more about this topic on this `blog post <https://www.ntop.org/nprobe/collecting-flows-from-hundred-of-routers-using-observation-points/>`_ 
+It allows you to mark flows according to their source regardless of the IP address of the probe originating them. You can read more about this topic on `this blog post <https://www.ntop.org/nprobe/collecting-flows-from-hundred-of-routers-using-observation-points/>`_ 
 
 
 Handling Trillion Flows: Dumping Flows into ClickHouse
@@ -50,3 +50,43 @@ There are many reasons for which the information we collect cam be duplicated, i
 - When you have duplicated packets you can use the option :code:`--enable-ipv4-deduplication` to discard consecutive duplicated IPv4 packets. Note that retransmissions might be exchanged (if consecutive) for duplications
 - During collection you can use :code:`--flow-deduplication` to specify and interval (example --flow-deduplication 15) in seconds during which if a flow is seen two or more times, only the first flow is considered
 
+InfluxDB-based Timeseries Dump
+##############################
+
+nProbe is able to dump in the line format (used by InfluxDB) timeseries about its internals. In essence it is similar to :code:`-b 1` but instead of dumping stats on the screen they are written on a timeseries file that can be imported in InfluxDB. In order to enable timeseries dump, you need to use :code:`--influxdb-dump-dir <dir>` that allows you to specify where timeseries are saved. nProbe creates a timeseries file per minute. Upon dump completion, using :code:`--influxdb-exec-cmd <cmd>` you can run a command file for importing the dumped file InfluxDB 1.x
+
+.. code:: bash
+
+   $ cat influx_upload.sh
+
+   #!/bin/bash
+
+   FILENAME=$1
+   DBNAME=ntop
+
+   curl -XPOST "http://localhost:8086/write?db=$DBNAME" --data-binary @$FILENAME
+
+   /bin/rm $FILENAME
+
+Note that you need to adapt the above script in case you have authentication or use Influx 2.x.
+   
+Example you can start nProbe as follows :code:`nprobe -i eth0 --influxdb-dump-dir /tmp/influx `--influxdb-exec-cmd influx_upload.sh` in order to dump timeseries and import them automatically into the specified database.
+
+
+HowTo Create sFlow Timeseries
+#############################
+
+When used
+in collector mode, nProbe can collect both NetFlow and sFlow traffic. In the case of sFlow, your device can export:
+ - packet samples: they are used by nProbe to create flows.
+ - counter samples: in essence they are SNMP MIB-II interface counters sent via sFlow instead of SNMP.
+
+Counter samples are ignored by nProbe unless :code:`--influxdb-dump-dir <dir>` is used. In this case nProbe will dump these counters in InfluxDB line format that can be imported :code:`--influxdb-exec-cmd <cmd>` as described above. This way nProbe will create
+
+.. code:: bash
+	  
+   sflow,deviceIP=192.168.2.1,ifIndex=9 ifInOctets=0,ifInPackets=0,ifInErrors=0,ifOutOctets=714615609544,ifOutPackets=591251324,ifOutErrors=0 1656403323000000000
+   sflow,deviceIP=192.168.2.1,ifIndex=9 ifInOctets=178297744,ifInPackets=2573381,ifInErrors=0,ifOutOctets=0,ifOutPackets=0,ifOutErrors=0 1656403332000000000
+   sflow,deviceIP=192.168.2.1,ifIndex=9 ifInOctets=178297744,ifInPackets=2573381,ifInErrors=0,ifOutOctets=0,ifOutPackets=0,ifOutErrors=0 1656403332000000000
+
+that can be imported in InfluxDB and depicted with tools such as Grafana.
