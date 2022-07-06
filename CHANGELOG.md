@@ -2,6 +2,131 @@
 
 -------------------------------------------------------------------------------
 
+#### nProbe 10.0 (July 2022)
+
+## New Features
+
+ - New agent mode for process monitoring on Linux (eBPF) and Windows
+ - New support for collecting flows from Fortinet in syslog format
+
+## New Command Line Options
+
+ - Add --agent-mode option to enable eBPF support
+ - Add --timestamp-format 3/4 option
+ - Add --tzsp-port option for specifying custom TZSP port
+ - Add --tls-insecure option to skip TLS certificate validation
+ - Add --tls-priv-key and --tls-cert options
+ - Add --nat-subscribe option
+ - Add --ndpi-protocols to limit export only to the selected L7 protocols (e.g. -O "DNS,HTTP")
+ - Add --memory-footprint to print memory usage statistics
+ - Add --short-proc-stats for printing stats in a parseable format
+ - Add --process-learning-duration to control process duration check
+ - Add --syslog-flow-format option
+ - Add --cache-geoip-asn to cache GeoIP ASN
+ - Add --collect-check-bidirectional-flows
+ - Add --influxdb-dump-dir and --influxdb-exec-cmd 
+ - Add -D j option for dumping flows in JSON format
+ - Add c suffic in collector mode to enable flow cache, disabled by default (e.g. -3 2055c)
+ - Add tcp:// and udp:// support to -3 option
+ - Change --ignore-obs-domain-id-port to --use-obs-domain-id-port (ignore by default)
+ 
+## Extensions
+
+ - Add %FLOW_VERDICT to export the flow verdict in IPS mode
+ - Add more DPI IEs
+   - %L7_CONFIDENCE
+   - %L7_INFO
+   - %L7_RISK_INFO to export information about the flow risk
+   - %L7_ERROR_CODE
+ - Add set of process Information Elements
+   - {SRC,DST}_PROC_PID
+   - {SRC,DST}_PROC_NAME
+   - {SRC,DST}_PROC_UID
+   - {SRC,DST}_PROC_USER_NAME
+   - {SRC,DST}_PROC_PKG_NAME
+   - {SRC,DST}_PROC_CMDLINE
+   - {SRC,DST}_PROC_CONTAINER_ID
+   - {SRC,DST}_FATHER_PROC_NAME
+   - {SRC,DST}_FATHER_PROC_UID
+   - {SRC,DST}_FATHER_PROC_PID
+   - {SRC,DST}_FATHER_PROC_USER_NAME
+   - {SRC,DST}_FATHER_PROC_PKG_NAME
+ - Add %APPLICATION_ID and %APPLICATION_NAME
+ - Add NAT IEs
+   - %POST_NAT_SRC_IPV4_ADDR
+   - %POST_NAT_DST_IPV4_ADDR
+   - %POST_NAPT_SRC_TRANSPORT_PORT
+   - %POST_NAPT_DST_TRANSPORT_PORT
+ - Add %AAA_NAT_KEY template key 
+ - Add %PORT_RANGE_START and %PORT_RANGE_END
+ - Add %INGRESS_VRFID and %EGRESS_VRFID
+
+## Improvements
+
+ - Add support for 16 bit TCP_FLAGS
+ - Add support for 64 bit IN/OUT BYTES/PKTS (required by IPFIX)
+ - Add support for BSD Tunnel encapsulation
+ - Add nProbe stats to influxdb
+ - Add sFlow timeseries dump
+ - Add check for unidirectional traffic
+ - Add support of L2TP with dynamic ports
+ - Add UDP data collection via syslog
+ - Add NFLOG support
+ - Add Nokia NAT/AAA mobile mapping
+ - Restore MySQL plugin
+ - Improve syslog collection
+ - Enlarge the Netfilter queue in IPS mode with nfnl_rcvbufsiz (to avoid ENOBUFS failures)
+ - Implement TLS certificate validation 
+ - Improve NAT mapping and caching of AAA/NAT
+ - Improve @NTOPNG@ ZMQ template with more IEs
+ - Improve handling of ZMQ events for IPS mode
+ - Improve TZSP support
+ - Improve flow collection performance
+
+## Fixes
+
+ - Fix timeseries export
+ - Fix FreeBSD support
+ - Fix crash with fragmented tunnelled traffic used in plugins
+ - Fix potential security issues
+ - Fix sscanf potential buffer overwrite vulnerability
+ - Fix HTTP dump when using --http-content-dump-dir
+ - Fix byte order in ZMQ message size
+ - Fix -i none on Windows
+ - Fix --black-list
+ - Fix invalid dissection of DNS responses with too many NSs entries
+ - Fix for memory boundary check
+ - Fix buffer access on Fiberblaze
+ - Fix -U overwriting the -V value
+ - Fix various bugs in IPS mode
+ - Fix stats reported in /proc
+ - Fix race condition in ZMQ export
+ - Fix -HUP file reload
+ - Fix handling of L2TP encapsulation
+ - Fix user change
+ - Fix loopback support on Windows
+ - Fix windows interface listing with the new pcap API
+ - Fix GTP handling
+ - Fix @NTOPNG@ in collector mode (NAT info)
+ - Fix invalid engineType/Id parsing
+ - Fix 64 bit counter issue in NetFlow v5
+ - Fix BPF
+
+## Misc
+
+ - Add support for Ubuntu 22.04, Debian 11, RPi Bullseye, RockyLinux
+ - Add nfFanout tool
+ - Add tool for collecting from ZMQ and publishing to Google PubSub
+ - Update DEB, RPM, FreeBSD, RPi packages dependencies
+ - Modified idle timeout to 60 sec (used to be 30 sec) as TCP keep-alive is 45 sec so we can avoid cutting flows (e.g. SSH)
+ - Change label HTTP_UA to HTTP_USER_AGENT
+ - Add eBPF dependency on supported OSs (Ubuntu 22)
+ - Update DPDK support
+ - Removed deprecated multithread support (-O)
+ - Remove deprecated --online-license-check option
+
+-------------------------------------------------------------------------------
+
 #### nProbe 9.6 (July 2021)
 
 ## New Features
