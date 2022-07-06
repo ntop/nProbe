@@ -6,8 +6,11 @@
 
 ## New Features
 
- - New agent mode for process monitoring on Linux (eBPF) and Windows
- - New support for collecting flows from Fortinet in syslog format
+ - Agent mode for process monitoring on Linux (eBPF) and Windows
+ - Implemented timeseries support for nProbe self-monitoring and sFlow-based counter timeseries
+ - Conversion of Amazon AWS VPC files into flows
+ - Improved collection of proprietary flows, including Nokia and Calix
+ - Support for collecting flows from syslog
 
 ## New Command Line Options
 
