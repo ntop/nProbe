@@ -20,13 +20,13 @@
 # -- Project information -----------------------------------------------------
 
 project = 'nProbe'
-copyright = '2021, ntop.org'
+copyright = '2022, ntop.org'
 author = 'ntop.org'
 
 # The short X.Y version
-version = ''
+version = '10.1'
 # The full version, including alpha/beta/rc tags
-release = '9.3'
+release = '10.1'
 
 
 # -- General configuration ---------------------------------------------------
