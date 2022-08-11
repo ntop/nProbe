@@ -50,6 +50,22 @@ There are many reasons for which the information we collect cam be duplicated, i
 - When you have duplicated packets you can use the option :code:`--enable-ipv4-deduplication` to discard consecutive duplicated IPv4 packets. Note that retransmissions might be exchanged (if consecutive) for duplications
 - During collection you can use :code:`--flow-deduplication` to specify and interval (example --flow-deduplication 15) in seconds during which if a flow is seen two or more times, only the first flow is considered
 
+Collecting nTap Traffic
+#######################
+
+nProbe Enterprise M (or better) feature native `nTap <https://www.ntop.org/products/traffic-analysis/ntap/>`_ support meaning that it can collect nTap traffic without a separate nTap license. This means that nProbe can collect in a secure way traffic originated in remote hosts/containers/VMs sent to it using end-to-end encryption. Below you can find an example of the commands you need to run in order to collect nTap packets. Suppose to start nProbe on host 1.2.3.4 and let it listen on port 1234, and encrypt traffic with key 'hello'. You can start the applications as follows:
+
+- [nProbe Enterprise M/L host] nprobe -3 1234 -n none --ntap hello ...
+- [remote host we want we want to monitor] tap -i eth0 -c 1.2.3.4:1234 -k hello
+
+Instead if you have nProbe Pro/Enterprise L, you need the nTap license in order to enable the nTap collector that creates a virtual interface named ntap0 in the example below:
+
+- [nProbe host] collector -p 1234 -k hello -i ntap0
+- [nProbe host] nProbe -i ntap0 ...
+- [remote host we want we want to monitor] tap -i eth0 -c 1.2.3.4:1234 -k hello
+
+
+  
 InfluxDB-based Timeseries Dump
 ##############################
 
