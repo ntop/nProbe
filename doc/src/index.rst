@@ -37,6 +37,7 @@ nProbe is an extensible NetFlow v5 v9/NetFlow Lite/sFlow/IPFIX/jFlow probe/colle
    nEdge <https://www.ntop.org/guides/nedge/>
    nScrub <https://www.ntop.org/guides/nscrub/>
    nBox <https://www.ntop.org/guides/nbox/>
+   nTap <https://www.ntop.org/guides/ntap/>
 
 .. Indices and tables
 .. ==================
