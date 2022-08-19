@@ -106,3 +106,57 @@ Counter samples are ignored by nProbe unless :code:`--influxdb-dump-dir <dir>` i
    sflow,deviceIP=192.168.2.1,ifIndex=9 ifInOctets=178297744,ifInPackets=2573381,ifInErrors=0,ifOutOctets=0,ifOutPackets=0,ifOutErrors=0 1656403332000000000
 
 that can be imported in InfluxDB and depicted with tools such as Grafana.
+
+Flow Relay
+##########
+
+Sometimes you need to collect (using a host in the private network) flows (over UDP) from devices located on the Internet/DMZ, and you want to avoid making a hole in your firewall for secturity reasons. In this case you need a flow relay that is basically an application deployed on the public Internet that acts as a rendez-vous point:
+
+   - your Internet devices will send flows (sFlow/NetFlow/IPFIX) to the relay
+   - your nProbe, deployed on the private LAN, will connect to the relay via (encrypted) ZMQ and receive the flows
+
+This way you can collect flows from the private network without the need to create security weaknesses. The **flowRelay** application is part of the nProbe package and it works as follows
+
+.. code:: bash
+
+   Welcome to flowRelay v1.0: sFlow/NetFlow/IPFIX flow relay
+   Copyright 2019-2022 ntop.org
+   flowRelay [-v] [-h] -z <ZMQ enpoint>] -c <port>
+     -z <ZMQ enpoint> | Where to connect to or accept connections from.
+                      | Examples:
+                      |   -z tcp://*:5556c        [collector mode]
+     -c <port>        | Flow collection port
+     -k <ZMQ key>     | ZMQ encryption public key
+     -v               | Verbose
+     -h               | Help
+
+
+Suppose to have deploy the flowRelay on host with public IP a.b.c.d listening for incoming flows on port 2055, and nProbe on host 192.168.2.23. All you need to do is:
+
+   - [host a.b.c.d]       :code:`flowRelay -c 2055 -z "tcp://a.b.c.d:1234c"`
+   - [host 192.168.2.23]  :code:`nprobe -i none -n none --collector-port tcp://a.b.c.d:1234`
+
+
+Flow Fanout
+###########
+
+Sometimes (e.g. when you migrate to nProbe but you need to keep running your legacy monitoring system) you need to collect flows and send them to ***multiple*** collectors. ithout using expensive software solutions, nProbe users have a turn-key solution available out of the box named **nfFanout**. This application allows you to collect flows (sFlow/NetFlow/IPFIX) over UDP and send them to multiple collectors simulataneously.
+
+.. code:: bash
+	  
+	  Copyright (C) 2010-22 ntop.org
+	  Usage: nfFanout -c <port> -a <collector IPv4:port> [-a <collector IPv4:port>]*
+	                   [-v] [-V] [-r] [-h]
+	   -c <port>              | UDP port where incoming flows are received
+	   -a <collector IP:port> | Address:port where to send collected flows to
+	   -r                     | Use round-robin instead of fan-out
+	   -v                     | Enable verbose logging
+	   -V                     | Show application version
+	   -h                     | Print this help
+	  
+	   
+Using it is pretty straightforwaard. Supposed you need to collect flows on port 2055 and send them to two collectors 192.168.0.1:1234 and 192.168.0.2:1234. All you need to do is to start the following command :code:`nfFanout -c 2055 -a 192.168.0.1:1234 -a 192.168.0.2:1234`.
+
+
+
+
