@@ -137,10 +137,10 @@ Suppose to have deploy the flowRelay on host with public IP a.b.c.d listening fo
    - [host 192.168.2.23]  :code:`nprobe -i none -n none --collector-port tcp://a.b.c.d:1234`
 
 
-Flow Fanout
-###########
+Flow Replication / Fanout
+#########################
 
-Sometimes (e.g. when you migrate to nProbe but you need to keep running your legacy monitoring system) you need to collect flows and send them to ***multiple*** collectors. ithout using expensive software solutions, nProbe users have a turn-key solution available out of the box named **nfFanout**. This application allows you to collect flows (sFlow/NetFlow/IPFIX) over UDP and send them to multiple collectors simultaneously.
+Sometimes (e.g. when you migrate to nProbe but you need to keep running your legacy monitoring system) you need to collect flows and send them to ***multiple*** collectors. Without using expensive software solutions, nProbe users have a turn-key solution available out of the box named **nfFanout**. This application allows you to collect flows (sFlow/NetFlow/IPFIX) over UDP and send them to multiple collectors simultaneously.
 
 .. code:: bash
 	  
@@ -155,7 +155,7 @@ Sometimes (e.g. when you migrate to nProbe but you need to keep running your leg
 	   -h                     | Print this help
 	  
 	   
-Using it is pretty straightforwaard. Supposed you need to collect flows on port 2055 and send them to two collectors 192.168.0.1:1234 and 192.168.0.2:1234. All you need to do is to start the following command :code:`nfFanout -c 2055 -a 192.168.0.1:1234 -a 192.168.0.2:1234`.
+Using it is pretty straightforward. Suppose you need to collect flows on port 2055 and send them to two collectors 192.168.0.1:1234 and 192.168.0.2:1234. All you need to do is to start the following command :code:`nfFanout -c 2055 -a 192.168.0.1:1234 -a 192.168.0.2:1234`.
 
 
 
