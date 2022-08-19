@@ -140,7 +140,7 @@ Suppose to have deploy the flowRelay on host with public IP a.b.c.d listening fo
 Flow Fanout
 ###########
 
-Sometimes (e.g. when you migrate to nProbe but you need to keep running your legacy monitoring system) you need to collect flows and send them to ***multiple*** collectors. ithout using expensive software solutions, nProbe users have a turn-key solution available out of the box named **nfFanout**. This application allows you to collect flows (sFlow/NetFlow/IPFIX) over UDP and send them to multiple collectors simulataneously.
+Sometimes (e.g. when you migrate to nProbe but you need to keep running your legacy monitoring system) you need to collect flows and send them to ***multiple*** collectors. ithout using expensive software solutions, nProbe users have a turn-key solution available out of the box named **nfFanout**. This application allows you to collect flows (sFlow/NetFlow/IPFIX) over UDP and send them to multiple collectors simultaneously.
 
 .. code:: bash
 	  
