@@ -110,7 +110,7 @@ that can be imported in InfluxDB and depicted with tools such as Grafana.
 Flow Relay
 ##########
 
-Sometimes you need to collect (using a host in the private network) flows (over UDP) from devices located on the Internet/DMZ, and you want to avoid making a hole in your firewall for secturity reasons. In this case you need a flow relay that is basically an application deployed on the public Internet that acts as a rendez-vous point:
+Sometimes you need to collect (using a host in the private network) flows (over UDP) from devices located on the Internet/DMZ, and you want to avoid making a hole in your firewall for security reasons. In this case you need a flow relay that is basically an application deployed on the public Internet that acts as a rendez-vous point:
 
    - your Internet devices will send flows (sFlow/NetFlow/IPFIX) to the relay
    - your nProbe, deployed on the private LAN, will connect to the relay via (encrypted) ZMQ and receive the flows
