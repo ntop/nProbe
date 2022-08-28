@@ -50,6 +50,76 @@ There are many reasons for which the information we collect cam be duplicated, i
 - When you have duplicated packets you can use the option :code:`--enable-ipv4-deduplication` to discard consecutive duplicated IPv4 packets. Note that retransmissions might be exchanged (if consecutive) for duplications
 - During collection you can use :code:`--flow-deduplication` to specify and interval (example --flow-deduplication 15) in seconds during which if a flow is seen two or more times, only the first flow is considered
 
+SNMP Interfaces Polling
+#######################
+
+Flow collectors such as ntopng, can map numeric interfaceId exported by NetFlow/IPFIX to interface names via SNMP. This requires the collector being able to poll via SNMP the interface names of the flow exporters (i.e. when nProbe is used in collector mode) or poll via SNMP the host where nProbe is running (nProbe probe mode).
+
+.. figure:: ./img/snmp-poll.png
+
+Sometimes this practice is not possible (e.g. when nProbe is behind a firewall and exports flows to ntopng deployed on the Internet), and a workaround has to be identified in order to allow the collector to map interface id to names. This solution works when nProbe is used with ntopng. In this case you can:
+
+  - Poll the interface names via SNMP and save their name in a text file
+  - Use the :code:`--snmp-mappings` option in order to let nProbe know the interface names
+  - Such names are propagated to ntopng via ZMQ (i.e. do not forget to specify :code:`--zmq`)
+
+The :code:`--snmp-mappings` option specifies the path of a text file containing the interface names of all flow exporters collected by nProbe (collector mode), or of the host where nProbe is active (probe mode). The file format is pretty straightforwar:
+
+.. code:: bash
+
+   # AgentIP ifIndex ifName
+   #
+   127.0.0.1 1 lo0
+   127.0.0.1 2 gif0
+   127.0.0.1 3 stf0
+   127.0.0.1 4 en0
+   127.0.0.1 5 en1
+   127.0.0.1 6 en2
+   192.168.1.1 11 utun0
+   192.168.1.1 12 utun1
+   192.168.1.1 13 utun2
+   192.168.1.1 14 utun3
+
+   
+The first column is the flow exporter IP address, the second is the SNMP interface Id, and the last column the SNMP interface name.
+
+In order to ease the creation of such file, the nProbe package comes with a companion tool :code:`/usr/bin/build_snmp_mappings.sh` that you can use to create such file by polling the router via SNMP. The tool syntax is traightforward as shown below:
+
+.. code:: bash
+
+	  $ /usr/bin/build_snmp_mappings.sh
+	  Usage:   build_snmp_mappings.sh <SNMP agent IP> <SNMP version 1|2c> <SNMP community>
+
+	  Example: build_snmp_mappings.sh 127.0.0.1 2c public > snmp_mappings.txt	  
+	           nprobe --snmp-mappings snmp_mappings.txt ...
+		   
+	  $ /usr/bin/build_snmp_mappings.sh 127.0.0.1 2c public > snmp_mappings.txt
+	  $ cat snmp_mappings.txt
+		   127.0.0.1 1 lo0
+		   127.0.0.1 2 gif0
+		   127.0.0.1 3 stf0
+		   127.0.0.1 4 EHC250
+		   127.0.0.1 5 EHC253
+		   127.0.0.1 6 en0
+		   127.0.0.1 7 en3
+		   127.0.0.1 8 en1
+		   127.0.0.1 9 p2p0
+		   127.0.0.1 10 fw0
+		   127.0.0.1 11 utun0
+		   # Agent InterfaceId Name
+
+Note that the SNMP mapping file:
+
+ - Needs to contain interfaces of all the flow exporters in order ntopng to be able to map interface names properly.
+ - In case you modify the mappings file, you need to restart nProbe in order to reload it.
+ - Interface names is sent periodically to ntopng via ZMQ.
+
+Furthermore:
+
+ - If ntopng polls flow exporters via SNMP, please make sure that the SNMP mapping file does not contain information about the same flow exporters as the existing information will be overwritten.
+ - If possible, please prefer ntopng poll the flow exporter via SNMP instead of using :code:`--snmp-mappings` as ntopng will be able to fetch additional interface information other than the interface name.
+
+   
 Collecting nTap Traffic
 #######################
 
