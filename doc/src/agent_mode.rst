@@ -3,7 +3,7 @@
 Agent Mode support in nProbe
 #############################
 
-nProbe not support integration with the operating system on Windows and Linux systems (eBPF based). This means that in addition to packet capture, bProbe can now report additional information about users and processes that have performed a given network activity.
+nProbe now supports integration with the operating system on Windows and Linux systems (eBPF based). This means that in addition to packet capture, nProbe can now report additional information about users and processes that have performed a given network activity.
 
 Agent mode is enabled adding `--agent-mode` to the nProbe command line (it requires Enterprise license) on Linux and Windows operating systems.
 
