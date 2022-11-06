@@ -19,5 +19,5 @@ The following picture summarizes the two scenarios highlighted above and demonst
 
 Instructions for configuring nProbe and ntopng are available in the 
 `Using ntopng with nProbe section of the ntopng User's Guide 
-<http://www.ntop.org/guides/ntopng/using_with_nprobe.html>`_.
+<https://www.ntop.org/guides/ntopng/using_with_other_tools/nprobe.html#usingntopngwithnprobe>`_.
 
