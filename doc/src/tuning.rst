@@ -119,7 +119,34 @@ Furthermore:
  - If ntopng polls flow exporters via SNMP, please make sure that the SNMP mapping file does not contain information about the same flow exporters as the existing information will be overwritten.
  - If possible, please prefer ntopng poll the flow exporter via SNMP instead of using :code:`--snmp-mappings` as ntopng will be able to fetch additional interface information other than the interface name.
 
-   
+
+.. note::
+
+   In flow-based traffic analysis, network interfaces are indentified by numeric identifiers. In nProbe you can set the input (i.e. from which packets are received) interface id with :code:`-u`, amd the output interface id with :code:`-Q`. If in the above example you start :code:`nprobe -i en3 ...` when as en3 has interface id 7, then your command line should be :code:`nprobe -i en3 -u 7 -Q 7 ....`.
+
+
+Usage Example
+-------------
+
+nProbe collects packets from interface en3 and sends them to ntopng
+
+  - :code:`nprobe --snmp-mappings snmp_mappings.txt -i en3 --ntopng zmq://127.0.0.1:1234 -t 3 -d 3 -b 2 -u 7 -Q 7`
+  - :code:`ntopng -i zmq://127.0.0.1:1234`
+
+
+As you can see in the figure below, ntopng natively detects the inerface id 
+
+.. figure:: ./img/snmp_if_idx.png
+
+and maps it also inside the flow details page
+ 
+.. figure:: ./img/snmp_flow_if_idx.png
+
+	    
+.. note::
+
+   In the above example we have used ZMQ as communication protocol between nProbe and ntopng, but the same results can be obtained using Kakfa instead.
+
 Collecting nTap Traffic
 #######################
 

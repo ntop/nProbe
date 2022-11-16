@@ -78,6 +78,6 @@ Plugins licenses are applied in a way which is identical to the way the main nPr
 
 .. note::
 
-   An nProbe restart is recommended once the license has been applied
+   A nProbe restart is recommended once the license has been applied
    to make sure all the new functionalities will be unlocked.
 
