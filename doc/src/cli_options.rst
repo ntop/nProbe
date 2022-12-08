@@ -3,9 +3,9 @@
 Command Line Options
 --------------------
 
-nProbe supports a large number of command line parameters. 
-To see what they are, simply enter the command :code:`nprobe -h` 
-and the help information should be printed. The most important 
+nProbe supports a large number of command line parameters.
+To see what they are, simply enter the command :code:`nprobe -h`
+and the help information should be printed. The most important
 parameters are briefly discussed here.
 
 :code:`-n: collector addresses`
@@ -18,11 +18,11 @@ parameters are briefly discussed here.
 
 :code:`-t: maximum flow lifetime`
 
-      Regardless of the flow duration, a flow that has been active for more that the specified maximum lifetime is considered expired and it will be emitted. Further packets belonging to the same flow will be accounted on a new flow. 
+      Regardless of the flow duration, a flow that has been active for more that the specified maximum lifetime is considered expired and it will be emitted. Further packets belonging to the same flow will be accounted on a new flow.
 
 :code:`-d: maximum flow idle lifetime`
 
-      A flow is over when the last packet received is older that the maximum flow idle lifetime. This means that whenever applicable, (e.g. SNMP walk) UDP flows will not be accounted on 1 packet/1 flow basis, but on one global flow that accounts all the traffic. This has a benefit on the total number of generated flows and on the overall collector performance. 
+      A flow is over when the last packet received is older that the maximum flow idle lifetime. This means that whenever applicable, (e.g. SNMP walk) UDP flows will not be accounted on 1 packet/1 flow basis, but on one global flow that accounts all the traffic. This has a benefit on the total number of generated flows and on the overall collector performance.
 
 :code:`-l: maximum queue timeout`
 
@@ -38,7 +38,7 @@ parameters are briefly discussed here.
 
 :code:`-f: packet capture filter`
 
-      This BPF filter (see the appendix for further information about BPF filters) allows nProbe to take into account only those packets that match the filter (if specified). 
+      This BPF filter (see the appendix for further information about BPF filters) allows nProbe to take into account only those packets that match the filter (if specified).
 
 :code:`-a: select flow export policy`
 
@@ -136,7 +136,7 @@ parameters are briefly discussed here.
 
 :code:`-z: <TCP[:UDP[:O]]>`
 
-       Peer-to-peer applications, attacks or misconfigured applications often generate a lot of tiny flows that can cause significant load on the collector side. As most collector setups often discarded those flows, it is possible to instrument nProbe via the --z flag not to emit such flows. 
+       Peer-to-peer applications, attacks or misconfigured applications often generate a lot of tiny flows that can cause significant load on the collector side. As most collector setups often discarded those flows, it is possible to instrument nProbe via the --z flag not to emit such flows.
 
 :code:`-M: maximum number of active flows`
 
@@ -236,7 +236,7 @@ parameters are briefly discussed here.
  127.0.0.1       10.0.24.25      12
  192.168.1.1     192.168.1.1     1,2,3,4
 
-      
+
 :code:`--tunnel`
 
       Let the probe decode tunneled traffic (e.g. GTP or GRE traffic) and thus extract traffic information from such traffic rather than from the external envelope.
@@ -289,13 +289,22 @@ parameters are briefly discussed here.
 
       Dump metadata information into the specified file and quit. This option is useful when users want to know the type of each information element exported by nProbe so that (for instance) they can properly import into a database.
 
+:code:`--ntopng <option>`
+
+      You can use this option to instruct nProbe to send data towards ntopng using ZMQ (available on all platforms) or Kafka (available on selected platforms).
+      When ZMQ is used you can specy :code:`--ntopng zmq://<socket>:<port>` to deliver flows to ntopng connected to the specified ZMQ endpoint (see also the old option :code:`--zmq`). When more than one endpoint is defined, a hash function is used to evenly balance the flows among them.
+      Example: :code:`--ntopng zmq://*:5556` or :code:`--ntopng zmq://127.0.0.1:1234`
+
+      When Kafka is used the syntax is :code:`--ntopng kafka://<brokers>` so that you can deliver flows to ntopng connected to the specified Kafka broker in plaintext. Instead you can use :code:`--ntopng kafka-ssl://<brokers>` to deliver data in TLS/SSL. Kafka brokers are comma separated (if more than one is defined).
+      Examples: :code:`--ntopng kafka://192.168.1.2` or :code:`--ntopng kafka-ssl://192.168.1.2,172.16.24.12`.
+
 :code:`--zmq <socket>`
 
-      Specify a socket (e.g., :code:`tcp://\*:5556`) that will be used to deliver flows to subscribers polling the socket. Up to 8 ZMQ endpoints can be specified by repeating the --zmq. When more than one endpoint is specified, nProbe uses an hash function to evenly balance flows among all the defined endpoints. Example:
+      Specify a socket (e.g., :code:`tcp://\*:5556`) that will be used to deliver flows to subscribers polling the socket. Up to 8 ZMQ endpoints can be specified by repeating the --zmq. When more than one endpoint is specified, nProbe uses an hash function to evenly balance flows among all the defined endpoints. Please note that this option is an alias for :code:`--ntopng` and it might be removed in future versions. Example:
 
 .. code:: bash
 
-   ./nprobe -i eth0 -n none --zmq tcp://\*:5556 --zmq tcp://\*:5557 
+   ./nprobe -i eth0 -n none --zmq tcp://\*:5556 --zmq tcp://\*:5557
    ./ntopng -i tcp://127.0.0.1:5556 -i tcp://127.0.0.1:5557 -i view: tcp://127.0.0.1:5556, tcp://127.0.0.1:5557
 
 :code:`--zmq-probe-mode`
@@ -332,12 +341,12 @@ parameters are briefly discussed here.
 
 :code:`--enable-collection-cache`
 
-      nProbe implements a flow cache for merging packets belonging to the same flow. In flow collection the flow cache is disabled. This option enables the flow collection cache as when nProbe operates in packet capture mode. Note that this option is available only in collector/proxy mode (i.e. use -i none). 
- 
+      nProbe implements a flow cache for merging packets belonging to the same flow. In flow collection the flow cache is disabled. This option enables the flow collection cache as when nProbe operates in packet capture mode. Note that this option is available only in collector/proxy mode (i.e. use -i none).
+
 :code:`--collector-passthrough`
 
       When you want to use nProbe as a flow proxy/collector (towards ntopng for instance) and have a 1:1 mapping between collected/exported flows this is the options to use. This because it allows you to collect flows at high speed with limited CPU usage. Note that this option is useless when --disable-cache is used.
-      
+
 
 :code:`--redis <host>[:<port>]`
 
@@ -379,7 +388,7 @@ where the configuration file contains the same options otherwise specified on th
 is the same as:
 
 .. code:: bash
-   
+
 	nprobe /etc/nprobe.conf
 
 where /etc/nprobe.conf contains the following lines:
@@ -393,7 +402,7 @@ where /etc/nprobe.conf contains the following lines:
 	  -a=
 	  -p=
 
-Note that flags with no parameter associated (e.g. --a) also need to have ‘=’ specified. 
+Note that flags with no parameter associated (e.g. --a) also need to have ‘=’ specified.
 Any standard NetFlow collector (e.g. ntop) can be used to analyze the flows generated by nProbe. When used with ntop, the nProbe can act as a remote and light traffic collector and ntop as a central network monitoring console. See chapter 3 for further information about this topic
 
 
@@ -417,59 +426,59 @@ HTTP Protocol
 :code:`--http-dump-dir <dump dir>`
 
       Directory where HTTP logs will be dumped
-	  
+
 :code:`--http-content-dump-dir <dump dir>`
 
       Directory where HTTP content (request only) will be dumped
-	  
+
 :code:`--http-content-dump-response`
 
       Dump both HTTP request and response with --http-content-dump-dir
-	  
+
 :code:`--http-exec-cmd <cmd>`
 
       Command executed whenever a directory has been dumped
-	  
+
 :code:`--dont-hash-cookies`
 
       Dump cookie string instead of cookie hash
-	  
+
 :code:`--http-verbose-level <level>`
 
       0 - Relevant info,  1 - Very verbose (default: 1)
-	  
+
 :code:`--http-ports`
 
       List of ports used for http protocol (default: 80)
-	  
+
 :code:`--proxy-ports`
 
       List of ports used for proxy protocol (default: 3128, 8080)
-	  
+
 :code:`--http-parse-geolocation`
 
       Dump geolocation info if explicitly present inside mobile app protocol (e.g., "Nimbuzz")
-   
+
 DNS/LLMNR Protocol
 ~~~~~~~~~~~~~~~~~~
 
 :code:`--dns-dump-dir <dump dir>`
 
       Directory where DNS logs will be dumped
-   
+
 SIP Plugin
 ~~~~~~~~~~
 
 :code:`--sip-dump-dir <dump dir>`
 
       Directory where SIP logs will be dumped
-	  
+
 :code:`--sip-exec-cmd <cmd>`
 
       Command executed whenever a directory has been dumped
    You can use @SIP@ in -T as shortcut for
    %SIP_CALL_ID %SIP_UAC %SIP_UAS %SIP_CALLING_PARTY %SIP_CALLED_PARTY %SIP_RTP_IPV4_SRC_ADDR %SIP_RTP_L4_SRC_PORT %SIP_RTP_IPV4_DST_ADDR %SIP_RTP_L4_DST_PORT %SIP_RESPONSE_CODE %SIP_REASON_CAUSE %SIP_CALL_STATE %SIP_RTP_CODECS
-   
+
 RTP Plugin
 ~~~~~~~~~~
 
@@ -478,184 +487,184 @@ RTP Plugin
       Discard from stats RTP packets whose inter-arrival is greater than the specified latency.
    You can use @RTP@ in -T as shortcut for
    %RTP_SIP_CALL_ID %RTP_RTT %RTP_IN_JITTER %RTP_OUT_JITTER %RTP_IN_PKT_LOST %RTP_OUT_PKT_LOST %RTP_IN_PKT_DROP %RTP_OUT_PKT_DROP %RTP_IN_MAX_DELTA %RTP_OUT_MAX_DELTA %RTP_IN_PAYLOAD_TYPE %RTP_OUT_PAYLOAD_TYPE %RTP_IN_MOS %RTP_OUT_MOS %RTP_IN_R_FACTOR %RTP_OUT_R_FACTOR
-   
+
 FTP Protocol
 ~~~~~~~~~~~~
 
 :code:`--ftp-dump-dir <dump dir>`
 
       Directory where FTP logs will be dumped
-	  
+
 :code:`--ftp-exec-cmd <cmd>`
 
       Command executed whenever a directory has been dumped
-   
+
 SMTP Protocol
 ~~~~~~~~~~~~~
 
 :code:`--smtp-dump-dir <dump dir>`
 
       Directory where SMTP logs will be dumped
-	  
+
 :code:`--smtp-exec-cmd <cmd>`
 
       Command executed whenever a directory has been dumped
-   
+
 BGP Update Listener
 ~~~~~~~~~~~~~~~~~~~
 
 :code:`--bgp-port <port>`
 
       TCP port on which BGP updates will be sent
-	  
+
 :code:`--adj-from-as-path <num>`
 
       Use the <num>-th ASN in the AS path to the source IP to populate field %BGP_PREV_ADJACENT_ASN, and <num>-th ASN in the AS path to the destination IP to populate field %BGP_NEXT_ADJACENT_ASN.
-   
+
 Netflow-Lite Plugin
 ~~~~~~~~~~~~~~~~~~~
 
 :code:`--nflite <flow listen port low>[:<num ports>]>`
 
       Specify NetFlow-Lite listen port(s) (max 32)
-   
+
 GTPv0 Signaling Protocol
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 :code:`--gtpv0-dump-dir <dump dir>`
 
       Directory where GTP logs will be dumped
-	  
+
 :code:`--gtpv0-exec-cmd <cmd>`
 
       Command executed whenever a directory has been dumped
-   
+
 GTPv1 Signaling Protocol
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 :code:`--gtpv1-dump-dir <dump dir>`
 
       Directory where GTP logs will be dumped
-	  
+
 :code:`--gtpv1-exec-cmd <cmd>`
 
       Command executed whenever a directory has been dumped
-	  
+
 :code:`--gtpv1-account-imsi`
 
       Enable IMSI aggregation on GTPv1 signalling
-	  
+
 :code:`--gtpv1-track-non-gtp-u-traffic`
 
       Enable tracking of user traffic non GTP-U encapsulated triggered by GTP-U signalling (requires --ucloud)
-   
+
 GTPv2 Signaling Protocol
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 :code:`--gtpv2-dump-dir <dump dir>`
 
       Directory where GTP logs will be dumped
-	  
+
 :code:`--gtpv2-exec-cmd <cmd>`
 
       Command executed whenever a directory has been dumped
-	  
+
 :code:`--gtpv2-account-imsi`
 
       Enable GTPv2 traffic accounting
-	  
+
 :code:`--gtpv2-track-non-gtp-u-traffic`
 
       Enable tracking of user traffic non GTP-U encapsulated triggered by GTP-U signalling (requires --ucloud)
-   
+
 Radius Protocol
 ~~~~~~~~~~~~~~~
 
 :code:`--radius-dump-dir <dump dir>`
 
       Directory where Radius logs will be dumped
-	  
+
 :code:`--radius-exec-cmd <cmd>`
 
       Command executed whenever a directory has been dumped
-   
+
 Modbus Plugin
 ~~~~~~~~~~~~~
 
 :code:`--modbus-dump-dir <dump dir>`
 
       Directory where modbus logs will be dumped
-	  
+
 :code:`--modbus-exec-cmd <cmd>`
 
       Command executed whenever a directory has been dumped
-	  
+
 :code:`--modbus-idle-timeout <duration>`
 
       Modbus idle flow timeout set to 120 seconds
-   
+
 Diameter Protocol
 ~~~~~~~~~~~~~~~~~
 
 :code:`--diameter-dump-dir <dump dir>`
 
       Directory where Diameter logs will be dumped
-	  
+
 :code:`--diameter-exec-cmd <cmd>`
 
       Command executed whenever a directory has been dumped
-   
+
 NETBIOS Protocol
 ~~~~~~~~~~~~~~~~
 
 :code:`--netbios-dump-dir <dump dir>`
 
       Directory where NETBIOS logs will be dumped
-   
+
 SSDP Protocol
 ~~~~~~~~~~~~~
 
 :code:`--ssdp-dump-dir <dump dir>`
 
       Directory where SSDP logs will be dumped
-   
+
 DHCP Protocol
 ~~~~~~~~~~~~~
 
 :code:`--dhcp-dump-dir <dump dir>`
 
       Directory where DHCP logs will be dumped
-	  
+
 :code:`--dhcp-exec-cmd <cmd>`
 
       Command executed whenever a directory has been dumped
-   
+
 IMAP Protocol
 ~~~~~~~~~~~~~
 
 :code:`--imap-dump-dir <dump dir>`
 
       Directory where IMAP logs will be dumped
-	  
+
 :code:`--imap-exec-cmd <cmd>`
 
       Command executed whenever a directory has been dumped
-	  
+
 :code:`--imap-peek-headers`
 
       Dump both emails body and headers (default: body only)
-   
+
 POP3 Protocol
 ~~~~~~~~~~~~~
 
 :code:`--pop-dump-dir <dump dir>`
 
       Directory where POP3 logs will be dumped
-	  
+
 :code:`--pop-exec-cmd <cmd>`
 
       Command executed whenever a directory has been dumped
-   
+
 Export Plugin
 ~~~~~~~~~~~~~
 
@@ -672,8 +681,10 @@ Examples:
 :code:`--elastic "flows;nprobe-%Y.%m.%d;http://localhost:9200/_bulk;elastic:3last1cpassw0rd"`
 :code:`--kafka <brokers>;<topic>;[<opt topic>;<ack>;<comp>]`
 
-      Send flows to Apache Kafka brokers obtained by metadata information 
-      <host1>[:<port1>],<host2>[:<port2>]... Initial brokers list used to receive metadata information
+      Send flows to Apache Kafka brokers obtained by metadata information
+      <host1>[:<port1>],<host2>[:<port2>]... Initial brokers list used to receive metadata information.
+      Note that you can specify multiple :code:`--kafka` options and exported data
+      will be sent to all configured brokers.
 
 :code:`<flow topic>    Flow topic`
 :code:`<opt topic>     Flow options topic`
@@ -684,9 +695,9 @@ Examples:
 Note: <opt topic> is only used when collecting NetFlow to export option template records.
 Option template records are just exported as-is, and must be configured with option --load-custom-fields.
 To disable option template records export it is safe to specify none as value for <opt topic>.
-			
+
       Example:
-	  
+
 :code:`--kafka localhost;flowsTopic;optionsTopic`
 :code:`--kafka-conf [<prop=value>|list]`
 
@@ -695,21 +706,12 @@ To disable option template records export it is safe to specify none as value fo
       Pass "list" to print all the available properties.
       Multiple properties can be set by repeating this option.
       Examples:
-	  
+
 :code:`--kafka-conf batch.num.messages=1000`
 :code:`--kafka-conf debug=msg`
 :code:`--kafka-conf queue.buffering.max.ms=100`
 :code:`--kafka-conf topic.auto.commit.interval.ms=200`
 :code:`--kafka-conf list`
-:code:`--kafka-num-producers <num>`
-
-Create <num> parallel Kafka producers. Producers are used in round-robin to export flows. Default: 1, maximum: 4.
- 
-:code:`--kafka-performance-test <num>`
-
-      Exports every flow <num>+1 times.
-Use only in test environments to perform performance analyses
-and measure how fast Kafka is able to ingest flows.
 
 :code:`--kafka-add-timestamp`
 
@@ -725,8 +727,8 @@ Skip database schema creation (it is automatically created by --mysql unless thi
 :code:`--clickhouse=<host[@port]>:<dbname>:<prefix>:<user>:<pw>`
 Dump flows into Clickhouse (Enterprise M/L only)
 
-    
-      
+
+
 Custom Fields
 ~~~~~~~~~~~~~
 
@@ -735,7 +737,7 @@ Custom Fields
       Comma-separated list of custom fields in the format <key>=<value>
       where value is a literal string/number (or a function)
       Example:
-	  
+
 :code:`--custom-fields "NAME=ntop,YEAR=2019"`
 
 NetFlow v9/IPFIX format [-T]
@@ -770,7 +772,7 @@ The following options can be used to specify the format:
    [ 17][Len 4] %DST_AS                     %bgpDestinationAsNumber   	Destination BGP AS
    [129][Len 4] %BGP_PREV_ADJACENT_ASN      %bgpNextAdjacentAsNumber  	Source BGP Prev AS
    [128][Len 4] %BGP_NEXT_ADJACENT_ASN      %bgpPrevAdjacentAsNumber  	Destination BGP Next AS
-   [ 18][Len 4] %IPV4_BGP_NEXT_HOP          %bgpNexthopIPv4Address    	
+   [ 18][Len 4] %IPV4_BGP_NEXT_HOP          %bgpNexthopIPv4Address
    [ 21][Len 4] %LAST_SWITCHED              %flowEndSysUpTime         	SysUptime (msec) of the last flow pkt
    [ 22][Len 4] %FIRST_SWITCHED             %flowStartSysUpTime       	SysUptime (msec) of the first flow pkt
    [ 23][Len 4] %OUT_BYTES                  %postOctetDeltaCount      	Outgoing flow bytes (dst->src) [Aliased to %DST_TO_SRC_BYTES]
@@ -942,7 +944,7 @@ The following options can be used to specify the format:
    [NFv9 57819][IPFIX 35632.347][Len 4] %NUM_PKTS_TTL_EQ_1         	# packets with TTL = 1
    [NFv9 57818][IPFIX 35632.346][Len 4] %NUM_PKTS_TTL_2_5          	# packets with TTL > 1 and TTL <= 5
    [NFv9 57806][IPFIX 35632.334][Len 4] %NUM_PKTS_TTL_5_32         	# packets with TTL > 5 and TTL <= 32
-   [NFv9 57807][IPFIX 35632.335][Len 4] %NUM_PKTS_TTL_32_64        	# packets with TTL > 32 and <= 64 
+   [NFv9 57807][IPFIX 35632.335][Len 4] %NUM_PKTS_TTL_32_64        	# packets with TTL > 32 and <= 64
    [NFv9 57808][IPFIX 35632.336][Len 4] %NUM_PKTS_TTL_64_96        	# packets with TTL > 64 and <= 96
    [NFv9 57809][IPFIX 35632.337][Len 4] %NUM_PKTS_TTL_96_128       	# packets with TTL > 96 and <= 128
    [NFv9 57810][IPFIX 35632.338][Len 4] %NUM_PKTS_TTL_128_160      	# packets with TTL > 128 and <= 160
@@ -1018,7 +1020,7 @@ Plugin HTTP Protocol templates:
 Plugin DNS/LLMNR Protocol templates:
 
 .. code:: bash
-	  
+
    [NFv9 57677][IPFIX 35632.205][Len 256 varlen] %DNS_QUERY                 	DNS query
    [NFv9 57678][IPFIX 35632.206][Len 2] %DNS_QUERY_ID              	DNS query transaction Id
    [NFv9 57679][IPFIX 35632.207][Len 1] %DNS_QUERY_TYPE            	DNS query type (e.g. 1=A, 2=NS..)
@@ -1030,7 +1032,7 @@ Plugin DNS/LLMNR Protocol templates:
 Plugin SIP Plugin templates:
 
 .. code:: bash
-	  
+
    [NFv9 57602][IPFIX 35632.130][Len 96 varlen] %SIP_CALL_ID               	SIP call-id
    [NFv9 57603][IPFIX 35632.131][Len 96 varlen] %SIP_CALLING_PARTY         	SIP Call initiator
    [NFv9 57604][IPFIX 35632.132][Len 96 varlen] %SIP_CALLED_PARTY          	SIP Called party
@@ -1061,7 +1063,7 @@ Plugin SIP Plugin templates:
 Plugin RTP Plugin templates:
 
 .. code:: bash
-	  
+
    [NFv9 57909][IPFIX 35632.437][Len 4] %RTP_SSRC                  	RTP Sync Source ID
    [NFv9 57622][IPFIX 35632.150][Len 4] %RTP_FIRST_SEQ             	First flow RTP Seq Number
    [NFv9 57623][IPFIX 35632.151][Len 4] %RTP_FIRST_TS              	First flow RTP timestamp
@@ -1092,7 +1094,7 @@ Plugin RTP Plugin templates:
 Plugin FTP Protocol templates:
 
 .. code:: bash
-	  
+
    [NFv9 57828][IPFIX 35632.356][Len 32 varlen] %FTP_LOGIN                 	FTP client login
    [NFv9 57829][IPFIX 35632.357][Len 32 varlen] %FTP_PASSWORD              	FTP client password
    [NFv9 57830][IPFIX 35632.358][Len 64 varlen] %FTP_COMMAND               	FTP client command
@@ -1101,14 +1103,14 @@ Plugin FTP Protocol templates:
 Plugin SMTP Protocol templates:
 
 .. code:: bash
-	  
+
    [NFv9 57657][IPFIX 35632.185][Len 64 varlen] %SMTP_MAIL_FROM            	Mail sender
    [NFv9 57658][IPFIX 35632.186][Len 64 varlen] %SMTP_RCPT_TO              	Mail recipient
 
 Plugin BGP Update Listener templates:
 
 .. code:: bash
-	  
+
    [NFv9 57762][IPFIX 35632.290][Len 4] %SRC_AS_PATH_1             	Src AS path position 1
    [NFv9 57763][IPFIX 35632.291][Len 4] %SRC_AS_PATH_2             	Src AS path position 2
    [NFv9 57764][IPFIX 35632.292][Len 4] %SRC_AS_PATH_3             	Src AS path position 3
@@ -1133,7 +1135,7 @@ Plugin BGP Update Listener templates:
 Plugin GTPv0 Signaling Protocol templates:
 
 .. code:: bash
-	  
+
    [NFv9 57793][IPFIX 35632.321][Len 1] %GTPV0_REQ_MSG_TYPE        	GTPv0 Request Msg Type
    [NFv9 57794][IPFIX 35632.322][Len 1] %GTPV0_RSP_MSG_TYPE        	GTPv0 Response Msg Type
    [NFv9 57795][IPFIX 35632.323][Len 8] %GTPV0_TID                 	GTPv0 Tunnel Identifier
@@ -1149,7 +1151,7 @@ Plugin GTPv0 Signaling Protocol templates:
 Plugin GTPv1 Signaling Protocol templates:
 
 .. code:: bash
-	  
+
    [NFv9 57692][IPFIX 35632.220][Len 1] %GTPV1_REQ_MSG_TYPE        	GTPv1 Request Msg Type
    [NFv9 57693][IPFIX 35632.221][Len 1] %GTPV1_RSP_MSG_TYPE        	GTPv1 Response Msg Type
    [NFv9 57694][IPFIX 35632.222][Len 4] %GTPV1_C2S_TEID_DATA       	GTPv1 Client->Server TunnelId Data
@@ -1176,7 +1178,7 @@ Plugin GTPv1 Signaling Protocol templates:
 Plugin GTPv2 Signaling Protocol templates:
 
 .. code:: bash
-	  
+
    [NFv9 57742][IPFIX 35632.270][Len 1] %GTPV2_REQ_MSG_TYPE        	GTPv2 Request Msg Type
    [NFv9 57743][IPFIX 35632.271][Len 1] %GTPV2_RSP_MSG_TYPE        	GTPv2 Response Msg Type
    [NFv9 57744][IPFIX 35632.272][Len 4] %GTPV2_C2S_S1U_GTPU_TEID   	GTPv2 Client->Svr S1U GTPU TEID
@@ -1209,7 +1211,7 @@ Plugin GTPv2 Signaling Protocol templates:
 Plugin Radius Protocol templates:
 
 .. code:: bash
-	  
+
    [NFv9 57712][IPFIX 35632.240][Len 1] %RADIUS_REQ_MSG_TYPE       	RADIUS Request Msg Type
    [NFv9 57713][IPFIX 35632.241][Len 1] %RADIUS_RSP_MSG_TYPE       	RADIUS Response Msg Type
    [NFv9 57714][IPFIX 35632.242][Len 32 varlen] %RADIUS_USER_NAME          	RADIUS User Name (Access Only)
@@ -1230,7 +1232,7 @@ Plugin Radius Protocol templates:
 Plugin Diameter Protocol templates:
 
 .. code:: bash
-	  
+
    [NFv9 57871][IPFIX 35632.399][Len 4] %DIAMETER_REQ_MSG_TYPE     	DIAMETER Request Msg Type
    [NFv9 57872][IPFIX 35632.400][Len 4] %DIAMETER_RSP_MSG_TYPE     	DIAMETER Response Msg Type
    [NFv9 57873][IPFIX 35632.401][Len 64 varlen] %DIAMETER_REQ_ORIGIN_HOST  	DIAMETER Origin Host Request
@@ -1254,7 +1256,7 @@ Plugin Diameter Protocol templates:
 Plugin NETBIOS Protocol templates:
 
 .. code:: bash
-	  
+
    [NFv9 57936][IPFIX 35632.464][Len 48 varlen] %NETBIOS_QUERY_NAME        	NETBIOS Query Name
    [NFv9 57937][IPFIX 35632.465][Len 64 varlen] %NETBIOS_QUERY_TYPE        	NETBIOS Query Type
    [NFv9 57938][IPFIX 35632.466][Len 64 varlen] %NETBIOS_RESPONSE          	NETBIOS Query Response
@@ -1263,7 +1265,7 @@ Plugin NETBIOS Protocol templates:
 Plugin SSDP Protocol templates:
 
 .. code:: bash
-	  
+
    [NFv9 57934][IPFIX 35632.462][Len 48 varlen] %SSDP_HOST                 	SSDP Host
    [NFv9 57935][IPFIX 35632.463][Len 64 varlen] %SSDP_USN                  	SSDP USN
    [NFv9 57940][IPFIX 35632.468][Len 64 varlen] %SSDP_SERVER               	SSDP Server
@@ -1273,7 +1275,7 @@ Plugin SSDP Protocol templates:
 Plugin DHCP Protocol templates:
 
 .. code:: bash
-	  
+
    [NFv9 57825][IPFIX 35632.353][Len 6] %DHCP_CLIENT_MAC           	MAC of the DHCP client
    [NFv9 57826][IPFIX 35632.354][Len 4] %DHCP_CLIENT_IP            	DHCP assigned client IPv4 address
    [NFv9 57827][IPFIX 35632.355][Len 64 varlen] %DHCP_CLIENT_NAME          	DHCP client name
@@ -1284,19 +1286,19 @@ Plugin DHCP Protocol templates:
 Plugin IMAP Protocol templates:
 
 .. code:: bash
-	  
+
    [NFv9 57732][IPFIX 35632.260][Len 64 varlen] %IMAP_LOGIN                	Mail sender
 
 Plugin POP3 Protocol templates:
 
 .. code:: bash
-	  
+
    [NFv9 57682][IPFIX 35632.210][Len 64 varlen] %POP_USER                  	POP3 user login
 
 Plugin MySQL Plugin templates:
 
 .. code:: bash
-	  
+
    [NFv9 57667][IPFIX 35632.195][Len 16] %MYSQL_SERVER_VERSION      	MySQL server version
    [NFv9 57668][IPFIX 35632.196][Len 16] %MYSQL_USERNAME            	MySQL username
    [NFv9 57669][IPFIX 35632.197][Len 64] %MYSQL_DB                  	MySQL database in use
@@ -1420,7 +1422,7 @@ Major protocol (%L7_PROTO) symbolic mapping:
  101 TruPhone               TCP      Acceptable   VoIP
  102 ICMPV6                          Acceptable   Network
  103 DHCPV6                 UDP      Acceptable   Network
- 104 Armagetron             UDP      Fun          Game 
+ 104 Armagetron             UDP      Fun          Game
  105 Crossfire              TCP/UDP  Fun          RPC
  106 Dofus                  TCP      Fun          Game
  107 Fiesta                 TCP      Fun          Game
@@ -1635,8 +1637,7 @@ Usage examples
    nprobe -i eth0 -n none -T "@NTOPNG@" --zmq tcp://127.0.0.1:1234
 
 On 192.168.2.25:
-  
-.. code:: bash
-  
-   ntopng -itcp://127.0.01:1234
 
+.. code:: bash
+
+   ntopng -itcp://127.0.01:1234
