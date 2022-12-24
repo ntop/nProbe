@@ -5,6 +5,7 @@ nProbe can be used in three modes, namely:
 
   - Probe
   - Collector (flow collection only, no Probe)
+  - Relay
   - Proxy: Receive flows via NetFlow and emit them (optionally combining with captured traffic) to a remote collector.
 
 Probe mode
@@ -54,6 +55,24 @@ Example:
   - -3 tls://2055
   - -3 tls://192.168.2.25:2055
 
+
+Relay mode
+----------
+
+.. code:: bash
+
+	  nprobe -i none -n none -3 zmq://a.b.c.d:1234
+
+Sometimes you need to collect (using a host in the private network) flows (over UDP) from devices located on the Internet/DMZ, and you want to avoid making a hole in your firewall for security reasons. In this case you need a flow relay that is basically an application deployed on the public Internet that acts as a rendez-vous point.
+
+Suppose to have deploy the flowRelay on host with public IP a.b.c.d listening for incoming flows on port 2055, and nProbe on host e.f.g.h. All you need to do is:
+
+  - [host a.b.c.d] flowRelay -c 2055 -z "zmq://a.b.c.d:1234c"
+  - [host e.f.g.h] nprobe -i none -n none -3 zmq://a.b.c.d:1234
+
+.. note::
+   
+    The flowRelay application is part of the nProbe package.
 
 Proxy mode
 ----------
