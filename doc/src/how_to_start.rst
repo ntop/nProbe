@@ -93,7 +93,7 @@ previous section, the 'nprobe@<interface>' service should be used, example:
 init-based Systems
 ------------------
 
-The nProbe service can be controlled on old init-based systems by means of the script script located at:
+Init-based system are usually available only on embedded systems, as otherwise systemd base scripts are the dafault. The nProbe service can be controlled on old init-based systems by means of the script script located at:
 
 .. code:: bash
 
