@@ -2,6 +2,72 @@
 
 -------------------------------------------------------------------------------
 
+#### nProbe 10.2 (Jan 2023)
+
+## New Features
+
+ - New nTap support (--ntap) for capturing traffic with the new ntop Virtual/Remote TAP (Enterprise M/L/XL)
+ - Rework and improve Kafka support (Kafka can be used as an alternative to ZMQ for delivering flow data to ntopng)
+ - Introduce support for exporting data to Google Pub/Sub
+ - Introduce support for Catchpoint
+ - Introduce a new nProbe XL model
+
+## Command Line Options
+
+ - Add --kafka-ntopng <brokers> option to deliver flow data to ntopng
+ - Add --snmp-mapping option for mapping SNMP interfaces and export mapping information to ntopng
+ - Add --tcp-dont-send-flow-lenght for flow collectors over TCP that do not expect the flow lenght
+ - Add --ntopng zmq://<socket>:<port> option (--zmq tcp://<socket> is now deprecated)
+ - Add support for encrytion keys in hex format with --zmq-encryption
+ - Add -J to ignore Netflow sender port
+ - Add the ability to specity an alternative topic in --kafka using "," as topic delimiter
+ - Add --accurate-hash flag
+ - Change --collector-port|-3 option for ZMQ accepting zmq:// to avoid mixing it with TCP collection
+ - Change --use-obs-domain-id-port which is IPFIX only now
+ - Rename --use-obs-domain-id-port to --use-obs-domain-id
+ - When not specified -n=2055 is now automatically when required (e.g. if - no -P - no --ntopng)
+ 
+## Improvements
+ 
+ - Add support for Linux cooked sockets v2 capture
+ - Preserve L7 protocol across flow updates
+ - Improve Zoom handling and add Zoom detection in RTP streams
+ - Improved RTP call quality calculation
+ - Add caching of application ID/Name mapping exported by Cisco NBAR
+ - Add custom formatting of Nokia ULI
+ - Improve processing of nasty corner cases (e.g. flows with the same 5-tuple)
+ 
+## Tools
+
+ - New build_snmp_mappings.sh tool to build SNMP interface mapping file (to be used with --snmp-mapping)
+ - Improve zmqReflector (ZMQ proxy)
+ - Improve sendPcap
+   - Add -f <filter> option
+   - Add the ability to handle multiple senders in the same PCAP file
+ 
+## Fixes
+
+ - Fix HTTP_SITE handling
+ - Fix crash in IMAP dissection
+ - Fix decoding loop with invalid Diameter packets
+ - Fix for supporting reassembly of Diameter flows on non-standard ports
+ - Fix bug with --collector-nf-reforge
+ - Fix SCTP dissection
+ - Fix first/last switched with collector passthrough (--collector-passthrough) when collecting IPFIX data
+ - Fix collector passthrough representation of bytes/packets
+ - Fix interface aggregation with ZC ice interfaces
+ - Fix for reading packets from pcap dumps
+ 
+## Misc
+
+ - Ignoring observationDomainId (i.e. sourceId) for both IPFIX and NetFlow
+ - Support for Rocky Linux 9
+ - Update support for (latest) OPNsense
+ - Windows improvements
+ - Update homebrew support
+
+-------------------------------------------------------------------------------
+
 #### nProbe 10.0 (July 2022)
 
 ## New Features
