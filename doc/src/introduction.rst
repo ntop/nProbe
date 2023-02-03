@@ -40,15 +40,10 @@ nProbe licenses are generated using the orderId and email you provided when the 
 Plugins
 ~~~~~~~
 
-nProbe plugins are licensed independently from the main nProbe license. Plugin licenses are add-ons which can be added on top of a valid nProbe license and can be purchased at https://shop.ntop.org/.
-
-
-.. warning::
-
-   Plugin licenses will only work if a valid nProbe license is found. Do not purchase an nProbe plugin license without having a licensed nProbe.
-
-
-nProbe Professional license comes bundled with HTTP and DNS plugin licenses.
+nProbe plugins are unlockedlicensed independently from the main nProbe license. i
+Plugin licenses are add-ons that add enhanced packet dissection and analysis for specific protocols.
+They are unlocked based on the nProbe license. For instance nProbe Enterprise S enables HTTP and DNS plugins.
+Please visit the product page on http://www.ntop.org for a full comparison table.
 
 Applying the License
 --------------------
@@ -71,10 +66,6 @@ Notepad as an administrator and paste the generated license key. Then
 select "File->Save as", specify :code:`nprobe.license` as file name and
 save it in the nProbe installation directory. Make sure the file name
 has no extension (e.g., :code:`.txt`) by selecting "Save as Type: All Files".
-
-
-Plugins licenses are applied in a way which is identical to the way the main nProbe license is applied as described above. The only thing that changes is the file name of the plugin license file. The plugin license generation procedure will tell you the exact file name to use, which you can then place in the directory above.
-
 
 .. note::
 
