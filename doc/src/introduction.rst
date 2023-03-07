@@ -33,15 +33,14 @@ before installing nProbe.
 
 Licensing
 ---------
-Binary nProbe instances require a per-server license that is released according to the EULA (End User License Agreement). Each license is perpetual (i.e. it does not expire) and it allows to install updates for one year since purchase/license issue. This means that a license generated on 1/1/2018 will be able to activate new versions of the software until 31/12/2018. If you want to install new versions of the software release after that date, you need to purchase a new license or avoid further updating the software. For source-based nProbes you still have to obey to the nProbe license listed in appendix.
+Binary nProbe instances require a per-server license that is released according to the EULA (End User License Agreement). Each license is perpetual (i.e. it does not expire) and it allows to install updates for one year since purchase/license issue. This means that a license generated on 1/1/2022 will be able to activate new versions of the software until 31/12/2022. If you want to install new versions of the software release after that date, you need to purchase a new license or avoid further updating the software. For source-based nProbes you still have to obey to the nProbe license listed in appendix.
 
 nProbe licenses are generated using the orderId and email you provided when the license has been purchased on the ntop shop. The license page is accessible at https://shop.ntop.org/mklicense/. On such page you need to specify the nprobe systemId and version. You can obtain such information with :code:`nprobe --version` (Linux) or :code:`nprobe /c --version` (Windows). On Linux the nProbe binary is installed under :code:`/usr/bin/` whereas on Windows on :code:`C:/ProgramFiles/nProbe`.
 
 Plugins
 ~~~~~~~
 
-nProbe plugins are unlockedlicensed independently from the main nProbe license. i
-Plugin licenses are add-ons that add enhanced packet dissection and analysis for specific protocols.
+Plugins are add-ons that add enhanced packet dissection and analysis for specific protocols.
 They are unlocked based on the nProbe license. For instance nProbe Enterprise S enables HTTP and DNS plugins.
 Please visit the product page on http://www.ntop.org for a full comparison table.
 
