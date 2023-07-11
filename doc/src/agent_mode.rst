@@ -70,5 +70,5 @@ Thanks to process visibility, nProbe can now report verdict about processes gene
 	  
 	  [NFv9 57994][IPFIX 35632.522][Len 2] %FLOW_VERDICT              Flow verdict marker (0 = unknown, 1=pass, 2=drop...)
 
-The verdict is not set to 2 (drop) whenever a local flow has been produced by a process that was not part of a Linux package (.apt or .rpm). This is because malware applications are often unpackaged and thus this is an indicator or a possible compromise. This is a Linux-only feature as Windows does not support packages.
+The verdict is set to drop (2) whenever a local flow has been produced by a process that was not part of a Linux package (.apt or .rpm). This is because malware applications are often unpackaged and thus this is an indicator or a possible compromise. This is a Linux-only feature as Windows does not support packages.
 
