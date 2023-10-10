@@ -20,14 +20,21 @@ nightly builds are intended for testing.
 
 Windows Notes
 -------------
-By default, the nProbe installer does not install capture drivers. It is
-recommended to install `npcap drivers <https://nmap.org/npcap/windows-10.html>`_
-before installing nProbe.
 
-.. note::
+The nProbe installer comes without capture drivers. You need to
+install manually `npcap drivers <https://nmap.org/npcap/>`_ **BEFORE** you install nProbe.
+If Wireshark is already installed on Windows, then npcap drivers
+are already installed and no driver installation is necessary.
 
-   If Wireshark is already installed on Windows, then
-   `npcap drivers <https://nmap.org/npcap/windows-10.html>`_ are already installed.
+.. figure:: ./img/npcap.png
+
+During npcap installation you need to select "Install Npcap in WinPcap API-compatible Mode".
+
+In case you see a message as the one below
+ 
+.. figure:: ./img/missing_pcap.png
+
+it means that your capture drivers have not been properly installed and that you have to install them as described in this section.
 
 .. _licensing:
 
