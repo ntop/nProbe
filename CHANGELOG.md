@@ -2,6 +2,99 @@
 
 -------------------------------------------------------------------------------
 
+#### nProbe 10.4 (Oct 2023)
+
+## New Features
+ - Added cloud mode support for integrating with ntopng in cloud mode
+ - Reworked Kafka export support to make it robust and scalable
+ - Merged agent mode code in nProbe so that it is automatically enabled as the templace defined host
+ - RTP handling for Zoom/Ms Teams streams
+ - Added support for FreeBSD 14, Debian 12, ARM 64 bit
+
+## Command Line Options
+ - Added support for encryption to --zmq-publish-events
+ - Added support for multi-line json export (--zmq-format m)
+ - Added --cloud option to ease integration with ntopng in cloud mode
+ - Added --gtpv1-dont-export-flows-immediately and --gtpv2-dont-export-flows-immediately flags for disabling immediate flow export as soon as the first response packet is received
+ - Added --map-postnat
+ - Added --template-ids to specify the list of templates to accept
+
+## Improvements
+ - Implemented --map-ifnames <list> for mapping interfaceNames to interfaceIds
+ - Implemented GTPV1_C2S_TEID/GTPV1_S2C_TEID and GTPV2_C2S_TEID/GTPV2_S2C_TEID
+ - Implemented ZMQ stress tester
+ - Implemented packet flow template
+ - Implemented supoort for proprietary Nokia IPFIX exports
+ - Improved VPC log scanning
+ - Improved nDPI protocol guess
+ - Improved packet decoding checkes
+ - Improved parameter check
+ - Improved tracing
+ - Added support for ndpi serializer in sflow counters export
+ - Added %FLOW_CONTENT_TYPE in order to export nDPI-dissected flow datatype (audio, video...)
+ - Added %FLOW_EXPORT_TIME that contains the epoch of a flow export
+ - Added -6 to sendPcap (Delivery of packets over IPv6)
+ - Added BPF filter in cloud mode
+ - Added BPF filter when started in --agent-mode
+ - Added Ent XL bundle support
+ - Added GTPV2_C2S_TEID and GTPV2_S2C_TEID
+ - Added Ms Teams support in RTP plugin
+ - Added Zoom RTP tracing
+ - Added check for avoiding crash when offload is on and packet length exceeds the snaplen size
+ - Added code for handling RTP stats when using dynamic payload (e.g. Teams)
+ - Added compressed AWS VPC log file support
+ - Added debian 12 support
+ - Added diameter handling of mesageId 300, 301, 303
+ - Added extra check
+ - Added support for %EXPORTER_IPV6_ADDRESS
+ - Added support of %INTERFACE_NAME %ACCOUNT_ID in VPC log collection
+ - Added test pcaps
+ - Added trace in case of being unable to delete a file
+ - Added tracing of log deletion
+ - Added FreeBSD 14 support
+
+## Fixes
+ - Fixed invalid print with large number of files
+ - Fixed for Win32 cross-compatibility
+ - Fixed for collecting bidirectional flows
+ - Fixed for various memory leaks
+ - Fixed netflow packets reforging during replay (it was adding 2 extra IP/UDP headers)
+ - Fixed DNS dissection
+ - Fixed ELK export with username/pwd Added support for ELK 8
+ - Fixed RTP detection with RTP flows starting with a STUN packet
+ - Fixed clickhouse export bug (missing username)
+ - Fixed flow direction due to a value overflow https://github.com/ntop/ntopng/issues/6267
+ - Fixed invalid bytes/octets decoding during flow collection
+ - Fixes buffer overflow issues
+ - Fixes cache statistics
+ - Fixes for exporting process information in cloud mode
+ - Fixes https://github.com/ntop/nProbe/issues/584
+ - Fixes sampling support Extended -p (aggregation) flag format
+
+## Misc
+ - Agent mode changes
+ - Changes due to nDPI API changes
+ - Changes for adding cloud support in Windows
+ - Code cleanup adding a new member to plugin dissector
+ - Do not enable the service on upgrade if disabled by the user
+ - Enable sflow counters export in TLV using numerial keys
+ - Enlarged Diameter port range 3868-3900
+ - Extended -p support with discard of OUT (NFv9)/Post (IPFIX) counters
+ - Fixed Kafka export format
+ - Minor fix in custom template handling
+ - Missing check to avoid using DPDK (when installed) if --with-dpdk is not used
+ - Now -3 allows to recursively scan a directory looking for AVC files
+ - Optimization to avoid handling binary data with HTTP plugin
+ - Print when running in Cloud mode. Disable demo mode when in Cloud mode.
+ - Removed --ucloud Added --instance-name <name> that is exported in %NPROBE_INSTANCE_NAME
+ - Rework embedded check (at runtime now)
+ - Reworked kafka options handling
+ - Set edr_mode when the cloud license should unlock the endpoint mode only
+ - Workaround for non-standard DLT_NULL encapsulations
+ - aarch64 changes
+
+-------------------------------------------------------------------------------
+
 #### nProbe 10.2 (Feb 2023)
 
 ## New Features
