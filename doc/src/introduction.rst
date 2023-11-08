@@ -26,10 +26,7 @@ install manually `npcap drivers <https://nmap.org/npcap/>`_ **BEFORE** you insta
 If Wireshark is already installed on Windows, then npcap drivers
 are already installed and no driver installation is necessary.
 
-.. figure:: ./img/npcap.png
-
 During npcap installation you need to select "Install Npcap in WinPcap API-compatible Mode".
-
 In case you see a message as the one below
  
 .. figure:: ./img/missing_pcap.png
