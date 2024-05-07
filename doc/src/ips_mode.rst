@@ -173,6 +173,17 @@ Full example:
 
 .. code:: json
 
+   ### Custom protocols definition ###
+   # Note: keep protocols and categories definitions before the policy definitions
+   { "custom_protocols": "/etc/nprobe/protos.txt" }
+   
+   ### Category files ###
+   { "category_file": "/etc/nprobe/lists/nfw_malware_list.txt" }
+   { "category_file": "/etc/nprobe/lists/nfw_mining_list.txt" }
+   
+   ### GeoIP ###   
+   { "geoip": { "asn": "/data/dbip-asn-lite-2021-04.mmdb", "city": "/data/dbip-city-lite-2021-04.mmdb" }}
+   
    ### Pool definition ###
    { "pool": { "id":1, "name": "my pool 1", "ip":  [ "192.168.0.1/24", "10.0.0.0/8", "2a03:b0c0:2:d0::360:4001/48"], "mac": [] }, "policy": { "id":1 }}
    { "pool": { "id":2, "name": "my pool 2", "mac": ["e8:06:88:ff:fe:e4", "02:81:27:b5:f9:f3", "00:01:01:e4:ba:2c"],  "ip":  ["172.16.0.0/16"] }, "policy": { "id":2 }}
@@ -191,15 +202,6 @@ Full example:
    # Subrule of rule 1 (with more restrictions)
    { "policy": { "id": 2, "root":1, "name": "my subrule 2 (son of rule 1)", "default_marker": "drop", "markers": { "protocols": { "53": "pass" }, "hostnames": { "fundingchoicesmessages.google.com": "pass", "www.gstatic.com": "drop", "www.youtube.com": "pass" }}}}
    
-   ### Custom protocols definition ###
-   { "custom_protocols": "/etc/nprobe/protos.txt" }
-   
-   ### Category files ###
-   { "category_file": "/etc/nprobe/lists/nfw_malware_list.txt" }
-   { "category_file": "/etc/nprobe/lists/nfw_mining_list.txt" }
-   
-   ### GeoIP ###   
-   { "geoip": { "asn": "/data/dbip-asn-lite-2021-04.mmdb", "city": "/data/dbip-city-lite-2021-04.mmdb" }}
 
 IPS Mode on Linux
 -----------------
