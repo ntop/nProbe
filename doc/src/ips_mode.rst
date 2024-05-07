@@ -185,11 +185,11 @@ Full example:
    { "policy": { "id": 0, "name": "root rule", "default_marker": "pass", "flow_risk": { "bitmap": 12321, "marker": "drop" }, "markers": { "protocols": { "TLS": "pass" }}}}
    
    # Rules definition (son of rule 0)
-   { "policy": { "id": 1, "root": 0, "name": "my rule 1", "default_marker": "pass", "markers": { "categories": { "29": "drop" }, "protocols": { "HTTP": "pass" }, "countries": { "IT": "pass", "CN": "drop" }, "continents" : { "Asia" : "drop"}}}}
+   { "policy": { "id": 1, "root": 0, "name": "my rule 1", "default_marker": "pass", "markers": { "categories": { "29": "drop" }, "protocols": { "HTTP": "pass" }, "countries": { "IT": "pass", "CN": "drop" }, "continents" : { "Asia" : "drop" }}}}
    { "policy": { "id": 3, "root": 0, "name": "my rule 3", "default_marker": "pass", "markers": { "protocols": { "HTTP": "drop" }}}}
    
    # Subrule of rule 1 (with more restrictions)
-   { "policy": { "id": 2, "root":1, "name": "my subrule 2 (son of rule 1)", "default_marker": "drop", "markers": { "protocols": { "53": "pass" }}, "hostnames": { "fundingchoicesmessages.google.com": "pass", "www.gstatic.com": "drop", "www.youtube.com": "pass" }}}
+   { "policy": { "id": 2, "root":1, "name": "my subrule 2 (son of rule 1)", "default_marker": "drop", "markers": { "protocols": { "53": "pass" }, "hostnames": { "fundingchoicesmessages.google.com": "pass", "www.gstatic.com": "drop", "www.youtube.com": "pass" }}}}
    
    ### Custom protocols definition ###
    { "custom_protocols": "/etc/nprobe/protos.txt" }
