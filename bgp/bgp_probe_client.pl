@@ -43,7 +43,7 @@ $dump_file = $options{d} if defined $options{d};
 
 ############
 
-my $bgp  = Net::BGP::Process->new();
+my $bgp  = Net::BGP::Process->new(ListenAddr => $local_ip);
 my $peer = Net::BGP::Peer->new(
     Start    => 1,
     ThisID   => $local_ip,
