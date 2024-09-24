@@ -51,7 +51,6 @@ The following sections cover the configuration and information elements provided
 .. toctree::
     :maxdepth: 2
 
-    bgp
     diameter
     dns
     dhcp
