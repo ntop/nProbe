@@ -72,6 +72,41 @@ In order to use the LM for validating the license you
 
 If license validation is successfull, nProbe will be permanently connected to the LM meaning that the used license cannot be used by another nProbe application. As soon as the application terminates the licenses can now be used by another nProbe instance eventually running on a different host.
 
+LM configuration files have the folowing format
+
+.. code:: bash
+	  
+	  LICENSE_MANAGER=127.0.0.1:9999
+
+	  #
+	  # Unique instance name
+	  #
+	  INSTANCE_NAME=dummy instance
+
+	  #
+	  # User authentication token
+	  #
+	  AUTH_TOKEN=fjfgsfgsj
+
+	  #
+	  # nprobe ntopng
+	  #
+	  PRODUCT_FAMILY=nprobe
+
+	  #
+	  # pro enterprise_s enterprise_m enterprise_l enterprise_xl
+	  #
+	  PRODUCT_EDITION=enterprise_m
+
+
+where
+
+- LICENSE_MANAGER is the IP and port of the host where the LM is running.
+- INSTANCE_NAME is a string used to indetity this specific instance
+- AUTH_TOKEN is a token that the LM can use to prevent issuing valid licenses for unknown AUTH_TOKEN. Its value must be configured in the LM.
+- PRODUCT_FAMILY and PRODUCT_EDITION define what license the ntop application will as the LM when contacting it.
+
+  
 The main difference between standard licenses and LM licenses are:
 
 - Standard licenses are bound to a specific host making impossible to use the license on a host other than the one for which the license was generated. With the LM licenses are bound to the host where the LM runs (that's why its systemId should not change) that distributes them to ntop applications regardless of where they run.
