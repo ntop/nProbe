@@ -54,6 +54,33 @@ Applying the License
 Once the nProbe license has been generated, it can be applied in order for
 nProbe to become fully-functional.
 
+Using the License Manager
+-------------------------
+
+In addition to standard per-server licenses, it is possible to centralize licenses on a license manager (LM) application that is part of the `ntop-license` package.
+
+.. figure:: ./img/license_manager.png
+
+This application needs to be installed on a network host of your LAN that is stable from the systemId standpoint (i.e. installing it on a container is probably not a good idea) meaning that the host and the management NIC of the host where the LM run should not change.
+
+The LM application is installed by the ntop-license package that runs it as a service. The first thing you need to do is to install your licenses in the LM license directory that is typically /etc/ntop/license_manager. Note that the LM licenses are different from standard licenses, so make sure you ask for/install LM licenses as others will not be recognized. Once the LM is started, it listens on a network for applications willing to validate licenses.
+
+In order to use the LM for validating the license you
+
+- do not need to install a nProbe standard license
+- you need to start nProbe adding the following CLI option ```--license-mgr <license manager>.conf```. Example ```nprobe -i eth1 --license-mgr <license manager>.conf```.
+
+If license validation is successfull, nProbe will be permanently connected to the LM meaning that the used license cannot be used by another nProbe application. As soon as the application terminates the licenses can now be used by another nProbe instance eventually running on a different host.
+
+The main difference between standard licenses and LM licenses are:
+
+- Standard licenses are bound to a specific host making impossible to use the license on a host other than the one for which the license was generated. With the LM licenses are bound to the host where the LM runs (that's why its systemId should not change) that distributes them to ntop applications regardless of where they run.
+- The LM allows to centralize licenses on a single place simplifying maintenance and license updates.
+- If ntop applications are unable to communicate with the LM (e.g. lack of connectivity) the ntop application (e.g. nProbe) will try to reconnect a few times, an in case of failure it will terminate the application. This mean that you should use the LM only if you are confident that your network is not affected by connectivity problems.
+- The LM allows you to share licenses acros multiple hosts. This means that (not simultaneously) you can use nProbe on host A and host B, thing that was not possible with standard licenses.
+
+  
+
 Linux
 ~~~~~
 On Linux, the license must
