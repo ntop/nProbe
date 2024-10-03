@@ -39,7 +39,7 @@ nProbe is an extensible NetFlow v5 v9/NetFlow Lite/sFlow/IPFIX/jFlow probe/colle
    nScrub <https://www.ntop.org/guides/nscrub/>
    nBox <https://www.ntop.org/guides/nbox/>
    nTap <https://www.ntop.org/guides/ntap/>
-   Licanse Manager <https://www.ntop.org/guides/license/>
+   License Manager <https://www.ntop.org/guides/license/>
 
 .. Indices and tables
 .. ==================
