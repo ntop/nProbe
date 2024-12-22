@@ -70,7 +70,7 @@ In order to use the LM for validating the license you
 - do not need to install a nProbe standard license
 - you need to start nProbe adding the following CLI option ```--license-mgr <license manager>.conf```. Example ```nprobe -i eth1 --license-mgr <license manager>.conf```.
 
-If license validation is successfull, nProbe will be permanently connected to the LM meaning that the used license cannot be used by another nProbe application. As soon as the application terminates the licenses can now be used by another nProbe instance eventually running on a different host.
+If license validation is successful, nProbe will be permanently connected to the LM meaning that the used license cannot be used by another nProbe application. As soon as the application terminates the licenses can now be used by another nProbe instance eventually running on a different host.
 
 LM configuration files have the folowing format
 
