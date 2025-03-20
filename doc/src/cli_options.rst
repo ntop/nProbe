@@ -323,6 +323,10 @@ parameters are briefly discussed here.
 
       When -P is used, with this option is also possible to generate throughput information. The file has the following format: <epoch> <bytes> <packets>. Each line is printed every second and it contains the number of bytes and packets observed within minute.
 
+:code:`--disable-upscale`
+
+      Ignore sFlow/NetFlow/IPFIX sampling rate (1:1 is used)and thus collected traffic is not upscaled
+
 :code:`--ndpi-proto-ports <file>`
 
       Read the nDPI custom protocol and ports configuration from the specified file. Please refer to the nDPI manual for further information about the format of this file.
@@ -1565,7 +1569,7 @@ Major protocol (%L7_PROTO) symbolic mapping:
  419      419 ClickHouse             TCP        X        Acceptable   Database           -                               -
  420      420 Nano                   TCP        X        Acceptable   Crypto_Currency    -                               7075
  421      421 OpenWire               TCP        X        Acceptable   RPC                -                               61616
- 
+
 
 Usage examples
 ~~~~~~~~~~~~~~
