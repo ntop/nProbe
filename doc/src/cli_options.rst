@@ -66,6 +66,10 @@ parameters are briefly discussed here.
 
       This option can be used to filter exported flows based on the application protocol. Example: -O "DNS,HTTP,BitTorrent".
 
+:code:`--ndpi-custom-protos <path|URL>`
+
+      Custom nDPI protocols. You can specify both a path (e.g. nDPI/example/protos.txt) or URL (http://localhost/protos.txt).
+					  
 :code:`-P: dump flows`
 
       This path specifies the directory where flows will be dumped. The dump format is text and it depends on the nProbe template specified with -T.
