@@ -6,8 +6,24 @@ When collected this information provides a detailed view of the network traffic.
 
 Precise network metric measurements is a challenging task so a lot of work has been done in this filed. In commercial environments, NetFlow is probably the de-facto standard for network traffic accounting and billing. NetFlow is a technology originally created by Cisco in 1996 and is now standardized as Internet Protocol Flow Information eXport (IPFIX -- RFC 3917). NetFlow is based on the probe/collector paradigm. The probe, usually part of network appliance such as a router or a switch, is deployed on the measured network segment, it sends traffic information in NetFlow format towards a central collector. 
 
-nProbe is a software NetFlow v5/v9/IPFIX probe able to collect, analyze and export network traffic reports using the standard Cisco NetFlow v5/v9/IPFIX format. It is available for most of the OSs on the market (Windows, BSD, Linux, MacOSX). When installed on a PC, nProbe turn it into a Network-aware monitoring appliance.
+What is nProbe?
+###############
 
+nProbe ia a software application able to:
+
+- Capture packets and emit them in flow (NetFlow v5/v9/IPFIX) format.
+- Collect NetFlow/IPFIX flows (e.g. produced by a network router).
+- Collect sFlow flows (e.g. produced by a network switch).
+  
+It is available for most of the OSs on the market (Windows, BSD, Linux, macOS). When installed on a PC, nProbe turn it into a Network-aware monitoring appliance.
+
+Its main purpose is to:
+
+- Preprocess flows/packets and `deliver them to ntopng <using_with_ntopng.html>`_.
+- Emit processed information sending it to a remote collector or database/disk storage.
+
+In packet collector mode, nProbe has been designed for network up to 10 Gbit sitting on top of `PF_RING <https://www.ntop.org/products/packet-capture/pf_ring/>`_. For 10+ Gbit networks, you should consider `nProbe Cento <https://www.ntop.org/products/netflow/nprobe-cento/>`_ that is designed for high-speed networks. 
+  
 This manual aims at describing how to use nProbe, deploy it in networks, and how to develop plugins for extending it functionalities.
 
 Installation

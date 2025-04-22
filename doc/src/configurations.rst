@@ -45,7 +45,7 @@ Collector mode
 
   nProbe in Collector Mode
 
-By default flows are collected over URL, but they can also collected over TCP and TLS. The syntax to use is <method>://[<IP>:]<port>. In case the IP address is specified the collection port is bound only to the specified IP address instead to all interfaces of the host where nProbe runs.
+In this mode, nProbe can collect NetFlow/IPFIX/sFlow. By default flows are collected over URL, but they can also collected over TCP and TLS. The syntax to use is <method>://[<IP>:]<port>. In case the IP address is specified the collection port is bound only to the specified IP address instead to all interfaces of the host where nProbe runs.
 
 Example:
 
