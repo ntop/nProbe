@@ -2,6 +2,66 @@
 
 -------------------------------------------------------------------------------
 
+#### nProbe 10.8 (Apr 2025)
+
+## Key Features
+
+ - Quality of Experience (QoE) computation
+ - Flow cache expiration changes to improve flow export and keep layer-7 information across updates for long-living flows:
+   - Inactive flows (i.e. those in memory that are not receiving traffic) now expire only for idleness when checked for expiration
+   - Active flows (i.e. those in memory that have just received traffic) will be cut for max duration and expire for idleness
+ - Support for Google Virtual Private Cloud (VPC) flows via logs
+
+## Improvements
+
+ - Add better nDPI support for HTTP/DNS
+ - Add GTPv0 GTPC-U correlation and logic for binding users to GTP flows
+ - Rework sampling rate in flow collection
+ - Add support for sampled flows (FLOW_SAMPLER_ID)
+ - Add %SAMPLING_INTERVAL IE to export sampling rate for NetFlow/IPFIX/sFlow flow
+ - Add support for %WLAN_SSID %WTP_MAC_ADDRESS IEs
+ - Add %NPROBE_IPV6_ADDRESS IE
+ - Add %L7_OS_HINT based on nDPI hint
+ - Add %ICMP_TYPE to the ntopng template
+ - Add check for detecting Diameter traffic and use it in the flow hash
+ - Add UTF-8 support in SMTP plugin
+ - Add HTTP_CONNECT support
+ - Add heuristic for swapping TCP flows
+ - Add heuristic for detecting invalid directions on DNS and NTP flows when nDPI is in use
+ - Update ZMQ message header
+ - Improve highSee plugin
+ - Enhance --collector-nf-reforge adding support for sFlow (in addition to NetFlow/IPFIX)
+ - Update packet counters from 32 to 64 bit
+ - Remove --disable-sflow-upscale and add --disable-upscale for disabling upscale for sFlow/NetFlow/IPFIX
+
+## Command Line Options
+ 
+ - --ndpi-custom-protos can now accept either file (path) or URL
+ - Add --gtpv2-teid-cache-duration
+ - Add --zmq-simulate-exporters
+
+## Fixes
+
+ - Fix DHCP plugin (server IP and client name handling)
+ - Fix GTP decoding and GTPv0 support
+ - Fix GTP-U extension header decoding
+ - Fix %CLIENT_TCP_FLAGS and %SERVER_TCP_FLAGS
+ - Fix endianess bug that caused decompression to fail
+ - Fix directories creation for text file dump
+ - Fix pcap bug that causes a pcap to be read twice on fork
+ - Fix flow aggregation
+ - Fix %HTTP_REFERER %HTTP_MIME %HTTP_HOST export
+ - Fix heuristic to detect DNS swapped flows
+ - Fix lua plugin for HTTP dump
+
+## Misc
+
+ - License Manager support for dynamic environments (nprobe --version --license-mgr license.conf)
+ - Add redis stats to logs
+ - Removed deprecated JA3 support
+
+-------------------------------------------------------------------------------
+
 #### nProbe 10.6 (Aug 2024)
 
 ## Command Line Options
