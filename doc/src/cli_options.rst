@@ -924,8 +924,8 @@ The following options can be used to specify the format:
    [NFv9 57581][IPFIX 35632.109][Len 4] %RETRANSMITTED_IN_PKTS             Number of retransmitted TCP flow packets (src->dst)
    [NFv9 57600][IPFIX 35632.128][Len 4] %RETRANSMITTED_OUT_BYTES           Number of retransmitted TCP flow bytes (dst->src)
    [NFv9 57582][IPFIX 35632.110][Len 4] %RETRANSMITTED_OUT_PKTS            Number of retransmitted TCP flow packets (dst->src)
-   [NFv9 57583][IPFIX 35632.111][Len 4] %OOORDER_IN_PKTS                   Number of out of order TCP flow packets (dst->src)
-   [NFv9 57584][IPFIX 35632.112][Len 4] %OOORDER_OUT_PKTS                  Number of out of order TCP flow packets (src->dst)
+   [NFv9 57583][IPFIX 35632.111][Len 4] %OOORDER_IN_PKTS                   Number of out of order TCP flow packets (src->dst)
+   [NFv9 57584][IPFIX 35632.112][Len 4] %OOORDER_OUT_PKTS                  Number of out of order TCP flow packets (dst->src)
    [NFv9 57585][IPFIX 35632.113][Len 1] %UNTUNNELED_PROTOCOL               Untunneled IP protocol byte
    [NFv9 57586][IPFIX 35632.114][Len 4] %UNTUNNELED_IPV4_SRC_ADDR          Untunneled IPv4 source address
    [NFv9 57587][IPFIX 35632.115][Len 2] %UNTUNNELED_L4_SRC_PORT            Untunneled IPv4 source port
@@ -934,17 +934,17 @@ The following options can be used to specify the format:
    [NFv9 57590][IPFIX 35632.118][Len 2] %L7_PROTO                          Layer 7 Protocol (numeric)
    [NFv9 58032][IPFIX 35632.560][Len 1] %L7_CONFIDENCE                     nDPI confidence
    [NFv9 58045][IPFIX 35632.573][Len 4] %FLOW_EXPORT_TIME                  Epoch of flow export
-   [NFv9 57591][IPFIX 35632.119][Len 16 varlen] %L7_PROTO_NAME                     Layer 7 Protocol Name [Aliased to %APPLICATION_NAME]
+   [NFv9 57591][IPFIX 35632.119][Len 16 varlen] %L7_PROTO_NAME             Layer 7 Protocol Name [Aliased to %APPLICATION_NAME]
    [NFv9 58046][IPFIX 35632.574][Len 1] %FLOW_CONTENT_TYPE                 Flow content (0=unk, 1=audio, 2=video...)
-   [NFv9 57973][IPFIX 35632.501][Len 16 varlen] %L7_PROTO_CATEGORY                 Layer 7 Protocol Category
-   [NFv9 58011][IPFIX 35632.539][Len 24 varlen] %L7_INFO                           Layer 7 Flow Information
-   [NFv9 58063][IPFIX 35632.591][Len 24 varlen] %L7_DOMAIN_INFO                    Layer 7 Flow domain Information
+   [NFv9 57973][IPFIX 35632.501][Len 16 varlen] %L7_PROTO_CATEGORY         Layer 7 Protocol Category
+   [NFv9 58011][IPFIX 35632.539][Len 24 varlen] %L7_INFO                   Layer 7 Flow Information
+   [NFv9 58063][IPFIX 35632.591][Len 24 varlen] %L7_DOMAIN_INFO            Layer 7 Flow domain Information
    [NFv9 57592][IPFIX 35632.120][Len 4] %DOWNSTREAM_TUNNEL_ID              Downstream tunnel identifier (e.g. GTP TEID, VXLAN VNI) or 0 if unknown
    [NFv9 57919][IPFIX 35632.447][Len 2] %DOWNSTREAM_SESSION_ID             Downstream session identifier (e.g. L2TP) or 0 if unknown
-   [NFv9 57660][IPFIX 35632.188][Len 48 varlen] %TLS_SERVER_NAME                   TLS server name
-   [NFv9 57661][IPFIX 35632.189][Len 40 varlen] %BITTORRENT_HASH                   BITTORRENT hash
-   [NFv9 57593][IPFIX 35632.121][Len 32 varlen] %FLOW_USER_NAME                    Flow username of the tunnel (if known)
-   [NFv9 57594][IPFIX 35632.122][Len 32 varlen] %NPROBE_INSTANCE_NAME              nprobe instance name
+   [NFv9 57660][IPFIX 35632.188][Len 48 varlen] %TLS_SERVER_NAME           TLS server name
+   [NFv9 57661][IPFIX 35632.189][Len 40 varlen] %BITTORRENT_HASH           BITTORRENT hash
+   [NFv9 57593][IPFIX 35632.121][Len 32 varlen] %FLOW_USER_NAME            Flow username of the tunnel (if known)
+   [NFv9 57594][IPFIX 35632.122][Len 32 varlen] %NPROBE_INSTANCE_NAME      nProbe instance name
    [NFv9 57598][IPFIX 35632.126][Len 8 varlen] %PLUGIN_NAME                Plugin name used by this flow (if any)
    [NFv9 57868][IPFIX 35632.396][Len 16] %UNTUNNELED_IPV6_SRC_ADDR         Untunneled IPv6 source address
    [NFv9 57869][IPFIX 35632.397][Len 16] %UNTUNNELED_IPV6_DST_ADDR         Untunneled IPv6 destination address
