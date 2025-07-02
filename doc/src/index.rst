@@ -8,6 +8,7 @@ nProbe is an extensible NetFlow v5 v9/NetFlow Lite/sFlow/IPFIX/jFlow probe/colle
    :caption: User's Guide
 
    introduction
+   version
    configurations
    whats_new
    how_to_start
