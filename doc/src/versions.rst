@@ -1,8 +1,8 @@
-Version comparison
+Models Comparison Table
 -----------------------
 
-.. list-table::
-  :widths: 30 15 15 15 15
+.. list-table:: Features by Model
+  :widths: 40 15 15 15 15
   :header-rows: 1
 
   * - Feature
