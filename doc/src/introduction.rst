@@ -62,7 +62,8 @@ Plugins
 
 Plugins are add-ons that add enhanced packet dissection and analysis for specific protocols.
 They are unlocked based on the nProbe license. For instance nProbe Enterprise S enables HTTP and DNS plugins.
-Please visit the product page on http://www.ntop.org for a full comparison table.
+Please check the Comparison Table section for a comparison between versions, or the nProbe Plugins section 
+to learn more about plugins.
 
 Applying the License
 --------------------
