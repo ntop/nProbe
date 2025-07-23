@@ -39,6 +39,7 @@ release = '10.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    "sphinxcontrib.jquery",    
     'sphinx.ext.intersphinx',
 ]
 
