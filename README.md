@@ -1,4 +1,4 @@
-![ntop][nprobe_logo] ![ntop][ntop_logo]
+![ntop][nprobe_logo]
 # nProbe
 This repository contains open source components and extensions for nProbe available at http://www.ntop.org/products/netflow/nprobe/
 
