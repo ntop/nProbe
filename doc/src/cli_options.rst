@@ -1150,429 +1150,465 @@ Major protocol (%L7_PROTO) symbolic mapping:
 
 .. code:: bash
 
- Id Protocol               Layer_4  Breed        Category
- 0        0 Unknown                TCP        X        Unrated      Unspecified        -                               -
- 1        1 FTP_CONTROL            TCP        X        Unsafe       Download           -                               21
- 2        2 POP3                   TCP        X        Unsafe       Email              -                               110
- 3        3 SMTP                   TCP        X        Acceptable   Email              -                               25,587
- 4        4 IMAP                   TCP        X        Unsafe       Email              -                               143
- 5        5 DNS                    TCP/UDP    X        Acceptable   Network            53                              53
- 6        6 IPP                    TCP/UDP    X        Acceptable   System             -                               -
- 7        7 HTTP                   TCP        X        Acceptable   Web                -                               80
- 8        8 MDNS                   TCP        X        Acceptable   Network            5353,5354                       -
- 9        9 NTP                    UDP        X        Acceptable   System             123                             -
- 10       10 NetBIOS                TCP/UDP    X        Acceptable   System             137,138,139                     139
- 11       11 NFS                    TCP/UDP    X        Acceptable   DataTransfer       2049                            2049
- 12       12 SSDP                   UDP        X        Acceptable   System             -                               -
- 13       13 BGP                    TCP        X        Acceptable   Network            -                               179,2605
- 14       14 SNMP                   UDP        X        Acceptable   Network            161,162                         -
- 15       15 XDMCP                  TCP/UDP    X        Acceptable   RemoteAccess       177                             177
- 16       16 SMBv1                  TCP        X        Dangerous    System             -                               445
- 17       17 Syslog                 TCP/UDP    X        Acceptable   System             514                             514,601,6514
- 18       18 DHCP                   UDP        X        Acceptable   Network            67,68                           -
- 19       19 PostgreSQL             TCP        X        Acceptable   Database           -                               5432
- 20       20 MySQL                  TCP        X        Acceptable   Database           -                               3306
- 21       21 Outlook                TCP                 Acceptable   Email              -                               -
- 22       22 VK                     TCP                 Fun          SocialNetwork      -                               -
- 23       23 POPS                   TCP                 Safe         Email              -                               995
- 24       24 Tailscale              UDP                 Acceptable   VPN                41641                           -
- 25       25 Yandex                 TCP                 Safe         Web                -                               -
- 26       26 ntop                   TCP                 Safe         Network            -                               -
- 27       27 COAP                   UDP        X        Safe         RPC                5683,5684                       -
- 28       28 VMware                 UDP        X        Acceptable   RemoteAccess       902,903                         903
- 29       29 SMTPS                  TCP                 Safe         Email              -                               465
- 30       30 DTLS                   UDP        X        Safe         Web                -                               -
- 31       31 UBNTAC2                UDP        X        Safe         Network            10001                           -
- 32       32 BFCP                   TCP/UDP    X        Acceptable   Video              -                               -
- 33       33 YandexMail             TCP                 Safe         Email              -                               -
- 34       34 YandexMusic            TCP                 Fun          Music              -                               -
- 35       35 Gnutella               TCP/UDP    X        Potentially Dangerous Download           -                               -
- 36       36 eDonkey                TCP        X        Unsafe       Download           -                               -
- 37       37 BitTorrent             TCP/UDP    X        Acceptable   Download           6771,51413                      51413,53646
- 38       38 Skype_TeamsCall        TCP                 Acceptable   VoIP               -                               -
- 39       39 Signal                 TCP                 Fun          Chat               -                               -
- 40       40 Memcached              TCP/UDP    X        Acceptable   Network            11211                           11211
- 41       41 SMBv23                 TCP        X        Acceptable   System             -                               445
- 42       42 Mining                 TCP                 Unsafe       Mining             -                               -
- 43       43 NestLogSink            TCP                 Acceptable   Cloud              -                               11095
- 44       44 Modbus                 TCP        X        Acceptable   IoT-Scada          -                               502
- 45       45 WhatsAppCall           TCP                 Acceptable   VoIP               -                               -
- 46       46 DataSaver              TCP                 Fun          Web                -                               -
- 47       47 Xbox                   UDP                 Fun          Game               -                               -
- 48       48 QQ                     UDP                 Fun          Chat               -                               -
- 49       49 TikTok                 TCP                 Fun          SocialNetwork      -                               -
- 50       50 RTSP                   TCP/UDP    X        Fun          Media              554                             554
- 51       51 IMAPS                  TCP                 Safe         Email              -                               993
- 52       52 IceCast                TCP        X        Fun          Media              -                               -
- 53       53 CPHA                   UDP                 Fun          Network            8116                            -
- 54       54 iQIYI                  UDP        X        Fun          Streaming          -                               -
- 55       55 Zattoo                 TCP/UDP             Fun          Video              -                               -
- 56       56 YandexMarket           TCP                 Safe         Shopping           -                               -
- 57       57 YandexDisk             TCP                 Safe         Cloud              -                               -
- 58       58 Discord                UDP                 Fun          Collaborative      -                               -
- 59       59 AdobeConnect           TCP                 Acceptable   Video              -                               -
- 60       60 MongoDB                TCP        X        Acceptable   Database           -                               27017
- 61       61 Pluralsight            TCP                 Fun          Video              -                               -
- 62       62 YandexCloud            TCP                 Safe         Cloud              -                               -
- 63       63 OCSP                   TCP                 Safe         Network            -                               -
- 64       64 VXLAN                  UDP        X        Acceptable   Network            4789                            -
- 65       65 IRC                    TCP        X        Unsafe       Chat               194                             194
- 66       66 MerakiCloud            UDP        X        Acceptable   Network            -                               -
- 67       67 Jabber                 TCP        X        Acceptable   Web                -                               -
- 68       68 Nats                   TCP        X        Acceptable   RPC                -                               -
- 69       69 AmongUs                UDP                 Fun          Game               22023                           -
- 70       70 Yahoo                  TCP                 Safe         Web                -                               -
- 71       71 DisneyPlus             TCP                 Fun          Streaming          -                               -
- 72       72 HART-IP                TCP/UDP    X        Acceptable   IoT-Scada          -                               5094
- 73       73 VRRP                   TCP        X        Acceptable   Network            -                               -
- 74       74 Steam                  UDP                 Fun          Game               -                               -
- 75       75 HalfLife2              UDP        X        Fun          Game               -                               -
- 76       76 WorldOfWarcraft        TCP                 Fun          Game               -                               -
- 77       77 Telnet                 TCP        X        Unsafe       RemoteAccess       -                               23
- 78       78 STUN                   TCP/UDP    X        Acceptable   Network            3478                            -
- 79       79 IPSec                  UDP        X        Safe         VPN                500,4500                        500
- 80       80 GRE                               X        Acceptable   Network            -                               -
- 81       81 ICMP                              X        Acceptable   Network            -                               -
- 82       82 IGMP                              X        Acceptable   Network            -                               -
- 83       83 EGP                               X        Acceptable   Network            -                               -
- 84       84 SCTP                              X        Acceptable   Network            -                               -
- 85       85 OSPF                              X        Acceptable   Network            -                               2604
- 86       86 IP_in_IP                          X        Acceptable   Network            -                               -
- 87       87 RTP                    TCP/UDP    X        Acceptable   Media              -                               -
- 88       88 RDP                    TCP/UDP    X        Acceptable   RemoteAccess       3389                            3389
- 89       89 VNC                    TCP        X        Acceptable   RemoteAccess       -                               5900,5901,5800
- 90       90 Tumblr                 TCP                 Fun          SocialNetwork      -                               -
- 91       91 TLS                    TCP        X        Safe         Web                -                               443
- 92       92 SSH                    TCP        X        Acceptable   RemoteAccess       -                               22
- 93       93 Usenet                 TCP        X        Acceptable   Web                -                               -
- 94       94 MGCP                   UDP        X        Acceptable   VoIP               -                               -
- 95       95 IAX                    UDP        X        Acceptable   VoIP               4569                            4569
- 96       96 TFTP                   UDP        X        Acceptable   DataTransfer       69                              -
- 97       97 AFP                    TCP        X        Acceptable   DataTransfer       548                             548
- 98       98 YandexMetrika          TCP                 Safe         Web                -                               -
- 99       99 YandexDirect           TCP                 Tracker/Ads  Advertisement      -                               -
- 100      100 SIP                    TCP/UDP    X        Acceptable   VoIP               5060,5061                       5060,5061
- 101      101 TruPhone               TCP                 Acceptable   VoIP               -                               -
- 102      102 ICMPV6                            X        Acceptable   Network            -                               -
- 103      103 DHCPV6                 UDP        X        Acceptable   Network            -                               -
- 104      104 Armagetron             UDP        X        Fun          Game               -                               -
- 105      105 Crossfire              TCP/UDP             Fun          RPC                -                               -
- 106      106 Dofus                  TCP        X        Fun          Game               -                               -
- 107      107 ADS_Analytic_Track     TCP                 Tracker/Ads  Advertisement      -                               -
- 108      108 AdultContent           TCP                 Acceptable   AdultContent       -                               -
- 109      109 Guildwars              TCP        X        Fun          Game               -                               -
- 110      110 AmazonAlexa            TCP                 Acceptable   VirtAssistant      -                               -
- 111      111 Kerberos               TCP/UDP    X        Acceptable   Network            88                              88
- 112      112 LDAP                   TCP/UDP    X        Acceptable   System             389                             389
- 113      113 MapleStory             TCP                 Fun          Game               -                               -
- 114      114 MsSQL-TDS              TCP        X        Acceptable   Database           -                               1433,1434
- 115      115 PPTP                   TCP        X        Acceptable   VPN                -                               -
- 116      116 Warcraft3              TCP/UDP    X        Fun          Game               -                               -
- 117      117 WorldOfKungFu          TCP        X        Fun          Game               -                               -
- 118      118 Slack                  TCP                 Acceptable   Collaborative      -                               -
- 119      119 Facebook               TCP                 Fun          SocialNetwork      -                               -
- 120      120 Twitter                TCP                 Fun          SocialNetwork      -                               -
- 121      121 Dropbox                UDP                 Acceptable   Cloud              17500                           -
- 122      122 GMail                  TCP                 Acceptable   Email              -                               -
- 123      123 GoogleMaps             TCP                 Safe         Web                -                               -
- 124      124 YouTube                TCP                 Fun          Media              -                               -
- 125      125 Skype_Teams            TCP                 Acceptable   VoIP               -                               -
- 126      126 Google                 TCP                 Acceptable   Web                -                               -
- 127      127 MS-RPCH                TCP        X        Acceptable   RPC                -                               -
- 128      128 NetFlow                UDP        X        Acceptable   Network            2055                            -
- 129      129 sFlow                  UDP        X        Acceptable   Network            6343                            -
- 130      130 HTTP_Connect           TCP        X        Acceptable   Web                -                               8080
- 131      131 HTTP_Proxy             TCP        X        Acceptable   Web                -                               8080,3128
- 132      132 Citrix                 TCP                 Acceptable   Network            -                               1494,2598
- 133      133 NetFlix                TCP                 Fun          Video              -                               -
- 134      134 LastFM                 TCP                 Fun          Music              -                               -
- 135      135 Waze                   TCP                 Acceptable   Web                -                               -
- 136      136 YouTubeUpload          TCP                 Fun          Media              -                               -
- 137      137 Hulu                   TCP                 Fun          Streaming          -                               -
- 138      138 CHECKMK                TCP        X        Acceptable   DataTransfer       -                               6556
- 139      139 AJP                    TCP        X        Acceptable   Web                -                               8009,8010
- 140      140 Apple                  TCP                 Safe         Web                -                               -
- 141      141 Webex                  TCP                 Acceptable   VoIP               -                               -
- 142      142 WhatsApp               TCP                 Acceptable   Chat               -                               -
- 143      143 AppleiCloud            TCP                 Acceptable   Web                -                               -
- 144      144 Viber                  TCP/UDP             Fun          VoIP               7985,7987,5242,5243,4244        7985,5242,5243,4244
- 145      145 AppleiTunes            TCP                 Fun          Streaming          -                               -
- 146      146 Radius                 UDP        X        Acceptable   Network            1812,1813                       1812,1813
- 147      147 WindowsUpdate          TCP                 Safe         SoftwareUpdate     -                               -
- 148      148 TeamViewer             TCP/UDP             Acceptable   RemoteAccess       5938                            5938
- 149      149 EthernetGlobalData     UDP        X        Acceptable   IoT-Scada          -                               -
- 150      150 LotusNotes             TCP        X        Acceptable   Collaborative      -                               1352
- 151      151 SAP                    TCP        X        Acceptable   Network            -                               3201
- 152      152 GTP                    UDP        X        Acceptable   Network            2152,2123                       -
- 153      153 WSD                    UDP        X        Acceptable   Network            3702                            -
- 154      154 LLMNR                  TCP        X        Acceptable   Network            5355                            5355
- 155      155 TocaBoca               UDP        X        Fun          Game               5055                            -
- 156      156 Spotify                TCP/UDP             Fun          Music              -                               -
- 157      157 FacebookMessenger      TCP                 Acceptable   Chat               -                               -
- 158      158 H323                   TCP/UDP    X        Acceptable   VoIP               1719,1720                       1719,1720
- 159      159 OpenVPN                TCP/UDP             Acceptable   VPN                1194                            1194
- 160      160 NOE                    UDP        X        Acceptable   VoIP               -                               -
- 161      161 CiscoVPN               UDP        X        Acceptable   VPN                10000                           10000,8008
- 162      162 TeamSpeak              TCP/UDP    X        Fun          VoIP               -                               -
- 163      163 Tor                    TCP                 Potentially Dangerous VPN                -                               -
- 164      164 CiscoSkinny            TCP        X        Acceptable   VoIP               -                               2000
- 165      165 RTCP                   TCP        X        Acceptable   VoIP               -                               -
- 166      166 RSYNC                  TCP        X        Acceptable   DataTransfer       -                               873
- 167      167 Oracle                 TCP        X        Acceptable   Database           -                               1521
- 168      168 Corba                  TCP/UDP    X        Acceptable   RPC                -                               -
- 169      169 UbuntuONE              TCP                 Acceptable   Cloud              -                               -
- 170      170 Whois-DAS              TCP        X        Acceptable   Network            -                               43,4343
- 171      171 SD-RTN                 UDP        X        Acceptable   Media              -                               -
- 172      172 SOCKS                  TCP        X        Acceptable   Web                1080                            1080
- 173      173 Nintendo               UDP                 Fun          Game               -                               -
- 174      174 RTMP                   TCP        X        Acceptable   Media              -                               1935
- 175      175 FTP_DATA               TCP        X        Acceptable   Download           -                               20
- 176      176 Wikipedia              TCP                 Safe         Web                -                               -
- 177      177 ZeroMQ                 TCP        X        Acceptable   RPC                -                               -
- 178      178 Amazon                 TCP                 Acceptable   Web                -                               -
- 179      179 eBay                   TCP                 Safe         Shopping           -                               -
- 180      180 CNN                    TCP                 Safe         Web                -                               -
- 181      181 Megaco                 UDP        X        Acceptable   VoIP               2944                            -
- 182      182 RESP                   TCP        X        Acceptable   Database           -                               6379
- 183      183 Pinterest              TCP                 Fun          SocialNetwork      -                               -
- 184      184 VHUA                   UDP        X        Fun          VoIP               58267                           -
- 185      185 Telegram               TCP/UDP             Acceptable   Chat               -                               -
- 186      186 CoD_Mobile             UDP        X        Fun          Game               -                               -
- 187      187 Pandora                TCP                 Fun          Streaming          -                               -
- 188      188 QUIC                   UDP        X        Acceptable   Web                443                             -
- 189      189 Zoom                   UDP                 Acceptable   Video              -                               -
- 190      190 EAQ                    UDP        X        Acceptable   Network            6000                            -
- 191      191 Ookla                  TCP/UDP             Safe         Network            -                               -
- 192      192 AMQP                   TCP        X        Acceptable   RPC                -                               -
- 193      193 KakaoTalk              TCP                 Acceptable   Chat               -                               -
- 194      194 KakaoTalk_Voice        UDP        X        Acceptable   VoIP               -                               -
- 195      195 Twitch                 TCP                 Fun          Video              -                               -
- 196      196 DoH_DoT                TCP                 Acceptable   Network            784,853                         853
- 197      197 WeChat                 TCP                 Fun          Chat               -                               -
- 198      198 MPEG_TS                UDP        X        Fun          Media              -                               -
- 199      199 Snapchat               TCP                 Fun          SocialNetwork      -                               -
- 200      200 Sina                   TCP                 Fun          SocialNetwork      -                               -
- 201      201 GoogleMeet             TCP                 Acceptable   Chat               -                               -
- 202      202 IFLIX                  TCP                 Fun          Video              -                               -
- 203      203 Github                 TCP                 Acceptable   Collaborative      -                               -
- 204      204 BJNP                   UDP        X        Acceptable   System             8612                            -
- 205      205 Reddit                 TCP                 Fun          SocialNetwork      -                               -
- 206      206 WireGuard              UDP        X        Acceptable   VPN                51820                           -
- 207      207 SMPP                   TCP        X        Acceptable   Download           -                               -
- 208      208 DNScrypt               TCP/UDP             Acceptable   Network            -                               -
- 209      209 TINC                   TCP/UDP    X        Acceptable   VPN                655                             655
- 210      210 Deezer                 TCP                 Fun          Music              -                               -
- 211      211 Instagram              TCP                 Fun          SocialNetwork      -                               -
- 212      212 Microsoft              TCP                 Safe         Cloud              -                               -
- 213      213 Starcraft              TCP/UDP    X        Fun          Game               1119                            1119
- 214      214 Teredo                 UDP        X        Acceptable   Network            -                               -
- 215      215 HotspotShield          TCP                 Potentially Dangerous VPN                -                               -
- 216      216 IMO                    UDP        X        Acceptable   VoIP               -                               -
- 217      217 GoogleDrive            TCP                 Acceptable   Cloud              -                               -
- 218      218 OCS                    TCP                 Fun          Media              -                               -
- 219      219 Microsoft365           TCP                 Acceptable   Collaborative      -                               -
- 220      220 Cloudflare             TCP                 Acceptable   Web                -                               -
- 221      221 MS_OneDrive            TCP                 Acceptable   Cloud              -                               -
- 222      222 MQTT                   TCP        X        Acceptable   RPC                -                               1883,8883
- 223      223 RX                     UDP        X        Acceptable   RPC                -                               -
- 224      224 AppleStore             TCP                 Safe         SoftwareUpdate     -                               -
- 225      225 OpenDNS                TCP                 Acceptable   Web                -                               -
- 226      226 Git                    TCP        X        Safe         Collaborative      -                               9418
- 227      227 DRDA                   TCP        X        Acceptable   Database           -                               -
- 228      228 PlayStore              TCP                 Safe         SoftwareUpdate     -                               -
- 229      229 SOMEIP                 TCP/UDP    X        Acceptable   RPC                30491,30501,30490               30491,30501
- 230      230 FIX                    TCP        X        Safe         RPC                -                               -
- 231      231 Playstation            TCP                 Fun          Game               -                               -
- 232      232 Pastebin               TCP                 Potentially Dangerous Download           -                               -
- 233      233 LinkedIn               TCP                 Fun          SocialNetwork      -                               -
- 234      234 SoundCloud             TCP                 Fun          Music              -                               -
- 235      235 SteamDatagramRelay     UDP        X        Fun          Game               -                               -
- 236      236 LISP                   TCP/UDP    X        Acceptable   Cloud              4342,4341                       -
- 237      237 Diameter               TCP        X        Acceptable   Network            -                               3868
- 238      238 ApplePush              TCP                 Acceptable   Cloud              -                               -
- 239      239 GoogleServices         TCP                 Acceptable   Web                -                               -
- 240      240 AmazonVideo            TCP/UDP             Fun          Cloud              -                               -
- 241      241 GoogleDocs             TCP                 Acceptable   Collaborative      -                               -
- 242      242 WhatsAppFiles          TCP                 Acceptable   Download           -                               -
- 243      243 TargusDataspeed        TCP        X        Acceptable   Network            5001,5201                       5001,5201
- 244      244 DNP3                   TCP        X        Acceptable   IoT-Scada          -                               20000
- 245      245 IEC60870               TCP        X        Acceptable   IoT-Scada          -                               2404
- 246      246 Bloomberg              TCP                 Acceptable   Network            -                               -
- 247      247 CAPWAP                 UDP        X        Acceptable   Network            5246,5247                       -
- 248      248 Zabbix                 TCP        X        Acceptable   Network            -                               10050,10051
- 249      249 S7Comm                 TCP        X        Acceptable   IoT-Scada          -                               -
- 250      250 Teams                  TCP                 Safe         Collaborative      -                               -
- 251      251 WebSocket              TCP        X        Acceptable   Web                -                               -
- 252      252 AnyDesk                TCP                 Acceptable   RemoteAccess       -                               -
- 253      253 SOAP                   TCP        X        Acceptable   RPC                -                               -
- 254      254 AppleSiri              TCP                 Acceptable   VirtAssistant      -                               -
- 255      255 SnapchatCall           TCP                 Acceptable   VoIP               -                               -
- 256      256 HP_VIRTGRP             TCP        X        Acceptable   Network            -                               -
- 257      257 GenshinImpact          TCP/UDP    X        Fun          Game               22102                           -
- 258      258 Activision             UDP                 Fun          Game               -                               -
- 259      259 FortiClient            TCP                 Safe         VPN                -                               8013,8014
- 260      260 Z3950                  TCP        X        Acceptable   Network            -                               210
- 261      261 Likee                  TCP                 Fun          SocialNetwork      -                               -
- 262      262 GitLab                 TCP                 Fun          Collaborative      -                               -
- 263      263 AVASTSecureDNS         UDP                 Safe         Network            -                               -
- 264      264 Cassandra              TCP        X        Acceptable   Database           -                               7000,9042
- 265      265 AmazonAWS              TCP                 Acceptable   Cloud              -                               -
- 266      266 Salesforce             TCP                 Safe         Cloud              -                               -
- 267      267 Vimeo                  TCP                 Fun          Streaming          -                               -
- 268      268 FacebookVoip           TCP                 Acceptable   VoIP               -                               -
- 269      269 SignalVoip             TCP                 Acceptable   VoIP               -                               -
- 270      270 Fuze                   TCP                 Acceptable   VoIP               -                               -
- 271      271 GTP_U                  TCP        X        Acceptable   Network            -                               -
- 272      272 GTP_C                  TCP        X        Acceptable   Network            -                               -
- 273      273 GTP_PRIME              TCP        X        Acceptable   Network            -                               -
- 274      274 Alibaba                TCP                 Acceptable   Web                -                               -
- 275      275 Crashlytics            TCP                 Acceptable   DataTransfer       -                               -
- 276      276 Azure                  TCP                 Acceptable   Cloud              -                               -
- 277      277 iCloudPrivateRelay     TCP                 Acceptable   VPN                -                               -
- 278      278 EthernetIP             TCP        X        Acceptable   Network            -                               44818
- 279      279 Badoo                  TCP                 Fun          SocialNetwork      -                               -
- 280      280 AccuWeather            TCP                 Fun          Web                -                               -
- 281      281 GoogleClassroom        TCP                 Safe         Collaborative      -                               -
- 282      282 HSRP                   UDP        X        Acceptable   Network            1985                            -
- 283      283 Cybersec               TCP                 Safe         Cybersecurity      -                               -
- 284      284 GoogleCloud            TCP                 Acceptable   Cloud              -                               -
- 285      285 Tencent                TCP                 Fun          SocialNetwork      -                               -
- 286      286 RakNet                 UDP        X        Fun          Game               -                               -
- 287      287 Xiaomi                 TCP                 Acceptable   Web                -                               -
- 288      288 Edgecast               TCP                 Acceptable   Cloud              -                               -
- 289      289 Cachefly               TCP                 Acceptable   Cloud              -                               -
- 290      290 Softether              UDP                 Acceptable   VPN                -                               -
- 291      291 MpegDash               TCP                 Fun          Media              -                               -
- 292      292 Dazn                   TCP                 Fun          Streaming          -                               -
- 293      293 GoTo                   TCP                 Acceptable   VoIP               -                               -
- 294      294 RSH                    TCP        X        Unsafe       RemoteAccess       -                               -
- 295      295 1kxun                  TCP                 Fun          Streaming          -                               -
- 296      296 PGM                               X        Acceptable   Network            -                               -
- 297      297 IP_PIM                            X        Acceptable   Network            -                               -
- 298      298 collectd               UDP        X        Acceptable   System             25826                           -
- 299      299 TunnelBear             TCP                 Acceptable   VPN                -                               -
- 300      300 CloudflareWarp         UDP                 Acceptable   VPN                -                               -
- 301      301 i3D                    UDP        X        Fun          Game               -                               -
- 302      302 RiotGames              UDP        X        Fun          Game               -                               -
- 303      303 Psiphon                TCP                 Acceptable   VPN                -                               -
- 304      304 UltraSurf              TCP        X        Acceptable   VPN                -                               -
- 305      305 Threema                TCP        X        Fun          Chat               -                               -
- 306      306 AliCloud               TCP        X        Acceptable   Cloud              -                               -
- 307      307 AVAST                  TCP        X        Safe         Network            -                               -
- 308      308 TiVoConnect            TCP/UDP    X        Fun          Network            2190                            2190
- 309      309 Kismet                 TCP        X        Acceptable   Network            -                               -
- 310      310 FastCGI                TCP        X        Safe         Network            -                               -
- 311      311 FTPS                   TCP        X        Unsafe       Download           -                               -
- 312      312 NAT-PMP                UDP        X        Acceptable   Network            5351                            -
- 313      313 Syncthing              UDP        X        Fun          Download           -                               -
- 314      314 CryNetwork             UDP        X        Fun          Game               -                               -
- 315      315 Line                   TCP        X        Acceptable   Chat               -                               -
- 316      316 LineCall               UDP        X        Acceptable   VoIP               -                               -
- 317      317 AppleTVPlus            TCP                 Fun          Streaming          -                               -
- 318      318 DirecTV                TCP                 Fun          Streaming          -                               -
- 319      319 HBO                    TCP                 Fun          Streaming          -                               -
- 320      320 Vudu                   TCP                 Fun          Streaming          -                               -
- 321      321 Showtime               TCP                 Fun          Streaming          -                               -
- 322      322 Dailymotion            TCP                 Fun          Streaming          -                               -
- 323      323 Livestream             TCP                 Fun          Streaming          -                               -
- 324      324 Tencentvideo           TCP                 Fun          Streaming          -                               -
- 325      325 IHeartRadio            TCP                 Fun          Music              -                               -
- 326      326 Tidal                  TCP                 Fun          Music              -                               -
- 327      327 TuneIn                 TCP                 Fun          Music              -                               -
- 328      328 SiriusXMRadio          TCP                 Fun          Music              -                               -
- 329      329 Munin                  TCP        X        Acceptable   System             -                               4949
- 330      330 Elasticsearch          TCP        X        Acceptable   System             -                               -
- 331      331 TuyaLP                 UDP        X        Acceptable   IoT-Scada          6667                            -
- 332      332 TPLINK_SHP             TCP/UDP    X        Acceptable   IoT-Scada          9999                            9999
- 333      333 Source_Engine          UDP        X        Fun          Game               27015                           -
- 334      334 BACnet                 UDP        X        Safe         IoT-Scada          47808                           -
- 335      335 OICQ                   UDP        X        Acceptable   Chat               8000                            -
- 336      336 Heroes_of_the_Storm    UDP        X        Fun          Game               -                               -
- 337      337 FbookReelStory         TCP                 Fun          SocialNetwork      -                               -
- 338      338 SRTP                   TCP        X        Acceptable   Media              -                               -
- 339      339 OperaVPN               TCP                 Acceptable   VPN                -                               -
- 340      340 EpicGames              UDP                 Fun          Game               -                               -
- 341      341 GeForceNow             TCP                 Fun          Game               -                               -
- 342      342 Nvidia                 TCP                 Safe         Web                -                               -
- 343      343 BITCOIN                TCP        X        Acceptable   Crypto_Currency    -                               8333
- 344      344 ProtonVPN              TCP                 Acceptable   VPN                -                               -
- 345      345 Thrift                 TCP/UDP    X        Acceptable   RPC                -                               -
- 346      346 Roblox                 TCP                 Fun          Game               -                               -
- 347      347 Service_Location_Protocol TCP/UDP    X        Acceptable   RPC                427                             427
- 348      348 Mullvad                TCP                 Acceptable   VPN                -                               -
- 349      349 HTTP2                  TCP        X        Safe         Web                -                               -
- 350      350 HAProxy                TCP        X        Safe         Web                -                               -
- 351      351 RMCP                   UDP        X        Safe         System             623                             -
- 352      352 Controller_Area_Network TCP/UDP    X        Safe         System             -                               -
- 353      353 Protobuf               TCP/UDP    X        Safe         Network            -                               -
- 354      354 ETHEREUM               TCP/UDP    X        Acceptable   Crypto_Currency    -                               30303
- 355      355 TelegramVoip           TCP                 Acceptable   VoIP               -                               -
- 356      356 SinaWeibo              TCP                 Fun          SocialNetwork      -                               -
- 357      357 TeslaServices          TCP                 Acceptable   Network            -                               -
- 358      358 PTPv2                  UDP        X        Acceptable   System             319,320                         -
- 359      359 RTPS                   UDP        X        Acceptable   RPC                7401                            -
- 360      360 OPC-UA                 TCP        X        Acceptable   IoT-Scada          -                               4840
- 361      361 S7CommPlus             TCP        X        Acceptable   IoT-Scada          -                               -
- 362      362 FINS                   TCP/UDP    X        Acceptable   IoT-Scada          9600                            9600
- 363      363 EtherSIO               UDP        X        Acceptable   IoT-Scada          6060                            -
- 364      364 UMAS                   TCP        X        Acceptable   IoT-Scada          -                               -
- 365      365 BeckhoffADS            TCP        X        Acceptable   IoT-Scada          -                               48898
- 366      366 ISO9506-1-MMS          TCP        X        Acceptable   IoT-Scada          -                               -
- 367      367 IEEE-C37118            TCP/UDP    X        Acceptable   IoT-Scada          4713                            4712
- 368      368 Ether-S-Bus            UDP        X        Acceptable   IoT-Scada          5050                            -
- 369      369 Monero                 TCP                 Acceptable   Crypto_Currency    -                               -
- 370      370 DCERPC                 TCP/UDP    X        Acceptable   RPC                135                             135
- 371      371 PROFINET_IO            UDP        X        Acceptable   IoT-Scada          -                               -
- 372      372 HiSLIP                 TCP        X        Acceptable   IoT-Scada          -                               4880
- 373      373 UFTP                   UDP        X        Acceptable   Download           1044                            -
- 374      374 OpenFlow               TCP        X        Acceptable   Network            -                               6653
- 375      375 JSON-RPC               TCP        X        Acceptable   RPC                -                               -
- 376      376 WebDAV                 TCP        X        Acceptable   Collaborative      -                               -
- 377      377 Kafka                  TCP        X        Acceptable   RPC                -                               9092
- 378      378 NoMachine              TCP/UDP    X        Acceptable   RemoteAccess       4000                            4000
- 379      379 IEC62056               TCP/UDP    X        Acceptable   IoT-Scada          4059                            4059
- 380      380 HL7                    TCP        X        Acceptable   RPC                -                               2575
- 381      381 Ceph                   TCP        X        Acceptable   DataTransfer       -                               3300,6789
- 382      382 GoogleChat             TCP                 Acceptable   Chat               -                               -
- 383      383 Roughtime              TCP/UDP    X        Acceptable   System             2002                            2002
- 384      384 PrivateInternetAccess  TCP                 Acceptable   VPN                -                               -
- 385      385 KCP                    TCP/UDP    X        Acceptable   Network            -                               -
- 386      386 Dota2                  TCP                 Fun          Game               -                               -
- 387      387 Mumble                 UDP        X        Fun          VoIP               -                               -
- 388      388 Yojimbo                UDP        X        Fun          Game               -                               -
- 389      389 ElectronicArts         TCP                 Fun          Game               -                               -
- 390      390 STOMP                  TCP        X        Acceptable   RPC                -                               61613
- 391      391 Radmin                 TCP        X        Acceptable   RemoteAccess       -                               4899
- 392      392 Raft                   TCP        X        Acceptable   Network            -                               -
- 393      393 CIP                    UDP        X        Acceptable   IoT-Scada          2222                            -
- 394      394 Gearman                TCP        X        Acceptable   RPC                -                               4730
- 395      395 TencentGames           TCP        X        Fun          Game               -                               -
- 396      396 GaijinEntertainment    UDP        X        Fun          Game               20011                           -
- 397      397 ANSI_C1222             TCP/UDP    X        Acceptable   IoT-Scada          1153                            1153
- 398      398 Huawei                 TCP                 Acceptable   Web                -                               -
- 399      399 HuaweiCloud            TCP                 Acceptable   Cloud              -                               -
- 400      400 DLEP                   TCP/UDP    X        Acceptable   Network            854                             854
- 401      401 BFD                    UDP        X        Acceptable   Network            3784,3785                       -
- 402      402 NetEaseGames           UDP        X        Fun          Game               -                               -
- 403      403 PathofExile            TCP        X        Fun          Game               -                               -
- 404      404 GoogleCall             TCP                 Acceptable   VoIP               -                               -
- 405      405 PFCP                   UDP        X        Acceptable   Network            8805                            -
- 406      406 FLUTE                  UDP        X        Acceptable   Download           -                               -
- 407      407 LoLWildRift            UDP        X        Fun          Game               -                               -
- 408      408 TES_Online             TCP        X        Fun          Game               -                               -
- 409      409 LDP                    TCP/UDP    X        Acceptable   Network            646                             646
- 410      410 KNXnet_IP              TCP/UDP    X        Acceptable   IoT-Scada          3671                            3671
- 411      411 Bluesky                TCP                 Fun          SocialNetwork      -                               -
- 412      412 Mastodon               TCP                 Fun          SocialNetwork      -                               -
- 413      413 Threads                TCP                 Fun          SocialNetwork      -                               -
- 414      414 ViberVoip              TCP                 Acceptable   VoIP               -                               -
- 415      415 ZUG                    UDP        X        Acceptable   Crypto_Currency    -                               -
- 416      416 JRMI                   TCP        X        Acceptable   RPC                -                               1099
- 417      417 RipeAtlas              UDP        X        Acceptable   Network            -                               -
- 418      418 HLS                    TCP        X        Fun          Media              -                               -
- 419      419 ClickHouse             TCP        X        Acceptable   Database           -                               -
- 420      420 Nano                   TCP        X        Acceptable   Crypto_Currency    -                               7075
- 421      421 OpenWire               TCP        X        Acceptable   RPC                -                               61616
+ Id Userd-id Protocol                   Layer_4    Nw_Proto Breed                 Category           Def UDP Port/s                  Def TCP Port/s                  Custom
+  0        0 Unknown                    TCP        X        Unrated               Unspecified        -                               -                                    0
+  1        1 FTP_CONTROL                TCP        X        Unsafe                Download           -                               21                                   0
+  2        2 POP3                       TCP        X        Unsafe                Email              -                               110                                  0
+  3        3 SMTP                       TCP        X        Acceptable            Email              -                               25,587                               0
+  4        4 IMAP                       TCP        X        Unsafe                Email              -                               143                                  0
+  5        5 DNS                        TCP/UDP    X        Acceptable            Network            53                              53                                   0
+  6        6 IPP                        TCP                 Acceptable            System             -                               -                                    0
+  7        7 HTTP                       TCP        X        Acceptable            Web                -                               80                                   0
+  8        8 MDNS                       TCP        X        Acceptable            Network            5353,5354                       -                                    0
+  9        9 NTP                        UDP        X        Acceptable            System             123                             -                                    0
+ 10       10 NetBIOS                    TCP/UDP    X        Acceptable            System             137,138,139                     139                                  0
+ 11       11 NFS                        TCP/UDP    X        Acceptable            DataTransfer       2049                            2049                                 0
+ 12       12 SSDP                       UDP        X        Acceptable            System             -                               -                                    0
+ 13       13 BGP                        TCP        X        Acceptable            Network            -                               179,2605                             0
+ 14       14 SNMP                       UDP        X        Acceptable            Network            161,162                         -                                    0
+ 15       15 XDMCP                      TCP/UDP    X        Acceptable            RemoteAccess       177                             177                                  0
+ 16       16 SMBv1                      TCP                 Dangerous             System             -                               445                                  0
+ 17       17 Syslog                     TCP/UDP    X        Acceptable            System             514                             514,601,6514                         0
+ 18       18 DHCP                       UDP        X        Acceptable            Network            67,68                           -                                    0
+ 19       19 PostgreSQL                 TCP        X        Acceptable            Database           -                               5432                                 0
+ 20       20 MySQL                      TCP        X        Acceptable            Database           -                               3306                                 0
+ 21       21 Outlook                    TCP                 Acceptable            Email              -                               -                                    0
+ 22       22 VK                         TCP                 Fun                   SocialNetwork      -                               -                                    0
+ 23       23 POPS                       TCP                 Safe                  Email              -                               995                                  0
+ 24       24 Tailscale                  UDP                 Acceptable            VPN                41641                           -                                    0
+ 25       25 Yandex                     TCP                 Safe                  Web                -                               -                                    0
+ 26       26 ntop                       TCP                 Safe                  Network            -                               -                                    0
+ 27       27 COAP                       UDP        X        Safe                  RPC                5683,5684                       -                                    0
+ 28       28 VMware                     UDP        X        Acceptable            RemoteAccess       902,903                         903                                  0
+ 29       29 SMTPS                      TCP                 Safe                  Email              -                               465                                  0
+ 30       30 DTLS                       TCP/UDP    X        Safe                  Web                -                               -                                    0
+ 31       31 UBNTAC2                    UDP                 Safe                  Network            10001                           -                                    0
+ 32       32 BFCP                       TCP/UDP    X        Acceptable            Video              -                               -                                    0
+ 33       33 YandexMail                 TCP                 Safe                  Email              -                               -                                    0
+ 34       34 YandexMusic                TCP                 Fun                   Music              -                               -                                    0
+ 35       35 Gnutella                   TCP/UDP             Potentially_Dangerous Download           -                               -                                    0
+ 36       36 eDonkey                    TCP        X        Unsafe                Download           -                               -                                    0
+ 37       37 BitTorrent                 TCP/UDP             Acceptable            Download           6881-6889,51413,6771            6881-6889,51413,53646                0
+ 38       38 TeamsCall                  TCP                 Acceptable            VoIP               -                               -                                    0
+ 39       39 Signal                     TCP                 Acceptable            Chat               -                               -                                    0
+ 40       40 Memcached                  TCP/UDP    X        Acceptable            Network            11211                           11211                                0
+ 41       41 SMBv23                     TCP                 Acceptable            System             -                               445                                  0
+ 42       42 Mining                     TCP                 Unsafe                Mining             -                               -                                    0
+ 43       43 NestLogSink                TCP                 Acceptable            Cloud              -                               11095                                0
+ 44       44 Modbus                     TCP        X        Acceptable            IoT-Scada          -                               502                                  0
+ 45       45 WhatsAppCall               TCP                 Acceptable            VoIP               -                               -                                    0
+ 46       46 DataSaver                  TCP                 Fun                   Web                -                               -                                    0
+ 47       47 Xbox                       UDP                 Fun                   Game               -                               -                                    0
+ 48       48 QQ                         UDP                 Fun                   Chat               -                               -                                    0
+ 49       49 TikTok                     TCP                 Fun                   SocialNetwork      -                               -                                    0
+ 50       50 RTSP                       TCP/UDP    X        Fun                   Media              554                             554                                  0
+ 51       51 IMAPS                      TCP                 Safe                  Email              -                               993                                  0
+ 52       52 IceCast                    TCP        X        Fun                   Media              -                               -                                    0
+ 53       53 CPHA                       UDP                 Fun                   Network            8116                            -                                    0
+ 54       54 iQIYI                      UDP                 Fun                   Streaming          -                               -                                    0
+ 55       55 Zattoo                     TCP/UDP             Fun                   Video              -                               -                                    0
+ 56       56 YandexMarket               TCP                 Safe                  Shopping           -                               -                                    0
+ 57       57 YandexDisk                 TCP                 Safe                  Cloud              -                               -                                    0
+ 58       58 Discord                    UDP                 Fun                   Collaborative      -                               -                                    0
+ 59       59 AdobeConnect               TCP                 Acceptable            Video              -                               -                                    0
+ 60       60 MongoDB                    TCP        X        Acceptable            Database           -                               27017                                0
+ 61       61 Pluralsight                TCP                 Fun                   Video              -                               -                                    0
+ 62       62 YandexCloud                TCP                 Safe                  Cloud              -                               -                                    0
+ 63       63 OCSP                       TCP                 Safe                  Network            -                               -                                    0
+ 64       64 VXLAN                      UDP        X        Acceptable            Network            4789                            -                                    0
+ 65       65 IRC                        TCP        X        Unsafe                Chat               194                             194                                  0
+ 66       66 MerakiCloud                UDP        X        Acceptable            Network            -                               -                                    0
+ 67       67 Jabber                     TCP        X        Acceptable            Web                -                               -                                    0
+ 68       68 Nats                       TCP        X        Acceptable            RPC                -                               -                                    0
+ 69       69 AmongUs                    UDP                 Fun                   Game               22023                           -                                    0
+ 70       70 Yahoo                      TCP                 Safe                  Web                -                               -                                    0
+ 71       71 DisneyPlus                 TCP                 Fun                   Streaming          -                               -                                    0
+ 72       72 HART-IP                    TCP/UDP    X        Acceptable            IoT-Scada          -                               5094                                 0
+ 73       73 VRRP                                  X        Acceptable            Network            -                               -                                    0
+ 74       74 Steam                      UDP                 Fun                   Game               -                               -                                    0
+ 75       75 MELSEC                     TCP/UDP             Acceptable            IoT-Scada          -                               -                                    0
+ 76       76 WorldOfWarcraft            TCP                 Fun                   Game               -                               -                                    0
+ 77       77 Telnet                     TCP        X        Unsafe                RemoteAccess       -                               23                                   0
+ 78       78 STUN                       TCP/UDP    X        Acceptable            Network            3478                            3478                                 0
+ 79       79 IPSec                      UDP        X        Safe                  VPN                500,4500                        500                                  0
+ 80       80 GRE                                   X        Acceptable            Network            -                               -                                    0
+ 81       81 ICMP                                  X        Acceptable            Network            -                               -                                    0
+ 82       82 IGMP                                  X        Acceptable            Network            -                               -                                    0
+ 83       83 EGP                                   X        Acceptable            Network            -                               -                                    0
+ 84       84 SCTP                                  X        Acceptable            Network            -                               -                                    0
+ 85       85 IP_OSPF                               X        Acceptable            Network            -                               -                                    0
+ 86       86 IP_in_IP                              X        Acceptable            Network            -                               -                                    0
+ 87       87 RTP                        TCP/UDP             Acceptable            Media              -                               -                                    0
+ 88       88 RDP                        TCP/UDP             Acceptable            RemoteAccess       3389                            3389                                 0
+ 89       89 VNC                        TCP        X        Acceptable            RemoteAccess       -                               5900,5901,5800                       0
+ 90       90 Tumblr                     TCP                 Fun                   SocialNetwork      -                               -                                    0
+ 91       91 TLS                        TCP/UDP    X        Safe                  Web                -                               443                                  0
+ 92       92 SSH                        TCP        X        Acceptable            RemoteAccess       -                               22                                   0
+ 93       93 Usenet                     TCP        X        Acceptable            Web                -                               -                                    0
+ 94       94 MGCP                       UDP        X        Acceptable            VoIP               -                               -                                    0
+ 95       95 IAX                        UDP        X        Acceptable            VoIP               4569                            4569                                 0
+ 96       96 TFTP                       UDP        X        Acceptable            DataTransfer       69                              -                                    0
+ 97       97 AFP                        TCP        X        Acceptable            DataTransfer       548                             548                                  0
+ 98       98 YandexMetrika              TCP                 Safe                  Web                -                               -                                    0
+ 99       99 YandexDirect               TCP                 Tracker_Ads           Advertisement      -                               -                                    0
+100      100 SIP                        TCP/UDP    X        Acceptable            VoIP               5060-5061                       5060-5061                            0
+101      101 TruPhone                   TCP                 Acceptable            VoIP               -                               -                                    0
+102      102 ICMPV6                                X        Acceptable            Network            -                               -                                    0
+103      103 DHCPV6                     UDP        X        Acceptable            Network            -                               -                                    0
+104      104 Armagetron                 UDP        X        Fun                   Game               -                               -                                    0
+105      105 Crossfire                  TCP/UDP             Fun                   RPC                -                               -                                    0
+106      106 Dofus                      TCP                 Fun                   Game               -                               -                                    0
+107      107 Blacknut                   TCP                 Fun                   Game               -                               -                                    0
+108      108 Boosteroid                 TCP                 Fun                   Game               -                               -                                    0
+109      109 GuildWars2                 TCP        X        Fun                   Game               -                               6112                                 0
+110      110 AmazonAlexa                TCP                 Acceptable            VirtAssistant      -                               -                                    0
+111      111 Kerberos                   TCP/UDP    X        Acceptable            Network            88                              88                                   0
+112      112 LDAP                       TCP/UDP    X        Acceptable            System             389                             389                                  0
+113      113 Nexon                      TCP                 Fun                   Game               -                               -                                    0
+114      114 MsSQL-TDS                  TCP        X        Acceptable            Database           -                               1433,1434                            0
+115      115 PPTP                       TCP        X        Acceptable            VPN                -                               -                                    0
+116      116 AH                                    X        Safe                  VPN                -                               -                                    0
+117      117 ESP                                   X        Safe                  VPN                -                               -                                    0
+118      118 Slack                      TCP                 Acceptable            Collaborative      -                               -                                    0
+119      119 Facebook                   TCP                 Fun                   SocialNetwork      -                               -                                    0
+120      120 Twitter                    TCP                 Fun                   SocialNetwork      -                               -                                    0
+121      121 Dropbox                    UDP                 Acceptable            Cloud              17500                           -                                    0
+122      122 GMail                      TCP                 Acceptable            Email              -                               -                                    0
+123      123 GoogleMaps                 TCP                 Safe                  Web                -                               -                                    0
+124      124 YouTube                    TCP                 Fun                   Media              -                               -                                    0
+125      125 Mozilla                    TCP                 Acceptable            Web                -                               -                                    0
+126      126 Google                     TCP                 Acceptable            Web                -                               -                                    0
+127      127 MS-RPCH                    TCP        X        Acceptable            RPC                -                               -                                    0
+128      128 NetFlow                    UDP        X        Acceptable            Network            2055                            -                                    0
+129      129 sFlow                      UDP        X        Acceptable            Network            6343                            -                                    0
+130      130 HTTP_Connect               TCP        X        Acceptable            Web                -                               8080                                 0
+131      131 HTTP_Proxy                 TCP        X        Acceptable            Web                -                               8080,3128                            0
+132      132 Citrix                     TCP                 Acceptable            Network            -                               1494,2598                            0
+133      133 NetFlix                    TCP                 Fun                   Video              -                               -                                    0
+134      134 LastFM                     TCP                 Fun                   Music              -                               -                                    0
+135      135 Waze                       TCP                 Acceptable            Web                -                               -                                    0
+136      136 YouTubeUpload              TCP                 Fun                   Media              -                               -                                    0
+137      137 Hulu                       TCP                 Fun                   Streaming          -                               -                                    0
+138      138 CHECKMK                    TCP        X        Acceptable            DataTransfer       -                               6556                                 0
+139      139 AJP                        TCP        X        Acceptable            Web                -                               8009,8010                            0
+140      140 Apple                      TCP                 Safe                  Web                -                               -                                    0
+141      141 Webex                      TCP                 Acceptable            VoIP               -                               -                                    0
+142      142 WhatsApp                   TCP                 Acceptable            Chat               -                               -                                    0
+143      143 AppleiCloud                TCP                 Acceptable            Web                -                               -                                    0
+144      144 Viber                      TCP/UDP             Fun                   Chat               7985,7987,5242,5243,4244        7985,5242,5243,4244                  0
+145      145 AppleiTunes                TCP                 Fun                   Streaming          -                               -                                    0
+146      146 Radius                     UDP        X        Acceptable            Network            1812,1813                       1812,1813                            0
+147      147 WindowsUpdate              TCP                 Safe                  SoftwareUpdate     -                               -                                    0
+148      148 TeamViewer                 TCP/UDP             Acceptable            RemoteAccess       5938                            5938                                 0
+149      149 EthernetGlobalData         UDP        X        Acceptable            IoT-Scada          -                               -                                    0
+150      150 HCL_Notes                  TCP        X        Acceptable            Collaborative      -                               1352                                 0
+151      151 SAP                        TCP        X        Acceptable            Network            -                               3201                                 0
+152      152 GTP                        UDP        X        Acceptable            Network            2152,2123                       -                                    0
+153      153 WSD                        UDP        X        Acceptable            Network            3702                            -                                    0
+154      154 LLMNR                      TCP        X        Acceptable            Network            5355                            5355                                 0
+155      155 TocaBoca                   UDP        X        Fun                   Game               5055                            -                                    0
+156      156 Spotify                    TCP/UDP             Fun                   Music              -                               -                                    0
+157      157 FacebookMessenger          TCP                 Acceptable            Chat               -                               -                                    0
+158      158 H323                       TCP/UDP    X        Acceptable            VoIP               1719,1720                       1719,1720                            0
+159      159 OpenVPN                    TCP/UDP             Acceptable            VPN                1194                            1194                                 0
+160      160 NOE                        UDP        X        Acceptable            VoIP               -                               -                                    0
+161      161 CiscoVPN                   UDP        X        Acceptable            VPN                10000                           10000,8008                           0
+162      162 TeamSpeak                  TCP/UDP    X        Fun                   VoIP               -                               -                                    0
+163      163 Tor                        TCP                 Potentially_Dangerous VPN                -                               -                                    0
+164      164 CiscoSkinny                TCP        X        Acceptable            VoIP               -                               2000                                 0
+165      165 RTCP                       TCP/UDP    X        Acceptable            VoIP               -                               -                                    0
+166      166 RSYNC                      TCP        X        Acceptable            DataTransfer       -                               873                                  0
+167      167 Oracle                     TCP        X        Acceptable            Database           -                               1521                                 0
+168      168 Corba                      TCP/UDP    X        Acceptable            RPC                -                               -                                    0
+169      169 Canonical                  TCP                 Acceptable            Cloud              -                               -                                    0
+170      170 Whois-DAS                  TCP        X        Acceptable            Network            -                               43,4343                              0
+171      171 SD-RTN                     UDP        X        Acceptable            Media              -                               -                                    0
+172      172 SOCKS                      TCP        X        Acceptable            Web                1080                            1080                                 0
+173      173 Nintendo                   UDP                 Fun                   Game               -                               -                                    0
+174      174 RTMP                       TCP        X        Acceptable            Media              -                               1935                                 0
+175      175 FTP_DATA                   TCP        X        Acceptable            Download           -                               20                                   0
+176      176 Wikipedia                  TCP                 Safe                  Web                -                               -                                    0
+177      177 ZeroMQ                     TCP        X        Acceptable            RPC                -                               -                                    0
+178      178 Amazon                     TCP                 Acceptable            Web                -                               -                                    0
+179      179 eBay                       TCP                 Safe                  Shopping           -                               -                                    0
+180      180 CNN                        TCP                 Safe                  Web                -                               -                                    0
+181      181 Megaco                     UDP        X        Acceptable            VoIP               2944                            -                                    0
+182      182 RESP                       TCP        X        Acceptable            Database           -                               6379                                 0
+183      183 Pinterest                  TCP                 Fun                   SocialNetwork      -                               -                                    0
+184      184 OSPF                       TCP        X        Safe                  Network            -                               2604                                 0
+185      185 Telegram                   TCP/UDP             Acceptable            Chat               -                               -                                    0
+186      186 CoD_Mobile                 UDP                 Fun                   Game               -                               -                                    0
+187      187 Pandora                    TCP                 Fun                   Streaming          -                               -                                    0
+188      188 QUIC                       UDP        X        Acceptable            Web                443                             -                                    0
+189      189 Zoom                       UDP                 Acceptable            Video              -                               -                                    0
+190      190 EAQ                        UDP        X        Acceptable            Network            6000                            -                                    0
+191      191 Ookla                      TCP/UDP             Safe                  Network            -                               -                                    0
+192      192 AMQP                       TCP        X        Acceptable            RPC                -                               -                                    0
+193      193 KakaoTalk                  TCP                 Acceptable            Chat               -                               -                                    0
+194      194 KakaoTalk_Voice            UDP        X        Acceptable            VoIP               -                               -                                    0
+195      195 Twitch                     TCP                 Fun                   Video              -                               -                                    0
+196      196 DoH_DoT                    TCP                 Acceptable            Network            784,853                         853                                  0
+197      197 WeChat                     TCP                 Fun                   Chat               -                               -                                    0
+198      198 MPEG_TS                    UDP        X        Fun                   Media              -                               -                                    0
+199      199 Snapchat                   TCP                 Fun                   SocialNetwork      -                               -                                    0
+200      200 Sina                       TCP                 Fun                   SocialNetwork      -                               -                                    0
+201      201 GoogleMeet                 TCP                 Acceptable            Chat               -                               -                                    0
+202      202 IFLIX                      TCP                 Fun                   Video              -                               -                                    0
+203      203 Github                     TCP                 Acceptable            Collaborative      -                               -                                    0
+204      204 BJNP                       UDP        X        Acceptable            System             8612                            -                                    0
+205      205 Reddit                     TCP                 Fun                   SocialNetwork      -                               -                                    0
+206      206 WireGuard                  UDP        X        Acceptable            VPN                51820                           -                                    0
+207      207 SMPP                       TCP        X        Acceptable            Download           -                               -                                    0
+208      208 DNScrypt                   TCP/UDP             Acceptable            Network            -                               -                                    0
+209      209 TINC                       TCP/UDP    X        Acceptable            VPN                655                             655                                  0
+210      210 Deezer                     TCP                 Fun                   Music              -                               -                                    0
+211      211 Instagram                  TCP                 Fun                   SocialNetwork      -                               -                                    0
+212      212 Microsoft                  TCP                 Safe                  Cloud              -                               -                                    0
+213      213 Blizzard                   TCP/UDP             Fun                   Game               1119                            1119                                 0
+214      214 Teredo                     UDP        X        Acceptable            Network            -                               -                                    0
+215      215 HotspotShield              TCP                 Potentially_Dangerous VPN                -                               -                                    0
+216      216 IMO                        UDP        X        Acceptable            VoIP               -                               -                                    0
+217      217 GoogleDrive                TCP                 Acceptable            Cloud              -                               -                                    0
+218      218 OCS                        TCP                 Fun                   Media              -                               -                                    0
+219      219 Microsoft365               TCP                 Acceptable            Collaborative      -                               -                                    0
+220      220 Cloudflare                 TCP                 Acceptable            Web                -                               -                                    0
+221      221 MS_OneDrive                TCP                 Acceptable            Collaborative      -                               -                                    0
+222      222 MQTT                       TCP        X        Acceptable            RPC                -                               1883,8883                            0
+223      223 RX                         UDP        X        Acceptable            RPC                -                               -                                    0
+224      224 AppleStore                 TCP                 Safe                  SoftwareUpdate     -                               -                                    0
+225      225 OpenDNS                    TCP                 Acceptable            Web                -                               -                                    0
+226      226 Git                        TCP        X        Safe                  Collaborative      -                               9418                                 0
+227      227 DRDA                       TCP        X        Acceptable            Database           -                               -                                    0
+228      228 PlayStore                  TCP                 Safe                  SoftwareUpdate     -                               -                                    0
+229      229 SOMEIP                     TCP/UDP    X        Acceptable            RPC                30491,30501,30490               30491,30501                          0
+230      230 FIX                        TCP        X        Safe                  RPC                -                               -                                    0
+231      231 Playstation                TCP                 Fun                   Game               -                               -                                    0
+232      232 Pastebin                   TCP                 Potentially_Dangerous Download           -                               -                                    0
+233      233 LinkedIn                   TCP                 Fun                   SocialNetwork      -                               -                                    0
+234      234 SoundCloud                 TCP                 Fun                   Music              -                               -                                    0
+235      235 SteamDatagramRelay         UDP        X        Fun                   Game               -                               -                                    0
+236      236 LISP                       TCP/UDP    X        Acceptable            Cloud              4342,4341                       -                                    0
+237      237 Diameter                   TCP        X        Acceptable            Network            -                               3868                                 0
+238      238 ApplePush                  TCP                 Acceptable            Cloud              -                               -                                    0
+239      239 GoogleServices             TCP                 Acceptable            Web                -                               -                                    0
+240      240 AmazonVideo                TCP/UDP             Fun                   Cloud              -                               -                                    0
+241      241 GoogleDocs                 TCP                 Acceptable            Collaborative      -                               -                                    0
+242      242 WhatsAppFiles              TCP                 Acceptable            Download           -                               -                                    0
+243      243 TargusDataspeed            TCP        X        Acceptable            Network            5001,5201                       5001,5201                            0
+244      244 DNP3                       TCP        X        Acceptable            IoT-Scada          -                               20000                                0
+245      245 IEC60870                   TCP        X        Acceptable            IoT-Scada          -                               2404                                 0
+246      246 Bloomberg                  TCP                 Acceptable            Network            -                               -                                    0
+247      247 CAPWAP                     UDP        X        Acceptable            Network            5246,5247                       -                                    0
+248      248 Zabbix                     TCP        X        Acceptable            Network            -                               10050,10051                          0
+249      249 S7Comm                     TCP        X        Acceptable            IoT-Scada          -                               -                                    0
+250      250 Teams                      TCP                 Safe                  Collaborative      -                               -                                    0
+251      251 WebSocket                  TCP                 Acceptable            Web                -                               -                                    0
+252      252 AnyDesk                    TCP                 Acceptable            RemoteAccess       -                               -                                    0
+253      253 SOAP                       TCP                 Acceptable            RPC                -                               -                                    0
+254      254 AppleSiri                  TCP                 Acceptable            VirtAssistant      -                               -                                    0
+255      255 SnapchatCall               TCP                 Acceptable            VoIP               -                               -                                    0
+256      256 HP_VIRTGRP                 TCP        X        Acceptable            Network            -                               -                                    0
+257      257 GenshinImpact              TCP/UDP    X        Fun                   Game               22102                           -                                    0
+258      258 Activision                 UDP                 Fun                   Game               -                               -                                    0
+259      259 FortiClient                TCP                 Safe                  VPN                -                               8013,8014                            0
+260      260 Z3950                      TCP        X        Acceptable            Network            -                               210                                  0
+261      261 Likee                      TCP                 Fun                   SocialNetwork      -                               -                                    0
+262      262 GitLab                     TCP                 Fun                   Collaborative      -                               -                                    0
+263      263 AVASTSecureDNS             UDP                 Safe                  Network            -                               -                                    0
+264      264 Cassandra                  TCP        X        Acceptable            Database           -                               7000,9042                            0
+265      265 AmazonAWS                  TCP                 Acceptable            Cloud              -                               -                                    0
+266      266 Salesforce                 TCP                 Safe                  Cloud              -                               -                                    0
+267      267 Vimeo                      TCP                 Fun                   Streaming          -                               -                                    0
+268      268 FacebookVoip               TCP                 Acceptable            VoIP               -                               -                                    0
+269      269 SignalVoip                 TCP                 Acceptable            VoIP               -                               -                                    0
+270      270 Fuze                       TCP                 Acceptable            VoIP               -                               -                                    0
+271      271 GTP_U                      TCP                 Acceptable            Network            -                               -                                    0
+272      272 GTP_C                      TCP                 Acceptable            Network            -                               -                                    0
+273      273 GTP_PRIME                  TCP                 Acceptable            Network            -                               -                                    0
+274      274 Alibaba                    TCP                 Acceptable            Web                -                               -                                    0
+275      275 Crashlytics                TCP                 Acceptable            DataTransfer       -                               -                                    0
+276      276 Azure                      TCP                 Acceptable            Cloud              -                               -                                    0
+277      277 iCloudPrivateRelay         TCP                 Acceptable            VPN                -                               -                                    0
+278      278 EthernetIP                 TCP        X        Acceptable            Network            -                               44818                                0
+279      279 Badoo                      TCP                 Fun                   SocialNetwork      -                               -                                    0
+280      280 AccuWeather                TCP                 Fun                   Web                -                               -                                    0
+281      281 GoogleClassroom            TCP                 Acceptable            Collaborative      -                               -                                    0
+282      282 HSRP                       UDP        X        Acceptable            Network            1985                            -                                    0
+283      283 Cybersec                   TCP                 Safe                  Cybersecurity      -                               -                                    0
+284      284 GoogleCloud                TCP                 Acceptable            Cloud              -                               -                                    0
+285      285 Tencent                    TCP                 Fun                   SocialNetwork      -                               -                                    0
+286      286 RakNet                     UDP        X        Fun                   Game               -                               -                                    0
+287      287 Xiaomi                     TCP                 Acceptable            Web                -                               -                                    0
+288      288 Edgecast                   TCP                 Acceptable            Cloud              -                               -                                    0
+289      289 Cachefly                   TCP                 Acceptable            Cloud              -                               -                                    0
+290      290 Softether                  UDP                 Acceptable            VPN                -                               -                                    0
+291      291 MpegDash                   TCP                 Fun                   Media              -                               -                                    0
+292      292 Dazn                       TCP                 Fun                   Streaming          -                               -                                    0
+293      293 GoTo                       TCP                 Acceptable            VoIP               -                               -                                    0
+294      294 RSH                        TCP        X        Unsafe                RemoteAccess       -                               -                                    0
+295      295 1kxun                      TCP                 Fun                   Streaming          -                               -                                    0
+296      296 PGM                                   X        Acceptable            Network            -                               -                                    0
+297      297 IP_PIM                                X        Acceptable            Network            -                               -                                    0
+298      298 collectd                   UDP        X        Acceptable            System             25826                           -                                    0
+299      299 TunnelBear                 TCP                 Acceptable            VPN                -                               -                                    0
+300      300 CloudflareWarp             UDP                 Acceptable            VPN                -                               -                                    0
+301      301 i3D                        UDP        X        Fun                   Game               -                               -                                    0
+302      302 RiotGames                  UDP                 Fun                   Game               -                               -                                    0
+303      303 Psiphon                    TCP                 Acceptable            VPN                -                               -                                    0
+304      304 UltraSurf                  TCP                 Acceptable            VPN                -                               -                                    0
+305      305 Threema                    TCP        X        Fun                   Chat               -                               -                                    0
+306      306 AliCloud                   TCP        X        Acceptable            Cloud              -                               -                                    0
+307      307 AVAST                      TCP        X        Safe                  Network            -                               -                                    0
+308      308 TiVoConnect                TCP/UDP    X        Fun                   Network            2190                            2190                                 0
+309      309 Kismet                     TCP        X        Acceptable            Network            -                               -                                    0
+310      310 FastCGI                    TCP        X        Safe                  Network            -                               -                                    0
+311      311 FTPS                       TCP        X        Unsafe                Download           -                               -                                    0
+312      312 NAT-PMP                    UDP        X        Acceptable            Network            5351                            -                                    0
+313      313 Syncthing                  UDP        X        Fun                   Download           -                               -                                    0
+314      314 CryNetwork                 UDP        X        Fun                   Game               -                               -                                    0
+315      315 Line                       TCP                 Acceptable            Chat               -                               -                                    0
+316      316 LineCall                   UDP        X        Acceptable            VoIP               -                               -                                    0
+317      317 AppleTVPlus                TCP                 Fun                   Streaming          -                               -                                    0
+318      318 DirecTV                    TCP                 Fun                   Streaming          -                               -                                    0
+319      319 HBO                        TCP                 Fun                   Streaming          -                               -                                    0
+320      320 Vudu                       TCP                 Fun                   Streaming          -                               -                                    0
+321      321 Showtime                   TCP                 Fun                   Streaming          -                               -                                    0
+322      322 Dailymotion                TCP                 Fun                   Streaming          -                               -                                    0
+323      323 Livestream                 TCP                 Fun                   Streaming          -                               -                                    0
+324      324 Tencentvideo               TCP                 Fun                   Streaming          -                               -                                    0
+325      325 IHeartRadio                TCP                 Fun                   Music              -                               -                                    0
+326      326 Tidal                      TCP                 Fun                   Music              -                               -                                    0
+327      327 TuneIn                     TCP                 Fun                   Music              -                               -                                    0
+328      328 SiriusXMRadio              TCP                 Fun                   Music              -                               -                                    0
+329      329 Munin                      TCP        X        Acceptable            System             -                               4949                                 0
+330      330 Elasticsearch              TCP        X        Acceptable            System             -                               -                                    0
+331      331 TuyaLP                     UDP        X        Acceptable            IoT-Scada          6667                            -                                    0
+332      332 TPLINK_SHP                 TCP/UDP    X        Acceptable            IoT-Scada          9999                            9999                                 0
+333      333 Source_Engine              UDP        X        Fun                   Game               27015                           -                                    0
+334      334 BACnet                     UDP        X        Safe                  IoT-Scada          47808                           -                                    0
+335      335 OICQ                       UDP        X        Acceptable            Chat               8000                            -                                    0
+336      336 Heroes_of_the_Storm        UDP        X        Fun                   Game               -                               -                                    0
+337      337 FbookReelStory             TCP                 Fun                   SocialNetwork      -                               -                                    0
+338      338 SRTP                       TCP                 Acceptable            Media              -                               -                                    0
+339      339 OperaVPN                   TCP                 Acceptable            VPN                -                               -                                    0
+340      340 EpicGames                  UDP                 Fun                   Game               -                               -                                    0
+341      341 GeForceNow                 TCP                 Fun                   Game               -                               -                                    0
+342      342 Nvidia                     TCP                 Safe                  Web                -                               -                                    0
+343      343 BITCOIN                    TCP        X        Acceptable            Crypto_Currency    -                               8333                                 0
+344      344 ProtonVPN                  TCP                 Acceptable            VPN                -                               -                                    0
+345      345 Thrift                     TCP/UDP    X        Acceptable            RPC                -                               -                                    0
+346      346 Roblox                     TCP                 Fun                   Game               -                               -                                    0
+347      347 Service_Location_Protocol  TCP/UDP    X        Acceptable            RPC                427                             427                                  0
+348      348 Mullvad                    TCP                 Acceptable            VPN                -                               -                                    0
+349      349 HTTP2                      TCP        X        Safe                  Web                -                               -                                    0
+350      350 HAProxy                    TCP        X        Safe                  Web                -                               -                                    0
+351      351 RMCP                       UDP        X        Safe                  System             623                             -                                    0
+352      352 Controller_Area_Network    TCP/UDP    X        Safe                  System             -                               -                                    0
+353      353 Protobuf                   TCP/UDP    X        Safe                  Network            -                               -                                    0
+354      354 ETHEREUM                   TCP/UDP    X        Acceptable            Crypto_Currency    -                               30303                                0
+355      355 TelegramVoip               TCP                 Acceptable            VoIP               -                               -                                    0
+356      356 SinaWeibo                  TCP                 Fun                   SocialNetwork      -                               -                                    0
+357      357 TeslaServices              TCP                 Acceptable            Network            -                               -                                    0
+358      358 PTPv2                      UDP        X        Acceptable            System             319,320                         -                                    0
+359      359 RTPS                       UDP        X        Acceptable            RPC                7401                            -                                    0
+360      360 OPC-UA                     TCP        X        Acceptable            IoT-Scada          -                               4840                                 0
+361      361 S7CommPlus                 TCP        X        Acceptable            IoT-Scada          -                               -                                    0
+362      362 FINS                       TCP/UDP    X        Acceptable            IoT-Scada          9600                            9600                                 0
+363      363 EtherSIO                   UDP        X        Acceptable            IoT-Scada          6060                            -                                    0
+364      364 UMAS                       TCP                 Acceptable            IoT-Scada          -                               -                                    0
+365      365 BeckhoffADS                TCP        X        Acceptable            IoT-Scada          -                               48898                                0
+366      366 ISO9506-1-MMS              TCP        X        Acceptable            IoT-Scada          -                               -                                    0
+367      367 IEEE-C37118                TCP/UDP    X        Acceptable            IoT-Scada          4713                            4712                                 0
+368      368 Ether-S-Bus                UDP        X        Acceptable            IoT-Scada          5050                            -                                    0
+369      369 Monero                     TCP                 Acceptable            Crypto_Currency    -                               -                                    0
+370      370 DCERPC                     TCP/UDP    X        Acceptable            RPC                135                             135                                  0
+371      371 PROFINET_IO                UDP                 Acceptable            IoT-Scada          -                               -                                    0
+372      372 HiSLIP                     TCP        X        Acceptable            IoT-Scada          -                               4880                                 0
+373      373 UFTP                       UDP        X        Acceptable            Download           1044                            -                                    0
+374      374 OpenFlow                   TCP        X        Acceptable            Network            -                               6653                                 0
+375      375 JSON-RPC                   TCP                 Acceptable            RPC                -                               -                                    0
+376      376 WebDAV                     TCP                 Acceptable            Collaborative      -                               -                                    0
+377      377 Kafka                      TCP        X        Acceptable            RPC                -                               9092                                 0
+378      378 NoMachine                  TCP/UDP    X        Acceptable            RemoteAccess       4000                            4000                                 0
+379      379 IEC62056                   TCP/UDP    X        Acceptable            IoT-Scada          4059                            4059                                 0
+380      380 HL7                        TCP        X        Acceptable            Health             -                               2575                                 0
+381      381 Ceph                       TCP        X        Acceptable            DataTransfer       -                               3300,6789                            0
+382      382 GoogleChat                 TCP                 Acceptable            Chat               -                               -                                    0
+383      383 Roughtime                  TCP/UDP    X        Acceptable            System             2002                            2002                                 0
+384      384 PrivateInternetAccess      TCP                 Acceptable            VPN                -                               -                                    0
+385      385 KCP                        TCP/UDP    X        Acceptable            Network            -                               -                                    0
+386      386 Dota2                      TCP                 Fun                   Game               -                               -                                    0
+387      387 Mumble                     UDP                 Fun                   VoIP               -                               -                                    0
+388      388 Yojimbo                    UDP        X        Fun                   Game               -                               -                                    0
+389      389 ElectronicArts             TCP                 Fun                   Game               -                               -                                    0
+390      390 STOMP                      TCP        X        Acceptable            RPC                -                               61613                                0
+391      391 Radmin                     TCP        X        Acceptable            RemoteAccess       -                               4899                                 0
+392      392 Raft                       TCP        X        Acceptable            Network            -                               -                                    0
+393      393 CIP                        UDP        X        Acceptable            IoT-Scada          2222                            -                                    0
+394      394 Gearman                    TCP        X        Acceptable            RPC                -                               4730                                 0
+395      395 TencentGames               TCP        X        Fun                   Game               -                               -                                    0
+396      396 GaijinEntertainment        UDP                 Fun                   Game               20011                           -                                    0
+397      397 ANSI_C1222                 TCP/UDP    X        Acceptable            IoT-Scada          1153                            1153                                 0
+398      398 Huawei                     TCP                 Acceptable            Web                -                               -                                    0
+399      399 HuaweiCloud                TCP                 Acceptable            Cloud              -                               -                                    0
+400      400 DLEP                       TCP/UDP    X        Acceptable            Network            854                             854                                  0
+401      401 BFD                        UDP        X        Acceptable            Network            3784,3785                       -                                    0
+402      402 NetEaseGames               UDP                 Fun                   Game               -                               -                                    0
+403      403 PathofExile                TCP        X        Fun                   Game               -                               -                                    0
+404      404 GoogleCall                 TCP                 Acceptable            VoIP               -                               -                                    0
+405      405 PFCP                       UDP        X        Acceptable            Network            8805                            -                                    0
+406      406 FLUTE                      UDP        X        Acceptable            Download           -                               -                                    0
+407      407 LoLWildRift                UDP        X        Fun                   Game               -                               -                                    0
+408      408 TES_Online                 TCP        X        Fun                   Game               -                               -                                    0
+409      409 LDP                        TCP/UDP    X        Acceptable            Network            646                             646                                  0
+410      410 KNXnet_IP                  TCP/UDP    X        Acceptable            IoT-Scada          3671                            3671                                 0
+411      411 Bluesky                    TCP                 Fun                   SocialNetwork      -                               -                                    0
+412      412 Mastodon                   TCP                 Fun                   SocialNetwork      -                               -                                    0
+413      413 Threads                    TCP                 Fun                   SocialNetwork      -                               -                                    0
+414      414 ViberVoip                  TCP                 Acceptable            VoIP               -                               -                                    0
+415      415 ZUG                        UDP        X        Acceptable            Crypto_Currency    -                               -                                    0
+416      416 JRMI                       TCP        X        Acceptable            RPC                -                               1099                                 0
+417      417 RipeAtlas                  UDP        X        Acceptable            Network            -                               -                                    0
+418      418 HLS                        TCP                 Fun                   Media              -                               -                                    0
+419      419 ClickHouse                 TCP        X        Acceptable            Database           -                               -                                    0
+420      420 Nano                       TCP        X        Acceptable            Crypto_Currency    -                               7075                                 0
+421      421 OpenWire                   TCP        X        Acceptable            RPC                -                               61616                                0
+422      422 CNP-IP                     UDP        X        Acceptable            IoT-Scada          -                               -                                    0
+423      423 ATG                        TCP        X        Acceptable            IoT-Scada          -                               -                                    0
+424      424 TRDP                       TCP/UDP    X        Acceptable            IoT-Scada          17224,17225                     17225                                0
+425      425 Lustre                     TCP        X        Acceptable            DataTransfer       -                               -                                    0
+426      426 NordVPN                    TCP                 Acceptable            VPN                -                               -                                    0
+427      427 SurfShark                  TCP                 Acceptable            VPN                -                               -                                    0
+428      428 CactusVPN                  TCP                 Acceptable            VPN                -                               -                                    0
+429      429 Windscribe                 TCP                 Acceptable            VPN                -                               -                                    0
+430      430 Sonos                      UDP                 Fun                   Music              -                               -                                    0
+431      431 DingTalk                   TCP                 Acceptable            Chat               -                               -                                    0
+432      432 Paltalk                    TCP                 Acceptable            Chat               -                               -                                    0
+433      433 Naver                      TCP                 Safe                  Web                -                               -                                    0
+434      434 Shein                      TCP                 Acceptable            Shopping           -                               -                                    0
+435      435 Temu                       TCP                 Acceptable            Shopping           -                               -                                    0
+436      436 Taobao                     TCP                 Acceptable            Shopping           -                               -                                    0
+437      437 Mikrotik                   UDP        X        Acceptable            Network            -                               -                                    0
+438      438 DICOM                      TCP        X        Acceptable            Health             -                               104                                  0
+439      439 ParamountPlus              TCP                 Fun                   Streaming          -                               -                                    0
+440      440 YandexAlice                TCP                 Acceptable            VirtAssistant      -                               -                                    0
+441      441 Vivox                      TCP                 Fun                   Game               -                               -                                    0
+442      442 DigitalOcean               TCP                 Safe                  Web                -                               -                                    0
+443      443 RUTUBE                     TCP                 Fun                   Media              -                               -                                    0
+444      444 LagoFast                   UDP                 Acceptable            VPN                -                               -                                    0
+445      445 GearUP_Booster             UDP                 Acceptable            VPN                -                               -                                    0
+446      446 Rumble                     TCP                 Fun                   Streaming          -                               -                                    0
+447      447 Ubiquity                   TCP                 Safe                  Network            -                               -                                    0
+448      448 MSDO                       TCP        X        Safe                  SoftwareUpdate     -                               7680                                 0
+449      449 RockstarGames              TCP                 Fun                   Game               -                               -                                    0
+450      450 Kick                       TCP                 Fun                   Video              -                               -                                    0
+451      451 Hamachi                    TCP/UDP             Acceptable            VPN                17771                           12975,32976                          0
+452      452 GLBP                       UDP        X        Acceptable            Network            3222                            -                                    0
+453      453 EasyWeather                UDP        X        Acceptable            Network            -                               -                                    0
+454      454 Mudfish                    TCP/UDP             Acceptable            VPN                -                               -                                    0
+455      455 TriStation                 UDP                 Acceptable            IoT-Scada          1501,1502                       -                                    0
+456      456 SamsungSDP                 UDP                 Acceptable            Network            15600                           -                                    0
+457      457 Matter                     UDP        X        Acceptable            IoT-Scada          5540,5542                       -                                    0
 
 
 Usage examples
