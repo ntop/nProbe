@@ -2,6 +2,70 @@
 
 -------------------------------------------------------------------------------
 
+#### nProbe 11.0 (November 2025)
+
+## Key Features
+
+ - TCP flags analysis
+ - Improve fragmented traffic support in tunnels including GTP
+ - Support for complex encapsulations (e.g. GRE+IP+GTP+IP)
+ - Enhance flow swapping logic (flows are now swapped by default with improved heuristics)
+
+## New Information Elements
+
+ - Add %TCP_STATS_SRC_TO_DST and %TCP_STATS_DST_TO_SRC for detailed TCP statistics export
+ - Add %NPROBE_SOURCE_ID IE for identifying nProbe instances
+ - Add %TCP_FINGERPRINT to @NTOPNG@ template
+ - Add %SRC_AS and %DST_AS in ntopng collector template
+ - Remove %BITTORRENT_HASH from @NTOPNG@ template
+
+## Command Line Options
+
+ - Add --disable-flow-swapping for disabling flow direction swapping
+ - Add --ndpi-protocols-dir for loading custom nDPI protocols from a directory
+ - Add --asn-mode (renamed from --ixp-mode for consistency)
+ - Add --zmq-fanout to send data to all exporters instead of sending in round-robin
+ - Remove --hw-timestamp-mode and IXIA timestamp support
+ - Extend -3 (collector mode) to support TZSP packet collection
+
+## Improvements
+
+ - Improved fragmented UDP handling with sarl fragment mode (-7)
+ - Add logic to recognize swapped ICMP echo flows
+ - Send ZMQ stats on shutdown for better monitoring
+ - Add check to avoid exporting flows whose reverse direction has not observed any packet
+ - Improve sampling support with better upscaling calculations
+ - Add hostnames in flow export
+ - Raise nProbe XL limit from 256 to 512 exporters
+ - Improve HTTPS support in HTTP plugin
+ - Various nDPI API updates and improvements for better protocol detection
+
+## Fixes
+
+ - Fix compilation failures due to nDPI API changes
+ - Fix pcap handling with --interpret-flow-packets
+ - Fix GRE dissection and encapsulation issues
+ - Fix bug that prevented swapped flows with unidirectional traffic from being exported
+ - Fix STUN detection
+ - Fix crash with custom nDPI protocols
+ - Fix invalid bitmap initialization
+ - Fix invalid export of unidirectional swapped flows
+ - Fix for avoiding all IN/OUT_XXXX IEs to be incorrectly considered bidirectional
+ - Fix nDPI initialization issues
+ - Various crash fixes and memory leak fixes
+
+## Misc
+
+ - Add Raspberry Pi (Debian 13) packaging support
+ - Add Rocky Linux 10 support
+ - Add Debian 13 support
+ - Windows compatibility fixes
+ - Catchpoint integration improvements
+ - Remove redis dependency on Rocky Linux 10
+ - Remove FLOW_VERDICT from agent template
+
+-------------------------------------------------------------------------------
+
 #### nProbe 10.8 (Apr 2025)
 
 ## Key Features
