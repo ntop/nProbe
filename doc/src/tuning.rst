@@ -22,10 +22,12 @@ Since nProbe 9.2 we have introduced a new command line option :code:`--collector
 
 When you need to collect flows at high speed with minimum CPU and memory requirements (this is the case whe collected flows are not stored into the cache but exported immediately), you should consider cache bypassing. In particular this is achieved with the --collector-passthrough option. Please refer to the "nProbe Case Study" section of this manual for further information about this topic.
 
+
 Expected Collection Performance
 ###############################
 
 nProbe has been enhacend with a new command line option :code:`--simulate-collection` that allows to simulate infinite flow ingress to measure the top collection speed. The current performance numbers have been reported on this `blog post <https://www.ntop.org/nprobe/netflow-ipfix-at-scale-comparing-nprobe-clickhouse-vs-nprobe-ntopng/>`_ and can be as high as 300 Kfps (collection only) or 183 Kfps when speaking with ntopng via ZMQ.
+
 
 Collecting Flows from Many Routers
 ##################################
@@ -42,6 +44,7 @@ Handling Trillion Flows: Dumping Flows into ClickHouse
 
 nProbe Enterprise M/L can natively dump flows into the `ClickHouse <https://clickhouse.tech>`_ open source database. Due to the nature of ClickHouse, data import happens in batches using a syntax similar to MySQL dump, namely :code:`--clickhouse=<host[@port]>:<dbname>:<prefix>:<user>:<pw>` You can read more about this topic on this `blog post <https://www.ntop.org/nprobe/netflow-ipfix-at-scale-comparing-nprobe-clickhouse-vs-nprobe-ntopng/>`_ 
 
+
 Data Deduplication
 ##################
 
@@ -49,6 +52,7 @@ There are many reasons for which the information we collect cam be duplicated, i
 
 - When you have duplicated packets you can use the option :code:`--enable-ipv4-deduplication` to discard consecutive duplicated IPv4 packets. Note that retransmissions might be exchanged (if consecutive) for duplications
 - During collection you can use :code:`--flow-deduplication` to specify and interval (example --flow-deduplication 15) in seconds during which if a flow is seen two or more times, only the first flow is considered
+
 
 SNMP Interfaces Polling
 #######################
@@ -147,6 +151,7 @@ and maps it also inside the flow details page
 
    In the above example we have used ZMQ as communication protocol between nProbe and ntopng, but the same results can be obtained using Kakfa instead.
 
+   
 Collecting nTap Traffic
 #######################
 
@@ -160,7 +165,6 @@ Instead if you have nProbe Pro/Enterprise L, you need the nTap license in order 
 - [nProbe host] collector -p 1234 -k hello -i ntap0
 - [nProbe host] nProbe -i ntap0 ...
 - [remote host we want we want to monitor] tap -i eth0 -c 1.2.3.4:1234 -k hello
-
 
   
 InfluxDB-based Timeseries Dump
@@ -203,6 +207,7 @@ Counter samples are ignored by nProbe unless :code:`--influxdb-dump-dir <dir>` i
    sflow,deviceIP=192.168.2.1,ifIndex=9 ifInOctets=178297744,ifInPackets=2573381,ifInErrors=0,ifOutOctets=0,ifOutPackets=0,ifOutErrors=0 1656403332000000000
 
 that can be imported in InfluxDB and depicted with tools such as Grafana.
+
 
 Flow Relay
 ##########
@@ -255,5 +260,28 @@ Sometimes (e.g. when you migrate to nProbe but you need to keep running your leg
 Using it is pretty straightforward. Suppose you need to collect flows on port 2055 and send them to two collectors 192.168.0.1:1234 and 192.168.0.2:1234. All you need to do is to start the following command :code:`nfFanout -c 2055 -a 192.168.0.1:1234 -a 192.168.0.2:1234`.
 
 
+Dumping Collected Flows/Packets
+###############################
 
+When nProbe collects data (both sFlow/NetFlow/IPFIX and nTap), it immediately discards collected data after processing. However sometimes it is useful to dump such data. A typical use-case include:
 
+  - nProbe collects packets sent by ntap_remove
+  - nProbe collects flows exported by a switch/router
+
+Probe can dump collected data to a virtual network interface on top of which applications such as n2disk or tcpdump can be enabled. This can be enabled with :code:`--dump-collected-pkts <interface>` for dumping collected data onto the specified network interface. In case of nTap raw collectd packets are dumped "as is" to the interface, whereas collected flows are dumped with a dummy ethernet/IP/UDP header.
+
+You can dump packets onto an existing host ethernet interface (e.g. eth0), or you can create (on Linux) a dummy ethernet interface using:
+
+  - :code:`$ sudo ip link add rec0 type dummy`
+  - :code:`$ sudo ifconfig rec0 up`
+
+you can dump nTap collected packet with:
+
+  - [host a.b.c.d]  :code:`$ sudo nprobe --dump-collected-pkts rec0 -3 5678 --ntap hello`
+  - [host f.g.h.i]  :code:`$ sudo ntap_remote -i eno1 -c a.b.c.d:5678 -k hello`
+
+or dump collected flows on port 2055 using:
+    
+  - :code:`$ sudo nprobe --dump-collected-pkts rec0 -3 2055`
+
+Note that in case you use ntopng with n2disk (e.g. ntopng bundle) you can configure ntopng to enable n2disk on the selected interface as described on `the ntopng manual <https://www.ntop.org/guides/ntopng/using_with_other_tools/n2disk.html>`_.
