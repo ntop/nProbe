@@ -51,7 +51,7 @@ Data Deduplication
 There are many reasons for which the information we collect cam be duplicated, including routing, redundant paths, backup devices. nProbe provides you advanced features for data deduplication:
 
 - When you have duplicated packets you can use the option :code:`--enable-ipv4-deduplication` to discard consecutive duplicated IPv4 packets. Note that retransmissions might be exchanged (if consecutive) for duplications
-- During collection you can use :code:`--flow-deduplication` to specify and interval (example --flow-deduplication 15) in seconds during which if a flow is seen two or more times, only the first flow is considered
+- During collection you can use :code:`--flow-collection-deduplication` to instruct nProbe to discard collected flows with the same flow key (usually VLAN/protocol/IP src/IP dst/port src/port dst) observed bytwo exporters sending flows to the same nProbe. You can read more on the `ntopng user's guide <https://www.ntop.org/guides/ntopng/advanced_features/deduplication.html>`_ about flow deduplication in ntopng (you can combine deduplication on both sides).
 
 
 SNMP Interfaces Polling
