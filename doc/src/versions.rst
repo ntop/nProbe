@@ -1,5 +1,5 @@
-Models Comparison Table
------------------------
+Versions Comparison Table
+-------------------------
 
 The comparison table below shows feature and capacity of nProbe by version. 
 nProbe is extensible and includes several plugins which are also unlocked based on the license version. 
