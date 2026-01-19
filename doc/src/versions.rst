@@ -8,7 +8,7 @@ below to check the compatibility, or check the nProbe Plugins section to learn m
 what they provide.
 
 .. list-table:: Features by Model
-  :widths: 40 15 15 15 15
+  :widths: 40 20 20 20 20
   :header-rows: 1
 
   * - Feature
@@ -96,17 +96,17 @@ what they provide.
     - ✓
     - ✓
     - ✓
+  * - Flow Collection Deduplication
+    -
+    -
+    - ✓
+    - ✓
   * - Agent Mode
     -
     -
     - ✓
     - ✓
   * - Native nTap Support
-    -
-    -
-    - ✓
-    - ✓
-  * - Flow Collection Deduplication
     -
     -
     - ✓
