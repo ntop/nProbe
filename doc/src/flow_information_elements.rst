@@ -181,7 +181,7 @@ The --T flag enabled users to specify the format of NetFlow v9/IPFIX flows. The 
   [NFv9 57821][IPFIX 35632.349][Len 37] %IN_SRC_OSI_SAP            	OSI Source SAP (OSI Traffic Only)
   [NFv9 57822][IPFIX 35632.350][Len 37] %OUT_DST_OSI_SAP           	OSI Destination SAP (OSI Traffic Only)
   [NFv9 57863][IPFIX 35632.391][Len 4] %DURATION_IN               	Client to Server stream duration (msec)
-  [NFv9 57864][IPFIX 35632.392][Len 4] %DURATION_OUT              	Client to Server stream duration (msec)
+  [NFv9 57864][IPFIX 35632.392][Len 4] %DURATION_OUT              	Server to Client stream duration (msec)
   [NFv9 57887][IPFIX 35632.415][Len 2] %TCP_WIN_MIN_IN            	Min TCP Window (src->dst)
   [NFv9 57888][IPFIX 35632.416][Len 2] %TCP_WIN_MAX_IN            	Max TCP Window (src->dst)
   [NFv9 57889][IPFIX 35632.417][Len 2] %TCP_WIN_MSS_IN            	TCP Max Segment Size (src->dst)
@@ -194,7 +194,7 @@ The --T flag enabled users to specify the format of NetFlow v9/IPFIX flows. The 
   [NFv9 57915][IPFIX 35632.443][Len 16] %SRC_AS_MAP                	Organization name for SRC_AS
   [NFv9 57916][IPFIX 35632.444][Len 16] %DST_AS_MAP                	Organization name for DST_AS
   [NFv9 57944][IPFIX 35632.472][Len 8] %SRC_TO_DST_SECOND_BYTES   	Bytes/sec (src->dst) [pro only]
-  [NFv9 57945][IPFIX 35632.473][Len 8] %DST_TO_SRC_SECOND_BYTES   	Bytes/sec2 (dst->src) [pro only]
+  [NFv9 57945][IPFIX 35632.473][Len 8] %DST_TO_SRC_SECOND_BYTES   	Bytes/sec (dst->src) [pro only]
   [NFv9 57961][IPFIX 35632.489][Len 32 varlen] %JA3C_HASH              	JA3 client hash
   [NFv9 57962][IPFIX 35632.490][Len 32 varlen] %JA3S_HASH              	JA3 server hash
   [NFv9 57963][IPFIX 35632.491][Len 48 varlen] %SRC_HOST_NAME          	Symbolic src host name
