@@ -136,6 +136,11 @@ what they provide.
     - 8
     - 32
     - 256
+  * - BGP/BMP Support
+    -
+    -
+    - ✓
+    - ✓
 
 \* limited by available CPU/memory
 
