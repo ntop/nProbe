@@ -81,17 +81,7 @@ what they provide.
     -
     -
     - ✓
-  * - Modbus Plugin
-    - 
-    - 
-    - ✓
-    - ✓
-  * - Profinet Plugin
-    - 
-    - 
-    - ✓
-    - ✓
-  * - S7 Plugin
+  * - Modbus/Profinet/S7 Plugin
     - 
     - 
     - ✓
@@ -99,6 +89,16 @@ what they provide.
   * - Radius Plugin
     -
     -
+    - ✓
+    - ✓
+  * - SSDP Plugin
+    -
+    - ✓
+    - ✓
+    - ✓
+  * - Elastic/Kafka Plugin
+    -
+    - ✓
     - ✓
     - ✓
   * - IPv4 Packet Deduplication
