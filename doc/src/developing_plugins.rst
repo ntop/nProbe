@@ -1,6 +1,10 @@
 Developing nProbe Plugins
 #########################
 
+.. note::
+   
+    Plugin SDK is available on demand to selected users
+
 Each nProbe plugin is implemented as shared library to be loaded at runtime by nProbe. The probe comes with several plugins that can be used as example for this activity. Below we list the main concepts you need to know if you plan to develop nProbe plugins.
 
 Each plugin has to defined a plugin entry point as follows
@@ -16,7 +20,7 @@ Each plugin has to defined a plugin entry point as follows
        "author email",
        1 /* do NOT skip in collector mode */,
        0 /* always enabled */, 1, /* enabled */
-       PLUGIN_DONT_NEED_LICENSE,
+       PLUGIN_PRO_VERSION,
        myPlugin_init,
        NULL, /* Term */
        myPlugin_conf,
