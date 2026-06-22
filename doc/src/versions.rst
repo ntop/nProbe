@@ -82,8 +82,18 @@ what they provide.
     -
     - ✓
   * - Modbus Plugin
+    - 
+    - 
     - ✓
     - ✓
+  * - Profinet Plugin
+    - 
+    - 
+    - ✓
+    - ✓
+  * - S7 Plugin
+    - 
+    - 
     - ✓
     - ✓
   * - Radius Plugin
