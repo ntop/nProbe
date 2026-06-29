@@ -1,0 +1,26 @@
+#
+# Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+#
+# Notes
+# - STANDARD_EQUIVALENT
+#   If this field is equivalenet/alias of a standard field, put its name here
+#   or put NONE if there is no standard equivalent element
+#
+# Notes
+# - Len cannot exceed 8 bytes
+# - Use 0 for no PEN
+#
+#
+# Available formats
+# - dump_as_uint
+# - dump_as_ipv4_address
+# - dump_as_mac_address
+# - dump_as_hex
+# - dump_as_ascii
+#
+
+
+# Name	STANDARD_ALIAS	PEN	FieldId		Len	Format
+
+srhSegmentIPv6LocatorLength    	    NONE	2620	501	    4		dump_as_uint
+srhSegmentIPv6EndpointBehavior	    NONE	2620    502	    4		dump_as_uint
