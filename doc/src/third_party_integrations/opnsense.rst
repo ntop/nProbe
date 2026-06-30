@@ -106,21 +106,3 @@ flag in the *ntopng Enterprise* plugin configuration page. Please take a look at
 `ntopng plugin guide <https://www.ntop.org/guides/ntopng/third_party_integrations/opnsense.html>`_
 for further information.
 
-IPS Mode
---------
-
-nProbe *9.5.210422* and later features a new IPS mode which is described in :ref:`RunningInIPSMode`.
-It is possible to enable this mode from the same configuration page under
-*Services* > *nProbe* > *Settings* > *General* by enabling the *Enable IPS Mode* checkbox.
-
-In order to configure traffic policies, enter *advanced mode* by toggling the top-left button in
-the same page, and use the *IPS Configuration* box to add the configuration as shown in below picture.
-
-.. figure:: ../img/opnsense_nprobe_ips_conf.png
-  :align: center
-  :alt: IPS Mode Configuration
-
-  IPS Mode Configuration
-
-After that just *Save* and restart the nProbe service, no additional action is required.
-Please read the :ref:`RunningInIPSMode` section for learning more about the IPS configuration.
