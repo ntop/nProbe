@@ -2,6 +2,72 @@
 
 -------------------------------------------------------------------------------
 
+#### nProbe 11.2 (September 2026)
+
+## Key Features
+
+ - Add BGP/BMP (BGP Monitoring Protocol) support
+   - New `bgp_server` daemon parses BGP/BMP sessions (including ExaBGP feeds) and builds a Routing Information Base (RIB) with best-route selection, queryable via Redis
+ - Add Operational Technology (OT) protocol plugins, including a generic OT plugin and Profinet support
+ - Add %FLOW_ANNOTATION information element characterizing flows via packet-length/inter-arrival-time distribution bins, protocol data ratio and TLS block details
+ - Add flow collection deduplication (discards duplicate flows with the same key received from multiple exporters, including IPv6 exporters)
+ - Reworked IPv6 support across probe/exporter code and flow templates
+ - Add support for loading custom nDPI plugins
+
+## New Information Elements
+
+ - Add %BURSTINESS for computing flow burstiness over 1 second intervals
+ - Add %FLOW_ANNOTATION
+ - Add %SRC_BGP_INFO and %DST_BGP_INFO (split from %BGP_INFO) with BGP best-route attributes
+ - Add %ENCAP_IPV4_SRC_ADDR / %ENCAP_IPV4_DST_ADDR and %ENCAP_IPV6_SRC_ADDR / %ENCAP_IPV6_DST_ADDR
+ - Add %ENCAP_IN_BYTES and %ENCAP_OUT_BYTES
+ - Add %HR_SRC_TO_DST_BYTES and %HR_DST_TO_SRC_BYTES
+ - Add %TCP_STATS_SRC_TO_DST / %TCP_STATS_DST_TO_SRC to the default template
+
+## Command Line Options
+
+ - Add --bgp-server for enabling BGP/BMP-based route enrichment
+ - Add --flow-collection-deduplication for discarding duplicate flows received from multiple exporters
+ - Add --ndpi-plugins-dir for loading custom nDPI plugins (defaults to /usr/share/ndpi/plugins/ when present)
+ - Add --dont-use-ndpi-for-dns-plugin and --dont-use-ndpi-for-http-plugin for preventing nDPI from being used in those plugins
+ - Add --kafka-export-only-flows for exporting only flows (no options/stats) over Kafka
+ - Add -n for specifying ASNs to be notified
+ - Add --dump-collected-pkts implementation
+ - When --interpret-flow-packets is used, the source packet port is now set to the original port instead of a dummy value
+ - Remove --max-num-untunnels
+
+## Improvements
+
+ - Improved Kafka export: optional message headers, misc topic support, plugin logging over Kafka, fixes for Kafka without ZMQ
+ - Reimplemented GTPv1 header decoding and improved GTPC/GTPU correlation and EBI dissection
+ - Improved handling of fragmented and tunnelled traffic length calculation
+ - Improved nDPI settings with TLS block analysis
+ - The number of collection templates is no longer static, it now scales with the max number of routers from which flows are collected (up to 8 templates per router)
+
+## Fixes
+
+ - Fix invalid GTP unencapsulated IP and untunnelled ports/bytes calculation
+ - Fix retransmission count when the first packet is (SYN|ECE|CWR) and the second is (SYN)
+ - Fix destination port for ICMP flows: it now only carries ICMP type/code with v5, and is set to 0 with v9/IPFIX as required
+ - Fix invalid payload calculation that could lead to invalid flow record decoding, plus additional flow collection sanity checks
+ - Fix segfault with a misconfigured max hash size
+ - Fix crash with non-TCP flows
+ - Fix several IPv6 handling issues in probe, exporter and BGP endianness code
+ - Fix race condition in stats reporting
+ - Fix cache memory allocation issue
+ - Fix isGoodLicense() to also check the current folder (useful in jails), matching readLicense() behavior
+ - Various compilation fixes for FreeBSD, recent RHEL/Rocky 9 and Ubuntu 26
+
+## Misc
+
+ - Support for Ubuntu 26, Rocky Linux 10, Debian 13
+ - Windows and FreeBSD compatibility fixes
+ - Packaged the new bgp_server tool (with systemd services, ExaBGP configuration samples)
+ - Disabled Kafka support on FreeBSD (OPNsense lacks the librdkafka dependency)
+ - Removed IPS (netfilter) support, superseeded by nEdge Lite
+
+-------------------------------------------------------------------------------
+
 #### nProbe 11.0 (November 2025)
 
 ## Key Features
