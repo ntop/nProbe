@@ -1,0 +1,38 @@
+#
+# Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+#
+# Notes
+# - STANDARD_EQUIVALENT
+#   If this field is equivalenet/alias of a standard field, put its name here
+#   or put NONE if there is no standard equivalent element
+#
+# Notes
+# - Len cannot exceed 8 bytes
+# - Use 0 for no PEN
+#
+#
+# Available formats
+# - dump_as_uint
+# - dump_as_ipv4_address
+# - dump_as_mac_address
+# - dump_as_hex
+# - dump_as_ascii
+#
+
+#
+# https://www.arista.com/en/admin-guide-vc-7-0/sd-wan-7-0-configure-network-services#zvz_Configure_Netflow_Settings_2
+#
+
+# Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+linkUUID		NONE	45346	12240	16	dump_as_ascii
+RxDeltaCount		NONE	45346	12241	86	dump_as_uint
+TxDeltaCount		NONE	45346	12242	8	dump_as_uint
+TxDeltaCountRetran	NONE	45346	12244	8	dump_as_uint
+packetsLostDeltaTxCount	NONE	45346	12311	8	dump_as_uint
+txLossPercent		NONE	45346	12315	4	dump_as_uint
+jitterTxMs		NONE	45346	12290	8	dump_as_uint
+avgLatencyTxMs		NONE	45346	12292	4	dump_as_uint
+packetsLostDeltaRxCount	NONE	45346	12243	8	dump_as_uint
+rxLossPercent		NONE	45346	12316	4	dump_as_uint
+jitterRxMs		NONE	45346	12293	4	dump_as_uint
+avgLatencyRxMs		NONE	45346	12295	4	dump_as_uint
