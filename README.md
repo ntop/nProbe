@@ -14,7 +14,7 @@ Enjoy!
 
 ### Documentation
 
-If you want to learn more about nProbe please visit the [User's Guide](https://www.ntop.org/guides/nProbe/).
+If you want to learn more about nProbe please visit the [User's Guide](https://www.ntop.org/guides/nprobe/).
 
 ### Details
 For more information about nProbe, please visit [http://ntop.org](https://www.ntop.org/products/netflow/nprobe/).
