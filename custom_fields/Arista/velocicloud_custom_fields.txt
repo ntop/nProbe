@@ -24,15 +24,29 @@
 #
 
 # Name		STANDARD_ALIAS	PEN	FieldId		Len	Format
+destinationUUID		NONE	45346	12233	16	dump_as_hex
+vcPriority		NONE	45346	12234	1	dump_as_uint
+vcRouteType		NONE	45346	12235	1	dump_as_uint
+vcLinkPolicy		NONE	45346	12236	1	dump_as_uint
+vcTrafficType		NONE	45346	12237	1	dump_as_uint
+vcFlowPath		NONE	45346	12239	1	dump_as_uint
 linkUUID		NONE	45346	12240	16	dump_as_ascii
-RxDeltaCount		NONE	45346	12241	86	dump_as_uint
-TxDeltaCount		NONE	45346	12242	8	dump_as_uint
-TxDeltaCountRetran	NONE	45346	12244	8	dump_as_uint
-packetsLostDeltaTxCount	NONE	45346	12311	8	dump_as_uint
-txLossPercent		NONE	45346	12315	4	dump_as_uint
-jitterTxMs		NONE	45346	12290	8	dump_as_uint
-avgLatencyTxMs		NONE	45346	12292	4	dump_as_uint
+replicatedPacketsRX	NONE	45346	12241	86	dump_as_uint
+replicatedPacketsTX	NONE	45346	12242	8	dump_as_uint
 packetsLostDeltaRxCount	NONE	45346	12243	8	dump_as_uint
-rxLossPercent		NONE	45346	12316	4	dump_as_uint
+TxDeltaCountRetran	NONE	45346	12244	8	dump_as_uint
+jitterTxMs		NONE	45346	12290	4	dump_as_uint
+avgLatencyTxMs		NONE	45346	12292	4	dump_as_uint
 jitterRxMs		NONE	45346	12293	4	dump_as_uint
 avgLatencyRxMs		NONE	45346	12295	4	dump_as_uint
+packetsLostDeltaTxCount	NONE	45346	12311	8	dump_as_uint
+bizPolicyId		NONE	45346	12312	16	dump_as_ascii
+nextHopUUID		NONE	45346	12314	16	dump_as_ascii
+txLossPercent		NONE	45346	12315	4	dump_as_uint
+rxLossPercent		NONE	45346	12316	4	dump_as_uint
+tcpRttMs		NONE	45346	12317	2	dump_as_uint
+tcpRetransmits		NONE	45346	12318	4	dump_as_uint
+
+
+
+
