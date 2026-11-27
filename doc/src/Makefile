@@ -1,20 +1,17 @@
-# Minimal makefile for Sphinx documentation
-#
+# make dist  -> build the site into dist/ (same URLs as the Sphinx docs: /guides/nprobe/<page>.html)
+# make serve -> build dist/ if needed and serve it at http://localhost:$(PORT)/guides/nprobe/
+PORT ?= 4173
+.PHONY: dist serve clean
 
-# You can set these variables from the command line.
-SPHINXOPTS    =
-SPHINXBUILD   = sphinx-build
-SPHINXPROJ    = nProbe
-SOURCEDIR     = .
-BUILDDIR      = _build
+node_modules: package.json
+	npm install
+	@touch node_modules
 
-# Put it first so that "make" without argument is like "make help".
-help:
-	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+dist: node_modules
+	npm run build
 
-.PHONY: help Makefile
+serve: dist
+	npx vitepress preview . --host 0.0.0.0 --port $(PORT)
 
-# Catch-all target: route all unknown targets to Sphinx using the new
-# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
-%: Makefile
-	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+clean:
+	rm -rf dist .vitepress/cache

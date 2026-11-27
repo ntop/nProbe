@@ -1,0 +1,278 @@
+{
+ "sidebar": [
+  {
+   "text": "User's Guide",
+   "items": [
+    {
+     "text": "Introduction",
+     "link": "/introduction"
+    },
+    {
+     "text": "Versions Comparison Table",
+     "link": "/versions"
+    },
+    {
+     "text": "nProbe Modes",
+     "link": "/configurations"
+    },
+    {
+     "text": "What's New",
+     "link": "/whats_new"
+    },
+    {
+     "text": "How to Start nProbe",
+     "link": "/how_to_start"
+    },
+    {
+     "text": "Tuning nProbe Performance",
+     "link": "/tuning"
+    },
+    {
+     "text": "Using TLS In Flow Collection/Export",
+     "link": "/tls"
+    },
+    {
+     "text": "Command Line Options",
+     "link": "/cli_options"
+    },
+    {
+     "text": "Using nProbe with ntopng",
+     "link": "/using_with_ntopng"
+    },
+    {
+     "text": "Using Kafka with nProbe",
+     "link": "/kafka"
+    },
+    {
+     "text": "BGP/BMP Traffic Monitoring",
+     "link": "/bgp"
+    },
+    {
+     "text": "Agent Mode support in nProbe",
+     "link": "/agent_mode"
+    },
+    {
+     "text": "Third-Party Integrations",
+     "link": "/third_party_integrations/",
+     "items": [
+      {
+       "text": "OPNsense",
+       "link": "/third_party_integrations/opnsense"
+      },
+      {
+       "text": "pfsense",
+       "link": "/third_party_integrations/pfsense"
+      }
+     ],
+     "collapsed": true
+    },
+    {
+     "text": "Frequently Asked Questions",
+     "link": "/faq"
+    },
+    {
+     "text": "nProbe Case Study",
+     "link": "/case_study/",
+     "items": [
+      {
+       "text": "Understanding How Flow Collection Works",
+       "link": "/case_study/flow_collection"
+      },
+      {
+       "text": "Collecting Proprietary Flow Fields",
+       "link": "/case_study/collecting_proprietary_flow_fields"
+      },
+      {
+       "text": "Exporting to Apache Kafka",
+       "link": "/case_study/exporting_to_kafka"
+      },
+      {
+       "text": "Scripting nProbe Using Lua",
+       "link": "/case_study/scripting_using_lua"
+      }
+     ],
+     "collapsed": true
+    },
+    {
+     "text": "nProbe Plugins",
+     "link": "/plugins/",
+     "items": [
+      {
+       "text": "SIP Plugin",
+       "link": "/plugins/diameter"
+      },
+      {
+       "text": "DNS Plugin",
+       "link": "/plugins/dns"
+      },
+      {
+       "text": "DHCP Plugin",
+       "link": "/plugins/dhcp"
+      },
+      {
+       "text": "Export Plugin",
+       "link": "/plugins/export"
+      },
+      {
+       "text": "GTPv0 Plugin",
+       "link": "/plugins/gtpv0"
+      },
+      {
+       "text": "GTPv1 Plugin",
+       "link": "/plugins/gtpv1"
+      },
+      {
+       "text": "GTPv2 Plugin",
+       "link": "/plugins/gtpv2"
+      },
+      {
+       "text": "HTTP Plugin",
+       "link": "/plugins/http"
+      },
+      {
+       "text": "IMAP Plugin",
+       "link": "/plugins/imap"
+      },
+      {
+       "text": "POP3 Plugin",
+       "link": "/plugins/pop3"
+      },
+      {
+       "text": "Radius Plugin",
+       "link": "/plugins/radius"
+      },
+      {
+       "text": "RTP Plugin",
+       "link": "/plugins/rtp"
+      },
+      {
+       "text": "SIP Plugin",
+       "link": "/plugins/sip"
+      },
+      {
+       "text": "SMTP Plugin",
+       "link": "/plugins/smtp"
+      },
+      {
+       "text": "NetFlow-Lite Plugin",
+       "link": "/plugins/netflowlite"
+      },
+      {
+       "text": "Modbus Plugin",
+       "link": "/plugins/modbus"
+      },
+      {
+       "text": "Custom Plugin",
+       "link": "/plugins/custom"
+      }
+     ],
+     "collapsed": true
+    },
+    {
+     "text": "Developing nProbe Plugins",
+     "link": "/developing_plugins"
+    },
+    {
+     "text": "BPF Packet Filtering Expressions",
+     "link": "/bpf_expressions"
+    },
+    {
+     "text": "Flow Information Elements",
+     "link": "/flow_information_elements"
+    },
+    {
+     "text": "Hardware Sizing",
+     "link": "/hardware_sizing"
+    }
+   ]
+  }
+ ],
+ "external": [
+  {
+   "text": "ntopng",
+   "link": "https://www.ntop.org/guides/ntopng/"
+  },
+  {
+   "text": "nProbe Cento",
+   "link": "https://www.ntop.org/guides/cento/"
+  },
+  {
+   "text": "n2disk",
+   "link": "https://www.ntop.org/guides/n2disk/"
+  },
+  {
+   "text": "nDPI",
+   "link": "https://www.ntop.org/guides/nDPI/"
+  },
+  {
+   "text": "PF_RING",
+   "link": "https://www.ntop.org/guides/pf_ring/"
+  },
+  {
+   "text": "nEdge",
+   "link": "https://www.ntop.org/guides/nedge/"
+  },
+  {
+   "text": "nScrub",
+   "link": "https://www.ntop.org/guides/nscrub/"
+  },
+  {
+   "text": "nBox",
+   "link": "https://www.ntop.org/guides/nbox/"
+  },
+  {
+   "text": "nTap",
+   "link": "https://www.ntop.org/guides/ntap/"
+  },
+  {
+   "text": "License Manager",
+   "link": "https://www.ntop.org/guides/license/"
+  }
+ ],
+ "pages": {
+  "agent_mode": "Agent Mode support in nProbe",
+  "bgp": "BGP/BMP Traffic Monitoring",
+  "bpf_expressions": "BPF Packet Filtering Expressions",
+  "case_study/collecting_proprietary_flow_fields": "Collecting Proprietary Flow Fields",
+  "case_study/exporting_to_kafka": "Exporting to Apache Kafka",
+  "case_study/flow_collection": "Understanding How Flow Collection Works",
+  "case_study/index": "nProbe Case Study",
+  "case_study/scripting_using_lua": "Scripting nProbe Using Lua",
+  "cli_options": "Command Line Options",
+  "configurations": "nProbe Modes",
+  "developing_plugins": "Developing nProbe Plugins",
+  "faq": "Frequently Asked Questions",
+  "flow_information_elements": "Flow Information Elements",
+  "hardware_sizing": "Hardware Sizing",
+  "how_to_start": "How to Start nProbe",
+  "index": "nProbe documentation",
+  "introduction": "Introduction",
+  "kafka": "Using Kafka with nProbe",
+  "plugins/custom": "Custom Plugin",
+  "plugins/dhcp": "DHCP Plugin",
+  "plugins/diameter": "SIP Plugin",
+  "plugins/dns": "DNS Plugin",
+  "plugins/export": "Export Plugin",
+  "plugins/gtpv0": "GTPv0 Plugin",
+  "plugins/gtpv1": "GTPv1 Plugin",
+  "plugins/gtpv2": "GTPv2 Plugin",
+  "plugins/http": "HTTP Plugin",
+  "plugins/imap": "IMAP Plugin",
+  "plugins/index": "nProbe Plugins",
+  "plugins/modbus": "Modbus Plugin",
+  "plugins/netflowlite": "NetFlow-Lite Plugin",
+  "plugins/pop3": "POP3 Plugin",
+  "plugins/radius": "Radius Plugin",
+  "plugins/rtp": "RTP Plugin",
+  "plugins/sip": "SIP Plugin",
+  "plugins/smtp": "SMTP Plugin",
+  "third_party_integrations/index": "Third-Party Integrations",
+  "third_party_integrations/opnsense": "OPNsense",
+  "third_party_integrations/pfsense": "pfsense",
+  "tls": "Using TLS In Flow Collection/Export",
+  "tuning": "Tuning nProbe Performance",
+  "using_with_ntopng": "Using nProbe with ntopng",
+  "versions": "Versions Comparison Table",
+  "whats_new": "What's New"
+ }
+}
